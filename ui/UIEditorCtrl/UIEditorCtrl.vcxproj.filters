@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Other">
+      <UniqueIdentifier>{331c49a6-f0b5-4e20-998e-73a8df895d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Inc">
+      <UniqueIdentifier>{66274bc6-7d51-46dd-a4d7-32ab108014b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src">
+      <UniqueIdentifier>{6e7982d4-7995-4a0a-8bbb-64c3c3afbc21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. ProjectTreeView">
+      <UniqueIdentifier>{cb00f11b-1ca2-4aad-8021-6e4b42873594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. ProjectTreeView\01. SkinItem">
+      <UniqueIdentifier>{4e63d5e0-62a0-44d3-96a8-77fd63868f55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. ProjectTreeView\02. ControlItem">
+      <UniqueIdentifier>{f0e878ee-b27a-4ecb-a0fa-e962ba4df0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\02. ToolboxTreeView">
+      <UniqueIdentifier>{d19fc31f-ebe4-4b7c-a06e-6c106fcba7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\02. ToolboxTreeView\item">
+      <UniqueIdentifier>{6b0203d9-4673-4d9c-bc07-0c15de8de110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\03. PropertyCtrl">
+      <UniqueIdentifier>{984567eb-4a84-4c2a-9d4b-bc9b05e0c211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\03. PropertyCtrl\item">
+      <UniqueIdentifier>{1b793108-bc73-403a-85f1-1f09c9b235de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\03. PropertyCtrl\item\添加">
+      <UniqueIdentifier>{6db37fb2-71b5-41e8-a622-b998bc83ed7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\04. ImageEditorList%28未实现）">
+      <UniqueIdentifier>{b326f145-4252-409f-9a4e-e903b5eb4725}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Other\dllmain.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Other\stdafx.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Other\UIEditorCtrl.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ProjectTreeView\iprojecttreeview.cpp">
+      <Filter>02. Src\01. ProjectTreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ProjectTreeView\projecttreeview.cpp">
+      <Filter>02. Src\01. ProjectTreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ProjectTreeView\skinitem\skintreeviewitem.cpp">
+      <Filter>02. Src\01. ProjectTreeView\01. SkinItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ProjectTreeView\controlitem\controltreeviewitem.cpp">
+      <Filter>02. Src\01. ProjectTreeView\02. ControlItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ToolBoxTreeView\itoolboxtreeitem.cpp">
+      <Filter>02. Src\02. ToolboxTreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ToolBoxTreeView\toolboxtreeitem.cpp">
+      <Filter>02. Src\02. ToolboxTreeView\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\ipropertyctrl.cpp">
+      <Filter>02. Src\03. PropertyCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\propertyctrl.cpp">
+      <Filter>02. Src\03. PropertyCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrlboolitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrlbuttonitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrlcomboboxitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrledititem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrlgroupitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrlitembase.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrllongitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PropertyCtrl\item\propertyctrladditionitem.cpp">
+      <Filter>02. Src\03. PropertyCtrl\item\添加</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEditorList\iimageeditorlistitem.cpp">
+      <Filter>02. Src\04. ImageEditorList%28未实现）</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEditorList\imageeditorlistitem.cpp">
+      <Filter>02. Src\04. ImageEditorList%28未实现）</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Other\resource.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\stdafx.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\targetver.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\inc.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\iprojecttreeview.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ipropertyctrl.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\itoolboxtreeview.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ProjectTreeView\projecttreeview.h">
+      <Filter>02. Src\01. ProjectTreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ProjectTreeView\skinitem\skintreeviewitem.h">
+      <Filter>02. Src\01. ProjectTreeView\01. SkinItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ProjectTreeView\controlitem\controltreeviewitem.h">
+      <Filter>02. Src\01. ProjectTreeView\02. ControlItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ToolBoxTreeView\toolboxtreeitem.h">
+      <Filter>02. Src\02. ToolboxTreeView\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\propertyctrl.h">
+      <Filter>02. Src\03. PropertyCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrlboolitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrlbuttonitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrlcomboboxitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrledititem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrlgroupitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrlitembase.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrllongitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\item\propertyctrladditionitem.h">
+      <Filter>02. Src\03. PropertyCtrl\item\添加</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEditorList\imageeditorlistitem.h">
+      <Filter>02. Src\04. ImageEditorList%28未实现）</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ProjectTreeView\projecttreeview_desc.h">
+      <Filter>02. Src\01. ProjectTreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PropertyCtrl\propertyctrl_desc.h">
+      <Filter>02. Src\03. PropertyCtrl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Other\UIEditorCtrl.rc">
+      <Filter>Other</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

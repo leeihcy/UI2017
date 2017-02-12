@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window needalphachannel="1" id="i18nview" layer="1" back.render.type="color" width="500" height="500" back.render.color="dlg_bkg" font="default">
+      <ListBox id="imagelistview" style="editor_listctrl" itemheight="60">
+        <prop key="layout" left="10" top="10" bottom="10" right="10"/>
+        <VScrollBar id="__vscrollbar" width="10">
+          <Button id="__scrollbar_thumb" style="scroll.thumb.back" />
+        </VScrollBar>
+      </ListBox>
+    </Window>
+        <ListItem id="i18nview.list">
+            <Label id="id" width="20%" layout.align="top|bottom">
+                <prop key="layout" left="5" right="0" top="0" height="20"/>
+            </Label>
+            <Label id="zh_cn" width="80%" layout.align="top|bottom">
+                <prop key="layout" left="20" right="0" top="20" height="20"/>
+                <prop key="text.render" color="#F40"/>
+            </Label>
+          <Label id="en_us" width="80%" layout.align="top|bottom">
+            <prop key="layout" left="20" right="0" top="40" height="20"/>
+            <prop key="text.render" color="#F40"/>
+          </Label>
+        </ListItem>
+	</layout>
+</skin>

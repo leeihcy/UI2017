@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window id="StatusBar">
+			<Label id="statustext" text="Ready" layout.left="10" layout.top="0" layout.bottom="0" layout.right="300" />
+		</Window>
+		<Window id="ProjectDependsCtrlDllConfigDlg" text="依赖控件库设置" width="400" height="400" padding="10" back.render.type="color" back.render.color="0xfff">
+			<ListBox id="listbox" style="editor_listctrl" padding="2" itempadding="2" back.render.type="theme.listbox.bkg" layout.left="0" layout.top="0" layout.right="100" layout.bottom="0" text.render.type="simple" text.render.font="default" />
+			<Button id="btn_add" text="添加" layout.right="10" layout.top="0" width="80" height="22" style="common_btn" />
+			<Button id="btn_del" text="删除" layout.right="10" layout.top="30" width="80" height="22" style="common_btn" />
+			<Button id="btn_ok" text="关闭" layout.right="10" layout.top="100" width="80" height="22" style="common_btn" />
+		</Window>
+        
+		<Window id="ToolBox" text="工具箱" width="200" height="300">
+			<TreeView id="tree" style="editor_listctrl" layout.left="0" layout.top="0" layout.right="0" layout.bottom="0">
+				<VScrollBar id="__vscrollbar" width="10">
+					<Button id="__scrollbar_thumb" style="scroll.thumb.back" />
+				</VScrollBar>
+			</TreeView>
+		</Window>
+		<Window id="layoutview" />
+		<Window id="menuview" />
+	</layout>
+</skin>

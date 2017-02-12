@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window id="PropertyDialog" minwidth="200" minheight="300" back.render.type="color" back.render.color="dlg_bkg">
+			<Panel layout.type="horz" layout.left="0" layout.top="2" layout.right="0" height="25">
+				<RadioButton id="radiobtn_attr1" text="obj属性" tooltip="显示对象所有属性" width="70" style="toolbar_textbtn" />
+				<RadioButton id="radiobtn_attr2" text="xml属性" tooltip="显示对象配置文件中的属性" width="70" style="toolbar_textbtn" />
+				<RadioButton id="radiobtn_attr3" text="style属性" tooltip="样式属性" width="70" style="toolbar_textbtn" />
+			</Panel>
+			<PropertyCtrl id="propertyctrl" transparent="1" layout.left="0" layout.top="30" layout.right="0" layout.bottom="76" expandicon.render.type="theme.treeview.expandcollpase.icon">
+				<InstantEdit id="__edit" style="child_edit" visible="collapsed" back.render.color="dlg_bkg" text.render.colorlist.count="2" text.render.color="0xFF000000;0xFFFFFFFF" text.render.font="default" caretheight="-1" />
+				<Button id="__button" />
+				<ComboBox id="__combobox" style="child_combobox" visible="collapsed" back.render.color="dlg_bkg" text.render.font="default">
+					<Edit id="__combo_edit" transparent="1" back.render.type="color" back.render.color="dlg_bkg" caretheight="18" />
+                    <Button id="__combo_button" transparent="1" tabstop="0" width="15" height="15" margin="0,0,1,0">
+                        <prop key="back.render" type="color" color="#DEDFE7"/>
+                    </Button>
+				</ComboBox>
+				<VScrollBar id="__vscrollbar" width="10" back.render.type="theme.vscrollbar.bkg">
+					<Button id="__scrollbar_thumb" style="scroll.thumb.back" />
+				</VScrollBar>
+			</PropertyCtrl>
+            <!--RichEdit id="property_desc" padding="3,3,3,3" back.render.type="color" height="68" layout.left="1" layout.right="1" layout.bottom="2" back.render.color="dlg_bkg" back.render.border.color="dlg_border" back.render.border="1,1,1,1" vscrollbar="auto" /-->
+            <RichText id="property_desc" padding="3,3,3,3" back.render.type="color" height="50" layout.left="1" layout.right="1" layout.bottom="25" back.render.color="dlg_bkg" back.render.border.color="dlg_border" back.render.border="1,1,1,1" vscrollbar="auto" />
+			<Label  width="60" height="25" layout.left="2" layout.bottom="0" text.render.type="simple" text.render.font="default" text="命令:" />
+			<Edit id="edit_command"  height="21" layout.left="40" layout.right="2" layout.bottom="2" caretheight="14" style="toolbar_combo"/>
+            <!--Button id="btn_command" text="" layout.right="5" layout.bottom="5" width="20" height="20" style="common_btn"/-->
+		</Window>
+	</layout>
+</skin>

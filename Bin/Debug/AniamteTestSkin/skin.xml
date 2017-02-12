@@ -1,0 +1,26 @@
+﻿ <?xml version="1.0"?>
+<skin>
+	<layout>
+    <CustomWindow id="login" width="500" height="500" transparent.type="glow">
+      <xprop key="back.render" type="image" image="bkg" image.drawtype="stretch" image.9region="10"/>
+      <prop key="back.render" type="color" color="#fff"/>
+      <Panel id="panel">
+        <xprop key="fore.render" type="color" color="#300f"/>
+        <prop key="back.render" type="image" image="red"/>
+        <prop key="layout" left="50" top="100" width="100" height="100"/>
+      </Panel>
+    </CustomWindow>
+	</layout>
+	<font>
+		<font id="default" face="微软雅黑" size="10" />
+	</font>
+	<image>
+    <image id="bkg" path="bkg.png"></image>
+    <image id="red" path="red.png"></image>
+  </image>
+	<i18n>
+	</i18n>
+	<style>
+	</style>
+	<color />
+</skin>

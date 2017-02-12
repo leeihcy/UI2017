@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window needalphachannel="1" id="FirstPageDlg" layer="1" back.render.type="color" width="500" height="400" back.render.color="firstpagedlgback" font="default">
+            <Label text="最近打开工程："/>
+            <ListBox id="list" itemheight="30">
+                <prop key="layout" left="0" right="0" top="30" bottom="0"/>
+            </ListBox>
+			<Button id="btnnew" style="common_btn" width="80" height="30" layout.top="250" layout.right="264" text="新建" />
+			<Button id="btnopen" style="common_btn" width="80" height="30" layout.top="250" layout.right="158" text="打开皮肤" />
+		</Window>
+        
+        <ListItem id="firstpage.list" back.render.type="color" back.render.color="#ccc">
+            <HyperLink id="link" style="fristpage_hyperlink" layout.top="5" />
+            <Button id="del" style="firstpage_recentbtn" layout.top="5" />
+        </ListItem>
+	</layout>
+    
+    <style>
+        <class id="fristpage_hyperlink" handcursor="1" height="20" layout.left="5" text.render.align="vcenter|endellipsis" text.render.type="fontcolorlist" text.render.color="link_normal;link_hover;link_press" text.render.font="default;default_underline;default_underline" />
+        <class id="firstpage_recentbtn" tooltip="删除" width="20" height="20" layout.right="5" text="x" inherit=".common_btn" />
+    </style>
+</skin>

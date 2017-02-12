@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx -->
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="WT.seg_1" content="zh-cn"><link rel="canonical" href="./使用 CRT 库查找内存泄漏_files/使用 CRT 库查找内存泄漏.html">
+    <title>使用 CRT 库查找内存泄漏</title>
+
+
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/zh-cn/library/x98tx3cf(d=default,l=zh-cn,v=vs.140).aspx">
+
+<meta name="NormalizedUrl" content="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(d=default,l=zh-cn,v=vs.140).aspx">
+
+<meta name="ms.normalizedurl" content="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(d=default,l=zh-cn,v=vs.140).aspx">
+
+<meta name="DCS.appliesToProduct" content="">
+
+<meta name="DCS.appliesToTechnology" content="">
+
+<meta name="DCS.appliesToVersion" content="">
+
+<meta name="ms.prod" content="visual-studio-dev14">
+
+<meta name="ms.service" content="">
+
+<meta name="ms.devlang" content="na">
+
+<meta name="ms.topic" content="article">
+
+<meta name="VotingContextUrl" content="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(d=default,l=zh-cn,v=vs.140).aspx">
+
+<meta name="MN" content="BF1CA93A-12:37:49 AM">
+
+<meta name="Search.ShortId" content="x98tx3cf">
+
+<meta name="ms.shortidmsdn" content="x98tx3cf">
+
+<meta name="Ms.Locale" content="zh-cn">
+
+<meta name="ms.prodver" content="VS.140">
+
+<meta name="ms.contentlang" content="ZH">
+
+<meta name="ms.lang" content="ZH">
+
+<meta name="ms.loc" content="CN">
+
+<meta name="ms.sitever" content="2015.11.16.2">
+
+<meta name="ms.assetid" content="cf6dc7a6-cd12-4283-b1b6-ea53915f7ed1">
+
+<meta name="ms.auth" content="0">
+
+<meta name="ms.technology" content="vs-ide-debug">
+
+<meta name="ms.custom" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="./使用 CRT 库查找内存泄漏_files/ai.0.js" async=""></script><script type="text/javascript" data-do-not-move="true">
+        //<![CDATA[
+        var AmbientContext = null;
+
+        (function(){
+            var root = (function(){return this;}).call(null);
+
+            var GetCookie = function(name){
+                var cookies = root.document.cookie ? root.document.cookie.split('; ') : [];
+                for (var i = 0; i < cookies.length; i++) {
+                    var pos = cookies[i].indexOf('=');
+                    if (name === root.decodeURIComponent(cookies[i].slice(0, pos)))
+                    {
+                        var cookie = cookies[i].slice(pos + 1).replace(/\+/g, ' ');
+                        cookie = root.decodeURIComponent(cookie);
+                        return cookie;
+                    }
+                }
+            };
+
+            var JsonDeserialize = function(content) {
+                return root.JSON && root.JSON.parse ? root.JSON.parse(content) : (new Function('return (' + content + ')'))();
+            };
+
+            try {
+                AmbientContext = GetCookie('AmbientContext');
+                AmbientContext = AmbientContext && JsonDeserialize(AmbientContext);
+            } catch(ex) {
+            } finally {
+                AmbientContext = AmbientContext || null;
+            }
+        })();
+        //]]>
+    </script>
+
+    <script type="text/javascript" src="./使用 CRT 库查找内存泄漏_files/jquery-1.8.2.min.js" data-do-not-move="true" data-provides="jQuery"></script>
+    
+<link rel="stylesheet" type="text/css" href="./使用 CRT 库查找内存泄漏_files/Combined.css"><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"xap": "https://msdn.microsoft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script class="mtps-injected">try {
+//
+  var literalNormalizedUrl = '/zh-cn/library/x98tx3cf(l=zh-cn,v=vs.140).aspx';
+  var wt_nvr_ru = 'WT_NVR_RU';
+  var wt_fpcdom = '.microsoft.com';
+  var wt_domlist = 'msdn.microsoft.com';
+  var wt_pathlist = '';
+  var wt_paramlist = 'DCSext.mtps_devcenter';
+  var wt_siteid = 'MSDN';
+  var gDomain = 'm.webtrends.com';
+  var gDcsId = 'dcsmgru7m99k7mqmgrhudo0k8_8c6m';
+  var gFpc = 'WT_FPC';
+
+
+
+  if (document.cookie.indexOf(gFpc + "=") == -1) {
+    var wtidJs = document.createElement("script");
+    wtidJs.src = "//" + gDomain + "/" + gDcsId + "/wtid.js";
+    document.getElementsByTagName("head")[0].appendChild(wtidJs);
+  }
+
+
+
+  var detectedLocale = 'zh-cn';
+  var wtsp = 'msdnlib_devtools_lang';
+  var gTrackEvents = '0';
+/**/
+} finally { MTPS._injectNextScript_1 && MTPS._injectNextScript_1(); }</script><script class="mtps-injected">try {
+//
+
+        window.appInsightsId = '60854590-027a-4ae4-98be-2741a40f355f';
+        //
+} finally { MTPS._injectNextScript_2 && MTPS._injectNextScript_2(); }</script><script class="mtps-injected" src="./使用 CRT 库查找内存泄漏_files/Combined.js"></script><link href="./使用 CRT 库查找内存泄漏_files/PrintView.css" rel="stylesheet" type="text/css" media="print"><meta name="ms.layout_limit_max_width" content="false"><meta name="ms.AmbientContextId" content="EB59B99D-F236-4E62-8DB6-E6AD9A2E4A9E"><meta name="ms.display_use_large_font" content="true"><meta name="ms.AmbientContextDownstream" content="%7B%7D"><meta name="ms.display_high_contrast" content="false"><script type="text/javascript" src="./使用 CRT 库查找内存泄漏_files/ms.js"></script><script class="mtps-injected" src="./使用 CRT 库查找内存泄漏_files/SearchBox.jss"></script><script class="mtps-injected">try {
+//
+    MTPS = window.MTPS || {};
+    MTPS.Translation = window.MTPS.Translation || {};
+
+    MTPS.Translation.TranslationType =  0;
+    
+    
+        
+        MTPS.Translation.EditorLink = {
+            includeEditor : 0,
+            editLink: "https://msdn.microsoft.com/zh-cn/library/translation/edit/x98tx3cf.aspx",
+            editLinkText: "建议更好的翻译"
+        };
+        
+    //
+} finally { MTPS._injectNextScript_5 && MTPS._injectNextScript_5(); }</script><script class="mtps-injected" src="./使用 CRT 库查找内存泄漏_files/Combined(1).js"></script><script class="mtps-injected">try {
+MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = '展开'; MTPS.LocalizedStrings.CollapseButtonTooltip = '折叠'; MTPS.LocalizedStrings.EnhancedExpandTooltip = '单击以展开。双击以全部展开。'; MTPS.LocalizedStrings.EnhancedCollapseTooltip = '单击以折叠。双击以全部折叠。'; MTPS.LocalizedStrings.ExpandAllButtonTooltip = '全部展开'; MTPS.LocalizedStrings.CollapseAllButtonTooltip = '全部折叠';
+} finally { MTPS._injectNextScript_7 && MTPS._injectNextScript_7(); }</script><script class="mtps-injected" src="./使用 CRT 库查找内存泄漏_files/Combined(2).js"></script><script src="./使用 CRT 库查找内存泄漏_files/broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_9 && MTPS._injectNextScript_9(); }</script></head>
+<body class="library Chrome">
+    <div id="page">
+
+        
+
+        
+    
+
+    
+    <link type="text/css" rel="stylesheet">
+    
+        
+        
+    <input type="hidden" id="isHeaderBleeding" value="true">
+    <div id="ux-header" dir="ltr" class="ltr msdn" data-device-type="desktop">
+        
+
+      <header ms.pgarea="header">
+        <span id="singleCol"></span>
+        <span id="doubleCol"></span>
+        <span id="isMobile"></span>
+        <div>
+          <div class="row topRow">
+            <div class="top">
+              <div class="left">
+                  <a class="msdnLogoImg" href="https://msdn.microsoft.com/zh-cn" title="MSDN home">
+                      <div id="msft-logo" class="msft-logo"></div>
+                  </a>
+                <div class="GrayPipe"></div>
+                  <a class="DevCenterFullNameNonMegaBlade" href="https://msdn.microsoft.com/zh-cn">Developer Network</a>
+                <a class="DevCenterFullName" href="https://msdn.microsoft.com/zh-cn">Developer Network</a>
+                <a class="DevCenterShortName" href="https://msdn.microsoft.com/zh-cn">Developer</a>
+              </div>
+              <div class="right">
+                <div id="signIn">
+
+  <img class="profileImage" src="./使用 CRT 库查找内存泄漏_files/profile.jpg">
+
+
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=12&ct=1448786269&rver=6.0.5276.0&wp=MCMBI&wlcxt=MSDN%24MSDN%24MSDN&wreply=https%3a%2f%2fmsdn.microsoft.com%2fzh-cn%2flibrary%2fx98tx3cf.aspx&lc=2052&id=254354&mkt=zh-CN" title="登录">登录</a></div>
+
+
+
+
+                <div class="auxNav">
+                  <div>
+                    <div data-fragmentname="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/subscriptions/manage/hh442900" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml">
+    <span style="line-height:18px;" xmlns="">MSDN 订阅</span>
+  </a>
+</div>
+                    <div data-fragmentname="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="http://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x804&slcid=0x804&campaign=o~msft~msdn~gettools-header~dn308572" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml">
+    <span style="line-height:18px;" xmlns="">获取工具</span>
+  </a>
+</div>
+                  </div>                    
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row middleRow">
+            <div class="expandTop" style="display: none;">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+        </div>
+        <div id="buttomRowWrapper" class="bg_default">
+          <div class="row buttomRow bg_default">
+            <div class="bottom">
+              <div class="left">
+                <a id="grip" class="menu-icon" href="javascript:void(0)"></a>
+                
+                <div id="drawer">
+                  <div class="toc">
+                    
+        <nav>
+            <ul class="navL1" ms.cmpgrp="main nav">
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="技术">技术</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/app-development-msdn" title="应用开发">应用开发</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/cloud-app-development-msdn" title="云">云</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/web-app-development-msdn" title="Web">Web</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/big-data-development-msdn" title="数据">数据</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/games-development-msdn" title="游戏">游戏</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="下载">下载</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://www.visualstudio.com/downloads/download-visual-studio-vs" title="Visual Studio">Visual Studio</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/subscriptions/" title="MSDN 订阅访问">MSDN 订阅访问</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/microsoft-sdks-msdn" title="SDK">SDK</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="试用软件">试用软件</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/evalcenter" title="免费下载">免费下载</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/officeevaluationresources" title="Office 资源">Office 资源</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sharepoint2013resources" title="Share Point Server 2013 资源">Share Point Server 2013 资源</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/windowsserver2012r2resources" title="Windows Server 2012 资源">Windows Server 2012 资源</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sqlserver2014expressresources" title="SQL Server 2014 Express 资源">SQL Server 2014 Express 资源</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="计划">计划</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://rewards.msdn.microsoft.com/" title="TechRewards">TechRewards</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://www.microsoft.com/bizspark" title="新手">新手</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="学生">学生</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/imagine/imagine-home" title="Microsoft Imagine">Microsoft Imagine</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/microsoftstudentpartners" title="Microsoft Student Partners">Microsoft Student Partners</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="架构师">架构师</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-blueprints-msdn" title="蓝图">蓝图</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-case-studies-msdn" title="案例研究">案例研究</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/architects-overview-msdn" title="概述">概述</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://blogs.msdn.com/b/msarchitecture/" title="博客">博客</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://social.msdn.microsoft.com/forums/en-us/home?brandignore=true&sort=relevancedesc&searchterm=architecture+or+architect" title="论坛">论坛</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/applicationbuilder" title="ISV">ISV</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://events.msdn.microsoft.com/zh-cn" title="Events（事件）">Events（事件）</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="MSDN 订阅">MSDN 订阅</a>
+
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/msdn-subscriptions-administration" title="Administrators">Administrators</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/msdn-subscriptions-overview" title="概述">概述</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/benefits-overview" title="权益">权益</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="社区">社区</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/magazine/dd767791" title="Magazine">Magazine</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://social.msdn.microsoft.com/forums/" title="论坛">论坛</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://blogs.msdn.com/b/developer-tools/" title="博客">博客</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://tech-advisors.msdn.microsoft.com/zh-cn" title="技术顾问">技术顾问</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://channel9.msdn.com/" title="第 9 频道">第 9 频道</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive current toggle">
+                            <a href="javascript:void(0)" title="文档">文档</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive current">
+                                            <a href="https://msdn.microsoft.com/library" title="APIs and reference">APIs and reference</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="https://msdn.microsoft.com/developer-centers-msdn" title="开发人员中心">开发人员中心</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive">
+                            <a href="https://code.msdn.microsoft.com/" title="示例代码">示例代码</a>
+                        </li>
+            </ul>
+        </nav>
+
+                  </div>
+                </div>
+              </div>
+              <div class="right">
+                <div data-fragmentname="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" class="SearchBoxOnFocus">
+      <button id="FakeHeaderSearchButton" value="Search" type="submit" class="header-search-button" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon">
+        <div id="search-finder" class="search-finder"></div>
+      </button>
+      <button id="HeaderSearchButton" style="display:none" data-searchtype="icon" data-pgarea="header" title="搜索 MSDN" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon"></button>
+      <div id="searchSplitter"></div>
+      <div id="searchCloseIcon" class="search-clear-x"></div>
+      <div id="searchTextContainer" style="width: 0px; display: none;">
+        <input id="HeaderSearchTextBox" name="query" type="text" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" autocomplete="off" data-searchtype="searchbox" data-pgarea="header" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="enter-key">
+      <div id="SearchFlyoutContainer" style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; color: rgb(255, 255, 255); font-family: &#39;Microsoft YaHei UI&#39;, &#39;Microsoft YaHei&#39;, SimSun, &#39;Segoe UI&#39;, &#39;Lucida Grande&#39;, Verdana, Arial, Helvetica, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><div id="SuggestionContainer"><ul data-pgarea="header" data-searchtype="search dropdown" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="suggested keyword" style="list-style: none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></div>
+    </form>
+    
+    
+  </div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+    <div id="overlayMaskHeader"></div></div>
+
+    
+    
+
+
+
+
+
+<link type="text/css" rel="stylesheet">
+<link type="text/css" rel="stylesheet">
+
+
+    <div id="breadcrumbs">
+        <div id="breadcrumbDesktop" class="breadCrumb">
+                        <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/zh-cn/library/sc65sadd.aspx" title="使用 Visual Studio 进行调试"></a></span>
+                        <span><a href="https://msdn.microsoft.com/zh-cn/library/mt243869.aspx" title="调试应用程序"><span>调试应用程序</span></a></span>
+                        <span><a href="https://msdn.microsoft.com/zh-cn/library/k70yt3e2.aspx" title="调试本机代码"><span>调试本机代码</span></a></span>
+                        <span class="breadcrumbDropSmall">
+                            <a id="breadcrumbDropDownButton" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#" targethref="https://msdn.microsoft.com/zh-cn/library/k70yt3e2.aspx" title="CRT 调试方法"><span>CRT 调试方法</span></a>
+                        </span>
+        </div>
+        <div id="breadcrumbDropDownMenu" style="display: none;"></div>
+        <div id="tocDropDownMenu" style="display: none;"></div>
+
+        <div id="breadcrumbTablet" class="breadCrumb">
+                        <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/zh-cn/library/k70yt3e2.aspx" title="调试本机代码"></a></span>
+                    <span><a href="https://msdn.microsoft.com/zh-cn/library/zh712wwf.aspx" title="CRT 调试方法"><span>CRT 调试方法</span></a></span>
+                <span class="breadcrumbDropSmall"><a id="tocDropDownButton" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#" title="使用 CRT 库查找内存泄漏"><span>使用 CRT 库查找内存泄漏</span></a></span>
+        <div id="navigationButtons">
+            <a id="provideFeedback1" href="javascript:void(0)"><ins class="suggestion"></ins>您有何建议？</a>
+            <a id="isd_print" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(d=printer).aspx" rel="nofollow"><ins class="print"></ins>打印</a>
+            <a id="isd_printABook" href="https://msdn.microsoft.com/zh-cn/library/export/help/?returnUrl=%2fzh-cn%2flibrary%2fx98tx3cf.aspx">
+                <ins class="export"></ins>导出 (<span class="count">0</span>)
+            </a>
+        </div></div>
+        <div id="breadcrumbMobile" class="breadCrumb">
+                <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/zh-cn/library/zh712wwf.aspx" title="CRT 调试方法"></a></span>
+            <span class="breadcrumbDropSmall"><a id="tocPopupButton" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#" title="使用 CRT 库查找内存泄漏"><span>使用 CRT 库查找内存泄漏</span></a></span>
+        </div>
+    </div>
+    <div id="tocPopupMenu" style="display: none;">
+        <div id="tocPopMenuClose" class="tocCloseLarge"></div>
+        <div id="tocTitle">使用 CRT 库查找内存泄漏</div>        
+    </div>
+
+    
+
+
+        <div id="body">
+            <span id="tabletView_large"></span>
+            <span id="tabletView_small"></span>
+            <span id="mobileView"></span>
+            
+
+
+
+
+
+
+
+
+
+    <div id="leftNav" style="height: auto;">
+
+
+
+
+
+<div id="tocnav" class="hide-archive" ms.pgarea="left toc" style="">
+
+
+    <div class="tocunselected">
+        <div id="tocExpandArea" style="display: block;">
+            <span class="toc_empty"></span>
+            <span id="tocExpandButton"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#"></a></span>
+        </div>
+        <div id="tocExpand"><div class="toclevel " data-toclevel="1">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/zh-cn/library/xfe82c8k.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="CRT 调试库使用">CRT 调试库使用</a>                </div><div class="toclevel " data-toclevel="1">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/zh-cn/library/yt0c3wdh.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="用于报告的宏">用于报告的宏</a>                </div></div>
+    <div class="toclevel " data-toclevel="1">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/zh-cn/library/2f7sy2e9.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="堆分配函数的“Debug”版本">堆分配函数的“Debug”版本</a>                </div><div class="toclevel " data-toclevel="1">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/zh-cn/library/974tc9t1.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="CRT 调试堆详细信息">CRT 调试堆详细信息</a>                </div><div class="toclevel " data-toclevel="1">
+<a class="toc_collapsed" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#" aria-label="展开目录"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/zh-cn/library/z2zscsc2.aspx" id="mt186282_VS.140_zh-cn" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="编写调试挂钩函数">编写调试挂钩函数</a>                </div></div>
+    <div class="tocselected"><div class="toclevel current" data-toclevel="1">
+<span class="toc_empty"></span><a href="./使用 CRT 库查找内存泄漏_files/使用 CRT 库查找内存泄漏.html" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="使用 CRT 库查找内存泄漏">使用 CRT 库查找内存泄漏</a>                </div><div class="tocPadding"></div></div>
+    <div class="tocunselected">
+                
+                
+                
+                
+                
+                
+    </div>
+    <a id="tocMenuToggler" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#">
+        <span id="tocMenuTogglerIcon" class="tocMenuCollapse"></span>
+        <div id="tocMenuTogglerLabel">TOC</div>
+    </a>
+</div>            <div style="display:none">
+                <div id="CollapseLocalizeString">折叠目录</div>
+                <div id="ExpandLocalizeString">展开目录</div>
+            </div>
+        <div>
+            <a id="isd_archiveControlResponsive" style="display:none;" data-include-archive="包含旧版本" data-exclude-archive="不包含旧版本">
+            </a>
+        </div>
+    </div>
+    <div id="content" class="content">
+
+
+
+<div id="MTPSTranslator" class="MTPSTranslator">
+    <table class="MTPSTranslatorTable" style="width: 100%">
+        <tbody><tr>
+            <td class="TranslationAlertBox">
+                <div>此文章由人工翻译。 将光标移到文章的句子上，以查看原文。 <a href="https://msdn.microsoft.com/translate/hh856053">更多信息。</a></div>
+            </td>
+                <td class="TranslationViewSwitcher">
+                    <div>
+                        <input title="显示译文" value="0" name="TrnaslatorView" type="radio" class="translatechoice" checked="checked" ms.title="translated" ms.cmptyp="language selector" ms.interactiontype="16"><span>译文</span>
+                    </div>
+                    <div>
+                        <input title="显示英文" value="1" name="TrnaslatorView" type="radio" class="translatechoice" ms.title="original" ms.cmptyp="language selector" ms.interactiontype="16"><span>原文</span>
+                    </div>
+                </td>
+        </tr>
+    </tbody></table>
+</div>
+    
+    
+    
+     
+
+
+
+
+
+
+<div xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="topic">
+    <h1 class="title">使用 CRT 库查找内存泄漏</h1>
+    
+    <div class="lw_vs">
+      <div id="curversion">
+        <strong>
+            Visual Studio 2015 
+        </strong>
+      </div>
+      <div id="versionclick">
+        <div id="vsseperator" class="cl_lw_vs_seperator"></div>
+        <div>
+          <div>
+            <a id="vsLink" href="javascript:;">
+                        其他版本
+                    </a>
+          </div>
+          <div class="cl_vs_arrow clip10x10">
+            <img class="cl_lw_vs_arrow" id="vsArrow" alt="" src="./使用 CRT 库查找内存泄漏_files/ImageSprite.png">
+          </div>
+        </div>
+        <ul id="vsPanel" style="display: none;">
+          <li class="">
+            <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(v=vs.120).aspx">Visual Studio 2013 </a>
+          </li>
+          <li class="">
+            <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(v=vs.110).aspx">Visual Studio 2012</a>
+          </li>
+          <li class="">
+            <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(v=vs.100).aspx">Visual Studio 2010</a>
+          </li>
+          <li class="archived">
+            <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(v=vs.80).aspx">Visual Studio 2005</a>
+          </li>
+          <li id="vsExpand" style="display: list-item;">
+            <span class="breadcrumbEllipsis">
+              <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#"></a>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div id="mainSection">
+      <div id="mainBody">&nbsp;<div class="introduction"><p><span id="mt1" class="sentence" data-guid="4a768d94aa21db01afb60bc0b8ccf2ae" data-source="Memory leaks, defined as the failure to correctly deallocate memory that was previously allocated, are among the most subtle and hard-to-detect bugs in C/C++ applications." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">内存泄漏，即未能正确释放以前分配的内存，是 C/C++ 应用程序中最难以捉摸也最难以检测到的 Bug 之一。</sentencetext></span><span id="mt2" class="sentence" data-guid="0639330ef0bc5420e7973948020d532c" data-source="A small memory leak might not be noticed at first, but over time, a progressive memory leak can cause symptoms that range from decreased performance to crashing when the application runs out of memory." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">最初少量内存泄漏可能不引人注目，但随着时间的推移，内存泄漏越来越多，就会出现一些征兆，包括性能下降，在应用程序内存不足时发生崩溃。</sentencetext></span><span id="mt3" class="sentence" data-guid="d90d6fdf652beb8ddd1bc6c87af9a993" data-source="Worse, a leaking application that uses up all available memory can cause another application to crash, creating confusion as to which application is responsible." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">更严重的是，占用了所有可用内存的泄漏应用程序可能会导致其他应用程序崩溃，从而无法确定问题出在哪个应用程序。</sentencetext></span><span id="mt4" class="sentence" data-guid="5a7bb9eacdc1418a8412344d4201a206" data-source="Even seemingly harmless memory leaks might be symptomatic of other problems that should be corrected." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">即使看似无害的内存泄漏也可能说明存在其他问题应当纠正。</sentencetext></span></p><p><span id="mt5" class="sentence" data-guid="ed35ba4a1aa3c868b01941e627a22c28" data-source="The Visual Studio debugger and C Run-Time (CRT) libraries provide you with the means for detecting and identifying memory leaks." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">借助 Visual Studio 调试器和 C 运行时 (CRT) 库，可以检测和识别内存泄漏。</sentencetext></span></p></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">启用内存泄漏检测</span></a><div id="Anchor_0" class="LW_CollapsibleArea_Anchor_Div active"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_0" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt7" class="sentence" data-guid="422a5b93c789e85cbffca7fb5dec6472" data-source="The primary tools for detecting memory leaks are the debugger and the C Run-Time Libraries (CRT) debug heap functions." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">检测内存泄漏的主要工具是调试器和 C 运行库 (CRT) 调试堆函数。</sentencetext></span></p><p><span id="mt8" class="sentence" data-guid="c899b3b01615e1a51f19ed634304ad7e" data-source="To enable the debug heap functions, include the following statements in your program:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">若要启用调试堆函数，请在程序中包括以下语句：</sentencetext></span></p>
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_6706c793-8766-4c0e-a73d-0319b98755cc');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_6706c793-8766-4c0e-a73d-0319b98755cc" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>#define _CRTDBG_MAP_ALLOC
+#include &lt;stdlib.h&gt;
+#include &lt;crtdbg.h&gt;
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt9" class="sentence" data-guid="50cb3d8b95740ab12dca88ef6156d0e9" data-source="For the CRT functions to work correctly, the &lt;strong&gt;#include&lt;/strong&gt; statements must follow the order shown here." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">为了 CRT 函数能够正常工作，<strong xmlns="http://www.w3.org/1999/xhtml">#include</strong> 语句必须遵循此处所示的顺序。</sentencetext></span></p><p><span id="mt10" class="sentence" data-guid="bcb18e697a33c474aa7a11f91dbe1b3d" data-source="Including crtdbg.h maps the &lt;strong&gt;malloc&lt;/strong&gt; and the &lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;free&lt;/span&gt;&lt;/span&gt; functions to their debug versions, &lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;_malloc_dbg&lt;/span&gt;&lt;/span&gt; and &lt;strong&gt;free&lt;/strong&gt;, which track memory allocation and deallocation." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">包含 crtdbg.h，将 <strong xmlns="http://www.w3.org/1999/xhtml">malloc</strong> 和 <a href="https://msdn.microsoft.com/zh-cn/library/we1whae7.aspx">free</a> 函数映射到它们的调试版本，即 <a href="https://msdn.microsoft.com/zh-cn/library/faz3a37z.aspx">_malloc_dbg</a> 和 <strong xmlns="http://www.w3.org/1999/xhtml">free</strong>，它们将跟踪内存分配和释放。</sentencetext></span><span id="mt11" class="sentence" data-guid="a154ea108f6c40bc5bea5b9d70ecd1bc" data-source="This mapping occurs only in debug builds, which have &lt;strong&gt;_DEBUG&lt;/strong&gt;." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">此映射只在包含 <strong xmlns="http://www.w3.org/1999/xhtml">_DEBUG</strong> 的调试版本中发生。</sentencetext></span><span id="mt12" class="sentence" data-guid="436ad529a44ef9814c18cf389c3ad5af" data-source="Release builds use the ordinary &lt;strong&gt;malloc&lt;/strong&gt; and &lt;strong&gt;free&lt;/strong&gt; functions." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">发布版本使用普通的 <strong xmlns="http://www.w3.org/1999/xhtml">malloc</strong> 和 <strong xmlns="http://www.w3.org/1999/xhtml">free</strong> 函数。</sentencetext></span></p><p><span id="mt13" class="sentence" data-guid="dd28054da1f387db1001221ded0b526b" data-source="The &lt;strong&gt;#define&lt;/strong&gt; statement maps a base version of the CRT heap functions to the corresponding debug version." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <strong xmlns="http://www.w3.org/1999/xhtml">#define</strong> 语句将 CRT 堆函数的基础版本映射到对应的调试版本。</sentencetext></span><span id="mt14" class="sentence" data-guid="f9e4740fff3ce5cab55d58f9fd935f09" data-source="If you omit the &lt;strong&gt;#define&lt;/strong&gt; statement, the memory leak dump will be less detailed." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果省略 <strong xmlns="http://www.w3.org/1999/xhtml">#define</strong> 语句，内存泄漏转储将有所简化。</sentencetext></span></p><p><span id="mt15" class="sentence" data-guid="43ae8d161eb501e0615c0386f4c913fc" data-source="After you have enabled the debug heap functions by using these statements, you can place a call to &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; before an application exit point to display a memory-leak report when your application exits:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">使用这些语句启用调试堆函数之后，可以在某个应用程序退出点之前设置一个对 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 的调用，以便在应用程序退出时显示内存泄漏报告：</sentencetext></span></p>
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_cc65f556-d55d-4d0f-90a3-c1a7795e27fc');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_cc65f556-d55d-4d0f-90a3-c1a7795e27fc" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtDumpMemoryLeaks();
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt16" class="sentence" data-guid="519ec924645684b804077181e6c3ab4f" data-source="If your application has multiple exits, you do not need to manually place a call to &lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;_CrtDumpMemoryLeaks&lt;/span&gt;&lt;/span&gt; at every exit point." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果应用程序有多个退出点，并不需要在每个退出点都手动设置一个对 <a href="https://msdn.microsoft.com/zh-cn/library/d41t22sb.aspx">_CrtDumpMemoryLeaks</a> 的调用。</sentencetext></span><span id="mt17" class="sentence" data-guid="63d37cf20f5f0ee876d11b541baa79fc" data-source="A call to &lt;strong&gt;_CrtSetDbgFlag&lt;/strong&gt; at the beginning of your application will cause an automatic call to &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; at each exit point." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">应用程序开头部分对 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtSetDbgFlag</strong> 的调用会导致在每个退出点自动调用 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong>。</sentencetext></span><span id="mt18" class="sentence" data-guid="ddec6e301f7a009e30259e205d8efdb0" data-source="You must set the two bit fields shown here:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">你必须设置两个位域，如下所示：</sentencetext></span></p>
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_2a83fbf3-7e0d-49ca-8e09-511e2b2e0277');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_2a83fbf3-7e0d-49ca-8e09-511e2b2e0277" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt19" class="sentence" data-guid="2975bbdd6351eee4e04086994c0cc14d" data-source="By default, &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; outputs the memory-leak report to the &lt;strong&gt;Debug&lt;/strong&gt; pane of the &lt;strong&gt;Output&lt;/strong&gt; window." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">默认情况下，<strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 将内存泄漏报告输出到<strong xmlns="http://www.w3.org/1999/xhtml">“输出”</strong>窗口的<strong xmlns="http://www.w3.org/1999/xhtml">“调试”</strong>窗格中。</sentencetext></span><span id="mt20" class="sentence" data-guid="953d9ce4a6c5550477b8bf6adc1110b7" data-source="You can use &lt;strong&gt;_CrtSetReportMode&lt;/strong&gt; to redirect the report to another location." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">你可以使用 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtSetReportMode</strong> 将该报告重定向到其他位置。</sentencetext></span></p><p><span id="mt21" class="sentence" data-guid="b622e257f6f2dfbee21d021006075273" data-source="If you use a library, the library might reset the output to another location." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果使用库，该库可能会将输出重置到另一位置。</sentencetext></span><span id="mt22" class="sentence" data-guid="6ba4b47a635daa9b85981e0bd1a3306f" data-source="In that case, you can set the output location back to the &lt;strong&gt;Output&lt;/strong&gt; window, as shown here:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在此情况下，可以将输出位置设置回<strong xmlns="http://www.w3.org/1999/xhtml">“输出”</strong>窗口，如下所示：</sentencetext></span></p>
+<div id="code-snippet-4" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_cc9bb7c9-33b4-4fd8-a7e6-c9bd60a13db0');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_cc9bb7c9-33b4-4fd8-a7e6-c9bd60a13db0" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_DEBUG );
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">解释内存泄漏报告</span></a><div id="Anchor_1" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_1" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt24" class="sentence" data-guid="51662ec722107fefbed63b9104dd46fe" data-source="If your application does not define &lt;span class=&quot;code&quot;&gt;_CRTDBG_MAP_ALLOC&lt;/span&gt;, &lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;_CrtDumpMemoryLeaks&lt;/span&gt;&lt;/span&gt; displays a memory-leak report that looks like this:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果应用程序未定义 <span class="code" xmlns="http://www.w3.org/1999/xhtml">_CRTDBG_MAP_ALLOC</span>，则 <a href="https://msdn.microsoft.com/zh-cn/library/d41t22sb.aspx">_CrtDumpMemoryLeaks</a> 显示的内存泄漏报告如下所示：</sentencetext></span></p>
+<div id="code-snippet-5" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_6d3f86fb-8acd-4701-a962-040c5f9ffea6');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_6d3f86fb-8acd-4701-a962-040c5f9ffea6" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>Detected memory leaks!
+Dumping objects -&gt;
+{18} normal block at 0x00780E80, 64 bytes long.
+ Data: &lt;                &gt; CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD
+Object dump complete.
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt25" class="sentence" data-guid="c4d6f99bb574f6c024c25877c33114cf" data-source="If your application defines &lt;span class=&quot;code&quot;&gt;_CRTDBG_MAP_ALLOC&lt;/span&gt;, the memory-leak report looks like this:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果应用程序定义了 <span class="code" xmlns="http://www.w3.org/1999/xhtml">_CRTDBG_MAP_ALLOC</span>，则显示的内存泄漏报告如下所示：</sentencetext></span></p>
+<div id="code-snippet-6" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_09b52f88-21ea-49b9-8e1a-3437a2039ecf');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_09b52f88-21ea-49b9-8e1a-3437a2039ecf" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>Detected memory leaks!
+Dumping objects -&gt;
+C:\PROGRAM FILES\VISUAL STUDIO\MyProjects\leaktest\leaktest.cpp(20) : {18}
+normal block at 0x00780E80, 64 bytes long.
+ Data: &lt;                &gt; CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD
+Object dump complete.
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt26" class="sentence" data-guid="1ca76db57854de9e95dd9b9584248d68" data-source="The difference is that the second report shows name of the file and the line number where the leaked memory is first allocated. " xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">区别在于，第二份报告显示文件名，以及泄漏的内存初次分配所在位置的行号。</sentencetext></span></p><p><span id="mt27" class="sentence" data-guid="998cb259fa75f19bfc134463024e3b13" data-source="Whether you define &lt;span class=&quot;code&quot;&gt;_CRTDBG_MAP_ALLOC&lt;/span&gt; or not, the memory-leak report will display the following information:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">不论是否定义 <span class="code" xmlns="http://www.w3.org/1999/xhtml">_CRTDBG_MAP_ALLOC</span>，内存泄漏报告都显示以下信息：</sentencetext></span></p><ul class="unordered"><li><p><span id="mt28" class="sentence" data-guid="b465a0bd7b2eb5a4ca26da133d2c084a" data-source="The memory allocation number, which is &lt;span class=&quot;code&quot;&gt;18&lt;/span&gt; in this example" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">内存分配编号，在本例中为 <span class="code" xmlns="http://www.w3.org/1999/xhtml">18</span>。</sentencetext></span></p></li><li><p><span id="mt29" class="sentence" data-guid="aa042e3361584e1758718f1bc6d6de9c" data-source="The &lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;block type&lt;/span&gt;&lt;/span&gt;, which is &lt;span class=&quot;code&quot;&gt;normal&lt;/span&gt; in this example. " xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/zh-cn/library/htdyz80k.aspx">块类型</a>，在本例中为 <span class="code" xmlns="http://www.w3.org/1999/xhtml">normal</span>。</sentencetext></span></p></li><li><p><span id="mt30" class="sentence" data-guid="57cb93e543bf2ffa4ed553cc65d093df" data-source="The hexadecimal memory location, which is &lt;span class=&quot;code&quot;&gt;0x00780E80&lt;/span&gt; in this example." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">十六进制内存位置，在本例中为 <span class="code" xmlns="http://www.w3.org/1999/xhtml">0x00780E80</span>。</sentencetext></span></p></li><li><p><span id="mt31" class="sentence" data-guid="4e322d15fea1f9cbd5f4c2467564e79f" data-source="The size of the block, &lt;span class=&quot;code&quot;&gt;64 bytes&lt;/span&gt; in this example." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">块的大小，在本例中为 <span class="code" xmlns="http://www.w3.org/1999/xhtml">64 bytes</span>。</sentencetext></span></p></li><li><p><span id="mt32" class="sentence" data-guid="9944768770d9cfd40894e90966e130bc" data-source="The first 16 bytes of data in the block, in hexadecimal form." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">块中前 16 个字节的数据（十六进制形式）。</sentencetext></span></p></li></ul><p><span id="mt33" class="sentence" data-guid="7355d64b27a2c3822148815e2551c9bc" data-source="The memory-leak report identifies a block of memory as normal, client, or CRT." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">内存泄漏报告将内存块标识为普通、客户端或 CRT。</sentencetext></span><span id="mt34" class="sentence" data-guid="f6fae82cb04ceb7082e73251445ea5bc" data-source="A &lt;em&gt;normal block&lt;/em&gt; is ordinary memory allocated by your program." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">“普通块”是由程序分配的普通内存。</sentencetext></span><span id="mt35" class="sentence" data-guid="b542d901bcef093fa8ef83c55e8ecccf" data-source="A &lt;em&gt;client block&lt;/em&gt; is a special type of memory block used by MFC programs for objects that require a destructor." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">“客户端块”是由 MFC 程序用于需要析构函数的对象的特殊类型内存块。</sentencetext></span><span id="mt36" class="sentence" data-guid="68dd48cc671a9ac490bf5e9519a95d45" data-source="The MFC &lt;span class=&quot;code&quot;&gt;new&lt;/span&gt; operator creates either a normal block or a client block, as appropriate for the object being created." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">MFC <span class="code" xmlns="http://www.w3.org/1999/xhtml">new</span> 运算符根据正在创建的对象的需要创建普通块或客户端块。</sentencetext></span><span id="mt37" class="sentence" data-guid="6095b9a7e1f55e9d28ee113ee5a15708" data-source="A &lt;em&gt;CRT block&lt;/em&gt; is allocated by the CRT library for its own use." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">“CRT 块”是由 CRT 库为自己使用而分配的内存块。</sentencetext></span><span id="mt38" class="sentence" data-guid="351c81dc7fa9a2c5ce085c56cd8c991b" data-source="The CRT library handles the deallocation for these blocks." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">CRT 库可处理这些块的释放。</sentencetext></span><span id="mt39" class="sentence" data-guid="a2bf03f59ab97673b366ecc40a29d549" data-source="Therefore, it is unlikely you will see these in the memory leak report unless something is significantly wrong, for example, the CRT library is corrupted." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">因此，你不大可能在内存泄漏报告中看到这些块，除非出现严重错误（例如 CRT 库损坏）。</sentencetext></span></p><p><span id="mt40" class="sentence" data-guid="51df2e106f30a0ecc4b4b5cabd8ea76c" data-source="There are two other types of memory blocks that never appear in memory-leak reports." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">内存泄漏报告中绝对不会出现另外两个内存块类型。</sentencetext></span><span id="mt41" class="sentence" data-guid="355585cd18d46e4b569437502b43326a" data-source="A &lt;em&gt;free block&lt;/em&gt; is memory that has been released." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">“可用块”是已释放的内存。</sentencetext></span><span id="mt42" class="sentence" data-guid="a88c370db1ff57ae762d2b6640c12332" data-source="That means it is not leaked, by definition." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">也就是说，根据定义，这种块不会泄漏。</sentencetext></span><span id="mt43" class="sentence" data-guid="73519991ff900cc9b19a0ae326a43cf5" data-source="An &lt;em&gt;ignore block&lt;/em&gt; is memory that you have explicitly marked to exclude it from the memory-leak report." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">“忽略块”是已明确标记、不出现在内存泄漏报告中的块。</sentencetext></span></p><p><span id="mt44" class="sentence" data-guid="6ca7dacf968fa2bf488efb5bb46b8c8c" data-source="These techniques work for memory allocated using the standard CRT &lt;strong&gt;malloc&lt;/strong&gt; function." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">这些方法适用于使用标准 CRT <strong xmlns="http://www.w3.org/1999/xhtml">malloc</strong> 函数分配的内存。</sentencetext></span><span id="mt45" class="sentence" data-guid="830fe2cca7072964a0d88c96c5fa5e72" data-source="If your program allocates memory using the C++ &lt;strong&gt;new&lt;/strong&gt; operator, however, you need to redefine &lt;strong&gt;new&lt;/strong&gt; if you want to see the file and line numbers in the memory-leak report." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">不过，如果程序使用 C++ <strong xmlns="http://www.w3.org/1999/xhtml">new</strong> 运算符分配内存，则需要重新定义 <strong xmlns="http://www.w3.org/1999/xhtml">new</strong> 才能在内存泄漏报告中看到文件和行号。</sentencetext></span><span id="mt46" class="sentence" data-guid="06dc89dc070f578a302b5f55c3668da1" data-source="You can do that with a block of code that looks like this:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">你可以利用如下所示的代码块实现：</sentencetext></span></p>
+<div id="code-snippet-7" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_f70fef5a-7a86-4c33-acd9-e9fc80428659');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_f70fef5a-7a86-4c33-acd9-e9fc80428659" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>#ifdef _DEBUG
+   #ifndef DBG_NEW
+      #define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+      #define new DBG_NEW
+   #endif
+#endif  // _DEBUG
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">在内存分配编号上设置断点</span></a><div id="Anchor_2" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_2" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt48" class="sentence" data-guid="c8c9e43505c411ff67c254c4c60e88de" data-source="The memory allocation number tells you when a leaked memory block was allocated." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果分配了泄漏内存块，内存分配编号会通知你。</sentencetext></span><span id="mt49" class="sentence" data-guid="f930c34f5161b2b6165628bb350066b4" data-source="A block with a memory allocation number of 18, for example, is the 18th block of memory allocated during the run of the application." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">例如，内存分配编号为 18 的块就是在应用程序运行过程中所分配的第 18 个内存块。</sentencetext></span><span id="mt50" class="sentence" data-guid="0ba35daf6a12c643179437d2484bdace" data-source="The CRT report counts all memory-block allocations during the run." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">CRT 报告包含运行过程中的所有内存块分配情况。</sentencetext></span><span id="mt51" class="sentence" data-guid="bcf79ea0f1264ba54e3b47e5a8b6dc97" data-source="This includes allocations by the CRT library and other libraries such as MFC." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">其中包括 CRT 库和其他库（如 MFC）的分配情况。</sentencetext></span><span id="mt52" class="sentence" data-guid="d6641a4d58334a5f83a548fe85e6bb1c" data-source="Therefore, a block with a memory allocation number of 18 may not be the 18th memory block allocated by your code." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">因此，内存分配编号为 18 的块可能不是你的代码所分配的第 18 个内存块。</sentencetext></span><span id="mt53" class="sentence" data-guid="086305df32e13518d883f6a4f700ce38" data-source="Typically, it will not be." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">通常，二者并不一致。</sentencetext></span></p><p><span id="mt54" class="sentence" data-guid="78561ac8d17a18edda3bdb8e3fe9615b" data-source="You can use the allocation number to set a breakpoint on the memory allocation." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">可以使用分配编号在内存分配位置设置断点。</sentencetext></span></p><div class="section" bookmarktitle="使用“监视”窗口设置内存分配断点"><h3 class="subHeading" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink"><span id="mt55" class="sentence" data-guid="50d56231184f848d20232a28ee684834" data-source="To set a memory-allocation breakpoint using the Watch window" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">使用“监视”窗口设置内存分配断点</sentencetext></span></h3><ol class="steps"><li class="step"><div class="section"><p><span id="mt56" class="sentence" data-guid="30751cb7d54919688e6d2f120c10c8ef" data-source="Set a breakpoint near the start of your application, and then start your application." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在应用程序的起点附近设置断点，然后启动应用程序。</sentencetext></span></p></div></li><li class="step"><div class="section"><p><span id="mt57" class="sentence" data-guid="cdaa6acc586183d0fd40853fe4075354" data-source="When the application breaks at the breakpoint, the &lt;strong&gt;Watch&lt;/strong&gt; window." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">当应用程序在断点处中断时，会出现<strong xmlns="http://www.w3.org/1999/xhtml">“监视”</strong>窗口。</sentencetext></span></p></div></li><li class="step"><div class="section"><p><span id="mt58" class="sentence" data-guid="58a8efde2fe73132b2fae6ec4ef85c54" data-source="In the &lt;strong&gt;Watch&lt;/strong&gt; window, type &lt;span class=&quot;code&quot;&gt;_crtBreakAlloc&lt;/span&gt; in in the &lt;strong&gt;Name&lt;/strong&gt; column." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在<strong xmlns="http://www.w3.org/1999/xhtml">“监视”</strong>窗口中，在<strong xmlns="http://www.w3.org/1999/xhtml">“名称”</strong>列中键入 <span class="code" xmlns="http://www.w3.org/1999/xhtml">_crtBreakAlloc</span>。</sentencetext></span></p><p><span id="mt59" class="sentence" data-guid="865d7972d163da31879a8987ff38e759" data-source="If you are using the multithreaded DLL version of the CRT library (the /MD option), include the context operator: &lt;span class=&quot;code&quot;&gt;{,,msvcr100d.dll}_crtBreakAlloc&lt;/span&gt;" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果要使用 CRT 库的多线程 DLL 版本（/MD 选项），请加入上下文运算符：<span class="code" xmlns="http://www.w3.org/1999/xhtml">{,,msvcr100d.dll}_crtBreakAlloc</span></sentencetext></span></p></div></li><li class="step"><div class="section"><p><span id="mt60" class="sentence" data-guid="7ae6945e1968d55508ce78b9b840a12a" data-source="Press &lt;strong&gt;RETURN&lt;/strong&gt;." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">按<strong xmlns="http://www.w3.org/1999/xhtml">“Return”</strong>。</sentencetext></span></p><p><span id="mt61" class="sentence" data-guid="2470f6d9b49cca1c2c87893b7e4ca702" data-source="The debugger evaluates the call and places the result in the &lt;strong&gt;Value&lt;/strong&gt; column." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">调试器将计算调用，并将结果放入<strong xmlns="http://www.w3.org/1999/xhtml">“值”</strong>列。</sentencetext></span><span id="mt62" class="sentence" data-guid="c3defe40316047a933078d4ff84707b3" data-source="This value will be –1 if you have not set any breakpoints on memory allocations." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果没有在内存分配上设置任何断点，该值将为 –1。</sentencetext></span></p></div></li><li class="step"><div class="section"><p><span id="mt63" class="sentence" data-guid="caed5266283c76384df0987c80385ce3" data-source="In the &lt;strong&gt;Value&lt;/strong&gt; column, replace the value shown with the allocation number of the memory allocation where you want to break." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在<strong xmlns="http://www.w3.org/1999/xhtml">“值”</strong>列中，将显示的值替换为要在其位置中断的内存分配的分配编号。</sentencetext></span></p></div></li></ol></div><p><span id="mt64" class="sentence" data-guid="50c65354a12cca24cfb21cb92271331d" data-source="After you set a breakpoint on a memory-allocation number, you can continue to debug." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在某个内存分配编号设置断点之后，你可以继续调试。</sentencetext></span><span id="mt65" class="sentence" data-guid="0709c7eee640514d70da3c1dbf67d94b" data-source="Be careful to run the program under the same conditions as the previous run so that the memory-allocation order does not change." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">请注意在与以前运行相同的条件下运行程序，以便内存分配顺序不会更改。</sentencetext></span><span id="mt66" class="sentence" data-guid="855b0eb715da28d527329839c992a34a" data-source="When your program breaks at the specified memory allocation, you can use the &lt;strong&gt;Call Stack&lt;/strong&gt; window and other debugger windows to determine the conditions under which the memory was allocated." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">当程序在指定的内存分配处中断时，可以使用<strong xmlns="http://www.w3.org/1999/xhtml">“调用堆栈”</strong>窗口和其他调试器窗口来确定分配内存时的情况。</sentencetext></span><span id="mt67" class="sentence" data-guid="e1333ca20f6f3ecfb88463c21cdfb946" data-source="Then, you can continue execution to observe what happens to the object and determine why it is not correctly deallocated." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">然后，可以继续执行程序以观察对象发生什么情况，并确定未正确释放对象的原因。</sentencetext></span></p><p><span id="mt68" class="sentence" data-guid="f977085c99e55d9d81e2934457f8d304" data-source="Setting a data breakpoint on the object might also be helpful." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在对象上设置数据断点可能也有帮助。</sentencetext></span><span id="mt69" class="sentence" data-guid="02463527ad9972c074c10ef978a6a7ce" data-source="For more information, see .&lt;span class=&quot;buildwarning&quot; id=&quot;Warn_b1c4b82b-8a13-4772-97a3-81f80e2d3e71&quot; title=&quot;020b2e97-3b3e-4b2c-872d-b5c6025e120e#BKMK_Set_a_data_change_breakpoint__native_C___only_&quot;&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;020b2e97-3b3e-4b2c-872d-b5c6025e120e#BKMK_Set_a_data_change_breakpoint__native_C___only_&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">有关详细信息，请参阅。<span class="buildwarning" id="Warn_b3479baa-988a-49d6-8c7c-0eaa0e105891" title="020b2e97-3b3e-4b2c-872d-b5c6025e120e#BKMK_Set_a_data_change_breakpoint__native_C___only_" xmlns="http://www.w3.org/1999/xhtml"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#NotExistJustToMakeTheAElementVisible">020b2e97-3b3e-4b2c-872d-b5c6025e120e#BKMK_Set_a_data_change_breakpoint__native_C___only_</a></span></sentencetext></span></p><p><span id="mt70" class="sentence" data-guid="a9be5b0ea513b34d017d6aa7ae512178" data-source="You can also set memory-allocation breakpoints in code." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">你也可以在代码中设置内存分配断点。</sentencetext></span><span id="mt71" class="sentence" data-guid="49f79e4b847a6ce8d3f44c38d136200b" data-source="There are two ways to do this:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">有两种方法可以实现此目的：</sentencetext></span></p>
+<div id="code-snippet-8" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_e719f3df-1ce2-4a87-aec0-d91e245f81a1');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_e719f3df-1ce2-4a87-aec0-d91e245f81a1" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_crtBreakAlloc = 18;
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt72" class="sentence" data-guid="e8c7746c798038181311eeb1ac3fda10" data-source="or:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">或：</sentencetext></span></p>
+<div id="code-snippet-9" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_b5958f2d-bebf-4fab-92f4-465d9c057a69');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_b5958f2d-bebf-4fab-92f4-465d9c057a69" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtSetBreakAlloc(18);
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">比较内存状态</span></a><div id="Anchor_3" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_3" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt74" class="sentence" data-guid="e68babe69d7602ed1b23e688cadf95db" data-source="Another technique for locating memory leaks involves taking snapshots of the application&#39;s memory state at key points." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">定位内存泄漏的另一种技术涉及在关键点对应用程序的内存状态拍快照。</sentencetext></span><span id="mt75" class="sentence" data-guid="35c27431a2bc86a66778d17fbc7a8cbf" data-source="To take a snapshot of the memory state at a given point in your application, create a &lt;strong&gt;_CrtMemState&lt;/strong&gt; structure and pass it to the &lt;strong&gt;_CrtMemCheckpoint&lt;/strong&gt; function." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">若要为应用程序中给定点的内存状态拍快照，请创建 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemState</strong> 结构，将它传递给 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemCheckpoint</strong> 函数。</sentencetext></span><span id="mt76" class="sentence" data-guid="f8e3abc283a32b192cef75e44ca3794d" data-source="This function fills in the structure with a snapshot of the current memory state:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">该函数用当前内存状态的快照填充此结构：</sentencetext></span></p>
+<div id="code-snippet-10" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_17767eb9-263e-4de1-9c71-f42362dd9398');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_17767eb9-263e-4de1-9c71-f42362dd9398" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtMemState s1;
+_CrtMemCheckpoint( &amp;s1 );
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt77" class="sentence" data-guid="1d9dea3e392c7afa7d138f7c6d240be9" data-source="&lt;strong&gt;_CrtMemCheckpoint&lt;/strong&gt; fills in the structure with a snapshot of the current memory state." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemCheckpoint</strong> 会将当前内存状态填充在该结构中。</sentencetext></span></p><p><span id="mt78" class="sentence" data-guid="330f68e13731865daeadd02a12a41a39" data-source="To output the contents of a &lt;strong&gt;_CrtMemState&lt;/strong&gt; structure, pass the structure to the &lt;strong&gt;_ CrtMemDumpStatistics&lt;/strong&gt; function:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">若要输出 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemState</strong> 结构的内容，请将该结构传递给 <strong xmlns="http://www.w3.org/1999/xhtml">_ CrtMemDumpStatistics</strong> 函数：</sentencetext></span></p>
+<div id="code-snippet-11" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_109ea2d1-6414-443a-a90a-e3ea6bc9698e');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_109ea2d1-6414-443a-a90a-e3ea6bc9698e" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtMemDumpStatistics( &amp;s1 );
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt79" class="sentence" data-guid="7233d1a9ea91ff9484b095c90eac7272" data-source="&lt;strong&gt;_ CrtMemDumpStatistics&lt;/strong&gt; outputs a dump of memory state that looks like this:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <strong xmlns="http://www.w3.org/1999/xhtml">_ CrtMemDumpStatistics</strong> 输出内存状态转储，如下所示：</sentencetext></span></p>
+<div id="code-snippet-12" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_c5df25c5-1500-4d33-b5f7-24cff6dcff0b');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_c5df25c5-1500-4d33-b5f7-24cff6dcff0b" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>0 bytes in 0 Free Blocks.
+0 bytes in 0 Normal Blocks.
+3071 bytes in 16 CRT Blocks.
+0 bytes in 0 Ignore Blocks.
+0 bytes in 0 Client Blocks.
+Largest number used: 3071 bytes.
+Total allocations: 3764 bytes.
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt80" class="sentence" data-guid="5ffb205bb0a5ae68808584d8bc5a5b24" data-source="To determine whether a memory leak has occurred in a section of code, you can take snapshots of the memory state before and after the section, and then use &lt;strong&gt;_ CrtMemDifference&lt;/strong&gt; to compare the two states:" xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">若要确定在某个代码部分中是否发生了内存泄漏，可以对这部分之前和之后的内存状态拍快照，然后使用 <strong xmlns="http://www.w3.org/1999/xhtml">_ CrtMemDifference</strong> 比较两个状态：</sentencetext></span></p>
+<div id="code-snippet-13" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="复制到剪贴板。" href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_f1612595-2fbf-4f0a-9239-ba73e9f8a393');">复制</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_f1612595-2fbf-4f0a-9239-ba73e9f8a393" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>_CrtMemCheckpoint( &amp;s1 );
+// memory allocations take place here
+_CrtMemCheckpoint( &amp;s2 );
+
+if ( _CrtMemDifference( &amp;s3, &amp;s1, &amp;s2) )
+   _CrtMemDumpStatistics( &amp;s3 );
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt81" class="sentence" data-guid="2c02cc6ec4b3a253a4481acc1e8fccb8" data-source="&lt;strong&gt;_CrtMemDifference&lt;/strong&gt; compares the memory states &lt;span class=&quot;code&quot;&gt;s1&lt;/span&gt; and &lt;span class=&quot;code&quot;&gt;s2&lt;/span&gt; and returns a result in (&lt;span class=&quot;code&quot;&gt;s3&lt;/span&gt;) that is the difference of &lt;span class=&quot;code&quot;&gt;s1&lt;/span&gt; and &lt;span class=&quot;code&quot;&gt;s2&lt;/span&gt;. " xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemDifference</strong> 比较内存状态 <span class="code" xmlns="http://www.w3.org/1999/xhtml">s1</span> 和 <span class="code" xmlns="http://www.w3.org/1999/xhtml">s2</span>，在 (<span class="code" xmlns="http://www.w3.org/1999/xhtml">s3</span>) 中返回结果，即 <span class="code" xmlns="http://www.w3.org/1999/xhtml">s1</span> 与 <span class="code" xmlns="http://www.w3.org/1999/xhtml">s2</span> 的差异。</sentencetext></span></p><p><span id="mt82" class="sentence" data-guid="40b180be95a2ea0b272a452c434ceb33" data-source="One technique for finding memory leaks begins by placing &lt;strong&gt;_CrtMemCheckpoint&lt;/strong&gt; calls at the beginning and end of your application, then using &lt;strong&gt;_CrtMemDifference&lt;/strong&gt; to compare the results." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">寻找内存泄漏的一个方法是，首先在应用程序的开头和结尾部分放置 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemCheckpoint</strong> 调用，然后使用 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemDifference</strong> 比较两个结果。</sentencetext></span><span id="mt83" class="sentence" data-guid="5248648d511cf493f19cc02fcb152f14" data-source="If &lt;strong&gt;_CrtMemDifference&lt;/strong&gt; shows a memory leak, you can add more &lt;strong&gt;_CrtMemCheckpoint&lt;/strong&gt; calls to divide your program using a binary search until you have isolated the source of the leak." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemDifference</strong> 显示有内存泄漏，你可以添加更多 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtMemCheckpoint</strong> 调用来使用二进制搜索划分程序，直至找到泄漏源。</sentencetext></span></p></div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">误报</span></a><div id="Anchor_4" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_4" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt85" class="sentence" data-guid="c58c57db8b6accd93a89a674a63ef875" data-source="In some cases, &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; can give false indications of memory leaks." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在某些情况下，<strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 可能给出错误的内存泄漏指示。</sentencetext></span><span id="mt86" class="sentence" data-guid="d05cd00ff2d5e636da4397a2f7e83f46" data-source="This might occur if you use a library that marks internal allocations as _NORMAL_BLOCKs instead of &lt;strong&gt;_CRT_BLOCK&lt;/strong&gt;s or &lt;strong&gt;_CLIENT_BLOCK&lt;/strong&gt;s." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果使用将内部分配标记为 _NORMAL_BLOCK 而不是 <strong xmlns="http://www.w3.org/1999/xhtml">_CRT_BLOCK</strong> 或 <strong xmlns="http://www.w3.org/1999/xhtml">_CLIENT_BLOCK</strong> 的库，则可能发生这种情况。</sentencetext></span><span id="mt87" class="sentence" data-guid="309a37b28f5798b796144f756b6ae2df" data-source="In that case, &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; is unable to tell the difference between user allocations and internal library allocations." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在这种情况下，<strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 无法区分用户分配和内部库分配。</sentencetext></span><span id="mt88" class="sentence" data-guid="68e43a7af600c5b0e4135934898a4992" data-source="If the global destructors for the library allocations run after the point where you call &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt;, every internal library allocation is reported as a memory leak." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">如果在 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 调用点之后运行库分配的全局析构函数，则每个内部库分配都会报告为内存泄漏。</sentencetext></span><span id="mt89" class="sentence" data-guid="cf7710ded385efefa5cd9a5292c36b5b" data-source="Older versions of the Standard Template Library, earlier than Visual Studio .NET, caused &lt;strong&gt;_CrtDumpMemoryLeaks&lt;/strong&gt; to report such false positives, but this has been fixed in recent releases." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">在 Visual Studio .NET 之前的早期版本的标准模板库会导致 <strong xmlns="http://www.w3.org/1999/xhtml">_CrtDumpMemoryLeaks</strong> 出现这种误报，在最近的版本中，已经解决了这一问题。</sentencetext></span></p></div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="" role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">请参阅</span></a><div id="Anchor_5" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#Anchor_5" class="LW_CollapsibleArea_Anchor_Img" title="复制并共享此部分的链接"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><p><a href="https://msdn.microsoft.com/zh-cn/library/974tc9t1.aspx">CRT 调试堆详细信息</a><br><a href="https://msdn.microsoft.com/zh-cn/library/ms242231.aspx">调试器安全</a><br><a href="https://msdn.microsoft.com/zh-cn/library/k70yt3e2.aspx">调试本机代码</a><br></p></div></div></div>
+    </div>
+  </div>
+</div>
+
+
+    
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>显示:</span>
+        <label>
+            <input type="checkbox" class="libraryFilterInherited" checked="checked" value="Inherit">继承
+        </label>
+        <label>
+            <input type="checkbox" class="libraryFilterProtected" checked="checked" value="Protected">保护
+        </label>
+    </div>
+</div>
+    
+<input type="hidden" id="libraryMemberFilterEmptyWarning" value="您当前的筛选设置无成员可用。">
+
+
+
+    </div>
+
+<div id="rightNavigationMenu" ms.pgarea="right nav" style="">
+    <div id="mobileButtons">
+        
+    </div>
+    <div id="navMain">
+        <div id="closeNavigation">
+            <a class="tocCloseSmall" id="closeButton"></a>
+        </div>
+        <div id="navigationButtons">
+            <a id="provideFeedback2" href="javascript:void(0)"><ins class="suggestion"></ins>您有何建议？</a>
+            <a id="isd_print" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf(d=printer).aspx" rel="nofollow"><ins class="print"></ins>打印</a>
+            <a id="isd_printABook2" href="https://msdn.microsoft.com/zh-cn/library/export/help/?returnUrl=%2fzh-cn%2flibrary%2fx98tx3cf.aspx">
+                <ins class="export"></ins>导出 (<span class="count">0</span>)
+            </a>
+            <a id="isdShare" href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#">
+                <ins class="share"></ins>共享
+            </a>
+            <div id="socials" style="display: none">
+                <a id="isdFacebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmsdn.microsoft.com%2Fzh-cn%2Flibrary%2Fx98tx3cf.aspx">
+                    <ins class="facebook"></ins>
+                </a>
+                <a id="isdTwitter" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmsdn.microsoft.com%2Fzh-cn%2Flibrary%2Fx98tx3cf.aspx&text=%E4%BD%BF%E7%94%A8%20CRT%20%E5%BA%93%E6%9F%A5%E6%89%BE%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F&tw_p=tweetbutton&url=https%3A%2F%2Fmsdn.microsoft.com%2Fzh-cn%2Flibrary%2Fx98tx3cf.aspx">
+                    <ins class="twitter"></ins>
+                </a>
+                <a id="isdGooglePlus" href="https://plus.google.com/share?url=https%3A%2F%2Fmsdn.microsoft.com%2Fzh-cn%2Flibrary%2Fx98tx3cf.aspx">
+                    <ins class="googlePlus"></ins>
+                </a>
+            </div>
+        </div>
+        <div id="indoc_toc" style="" ms.cmpgrp="indoc toc">
+            <div id="indoc_title">本文内容</div>
+            <ul id="indoc_toclist"><li data-index="0" class="active">启用内存泄漏检测</li><li data-index="1" class="">解释内存泄漏报告</li><li data-index="2" class="">在内存分配编号上设置断点</li><li data-index="3" class="">比较内存状态</li><li data-index="4" class="">误报</li><li data-index="5" class="">请参阅</li></ul>
+        </div>
+    </div>
+</div>
+<div id="rightNavigationMenuThumbnail" class="rightNavigationMenuThumbnail">
+</div>
+
+
+
+        </div>
+        <div class="clear"></div>
+
+        
+
+<input name="__RequestVerificationToken" type="hidden" value="eaMX6RrU9o4YU7Ceb_UY6-hchXrBryrWYtHWDSpcYhzXkNZXAM3628jM9ue-lnNeTbfwyg6xRL6r7mSjHvSQ8ZKEubg1">
+<input id="ratingValueSubmitUrl" type="hidden" value="https://msdn.microsoft.com/zh-cn/library/feedback/rate/x98tx3cf.aspx">
+<input id="ratingAdditionalSubmitUrl" type="hidden" value="https://msdn.microsoft.com/zh-cn/library/feedback/additional/x98tx3cf.aspx">
+<input id="isTopicRated" type="hidden" value="false">
+
+
+
+    <div id="lib-footer">
+            <div id="responsiveRating" ms.pgarea="rating" class="show">
+                    
+    <div id="skinnyRating">
+        <div class="closeSmallWhite"></div>
+        <div class="rating">
+            <div id="s_ratingSection1">
+                <div class="title">
+                    此页面有用吗？
+                </div>
+                <div class="buttons">
+                    <button class="button" id="s_ratingYes" aria-label="是，此页面很有帮助">是</button>
+                    <button class="button" id="s_ratingNo" aria-label="不，此页面没有任何帮助">否</button>
+                </div>
+                <input id="s_ratingValue" type="hidden" value="">
+            </div>
+            <div id="s_ratingSection2">
+                <div id="s_skinnyRatingForm">
+                    <div class="title">
+                        更多反馈？
+                    </div>
+                    <textarea id="s_ratingText" rows="6" cols="" maxlength="1500"></textarea>
+                    <div class="right">
+                        <div class="counter">
+                            <span id="feedbackTextCounter">1500</span> 个剩余字符
+                        </div>
+                        <div class="buttons">
+                            <button class="button" id="s_ratingSubmit" aria-label="提交我的其他反馈">提交</button>
+                            <button class="button" id="s_ratingSkipThis" aria-label="跳过其他反馈">跳过此步</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="s_ratingSection3" style="display: none">
+                <div class="title">
+                    谢谢！
+                </div>
+                <div class="description">
+                    我们非常感谢您的反馈。
+                </div>
+            </div>
+            
+            <div id="contentFeedbackQAContainer" style="display: none;"></div>
+        </div>
+    </div>
+        
+
+            </div>
+        
+
+    
+    <link type="text/css" rel="stylesheet">
+    
+        
+    <div id="ux-footer" class="" style="" dir="ltr">
+        
+            
+        <div id="footerSock" class="">
+            <div id="footerSockInner">
+                             
+                    <div class="footerSockLeft"><div data-fragmentname="SocialLinks" id="Fragment_SocialLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">关注我们</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.weibo.com/cnmsdn" target="_blank" id="SocialLinks_2151_19" class="weiboShare" xmlns="http://www.w3.org/1999/xhtml">http://www.weibo.com/cnmsdn</a>
+      </li>
+      <li>
+        <a href="http://aka.ms/msdnwechat" target="_blank" id="SocialLinks_2151_20" class="wechatShare" xmlns="http://www.w3.org/1999/xhtml">http://aka.ms/msdnwechat</a>
+      </li>
+      <li>
+        <a href="http://aka.ms/contactmsdn" target="_blank" id="SocialLinks_2151_21" class="cnContactShare" xmlns="http://www.w3.org/1999/xhtml">http://aka.ms/contactmsdn</a>
+      </li>
+    </ul>
+  </div>
+</div></div>
+                        
+                <div class="footerSockCenter">
+                        <a name="feedback"></a>
+
+<div class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            此页面有用吗？
+        </div>
+        <div class="description">
+            您对此内容的反馈非常重要。<br>请告诉我们您的想法。
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes" aria-label="是，此页面很有帮助">是</button>
+            <button class="button" id="ratingNo" aria-label="不，此页面没有任何帮助">否</button>
+        </div>
+        <input id="ratingValue" type="hidden" value="">
+    </div>
+    <div id="ratingSection2">
+        <div class="title left">
+            更多反馈？
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="right">
+            <div class="counter">
+                <span id="feedbackTextCounter">1500</span> 个剩余字符
+            </div>
+            <div class="buttons">
+                <button class="button" id="ratingSubmit" aria-label="提交我的其他反馈">提交</button>
+                <button class="button" id="ratingSkipThis" aria-label="跳过其他反馈">跳过此步</button>
+            </div>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            谢谢！
+        </div>
+        <div class="description">
+            我们非常感谢您的反馈。
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+                                    </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <footer class="top">
+            <div data-fragmentname="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">开发人员中心</div>
+    <ul class="links">
+      <li>
+        <a href="https://dev.windows.com/" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml">Windows</a>
+      </li>
+      <li>
+        <a href="http://dev.office.com/" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml">Office</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/vstudio" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+      </li>
+      <li>
+        <a href="http://azure.microsoft.com/zh-cn/documentation/" target="_blank" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/developer-centers-msdn" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml">更多...</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <div id="rightLinks">
+                <div data-fragmentname="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">学习资源</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoftvirtualacademy.com/" id="CenterLinks1_2151_4" xmlns="http://www.w3.org/1999/xhtml">Microsoft 虚拟学院</a>
+      </li>
+      <li>
+        <a href="http://channel9.msdn.com/" id="CenterLinks1_2151_5" xmlns="http://www.w3.org/1999/xhtml">第 9 频道</a>
+      </li>
+      <li>
+        <a href="http://www.interoperabilitybridges.com/" id="CenterLinks1_2151_6" xmlns="http://www.w3.org/1999/xhtml">互操作性桥梁</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/magazine/" id="CenterLinks1_2151_7" xmlns="http://www.w3.org/1999/xhtml">MSDN 杂志</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">社区</div>
+    <ul class="links">
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/zh-cn/home" id="CenterLinks2_2151_8" xmlns="http://www.w3.org/1999/xhtml">论坛</a>
+      </li>
+      <li>
+        <a href="http://blogs.msdn.com/b/developer-tools/" id="CenterLinks2_2151_9" xmlns="http://www.w3.org/1999/xhtml">博客</a>
+      </li>
+      <li>
+        <a href="http://www.codeplex.com/" id="CenterLinks2_2151_10" xmlns="http://www.w3.org/1999/xhtml">Codeplex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">支持</div>
+    <ul class="links">
+      <li>
+        <a href="https://msdn.microsoft.com/hh361695" id="CenterLinks3_2151_11" xmlns="http://www.w3.org/1999/xhtml">自助支持</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml" class="nth-child-4n">
+  
+  <div class="linkList">
+    <div class="linkListTitle">计划</div>
+    <ul class="links">
+      <li>
+        <a href="https://www.microsoft.com/bizspark/" id="CenterLinks4_2151_13" xmlns="http://www.w3.org/1999/xhtml">BizSpark（针对新创企业）</a>
+      </li>
+      <li>
+        <a href="https://www.dreamspark.com/" id="CenterLinks4_2151_14" xmlns="http://www.w3.org/1999/xhtml">DreamSpark</a>
+      </li>
+      <li>
+        <a href="http://www.imaginecup.com/" id="CenterLinks4_2151_17" xmlns="http://www.w3.org/1999/xhtml">创新杯</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            </div>
+        </footer>
+
+        <footer class="bottom">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="https://msdn.microsoft.com/zh-cn/selectlocale-dmc">
+        <input type="hidden" name="fromPage" value="https%3a%2f%2fmsdn.microsoft.com%2fzh-cn%2flibrary%2fx98tx3cf.aspx">
+        <a href="https://msdn.microsoft.com/zh-cn/library/x98tx3cf.aspx#" onclick="$(&#39;#selectLocaleForm&#39;).submit();return false;" title="更改您的语言">中国 (简体中文)</a>
+    </form>
+
+
+            </span>
+
+            <div data-fragmentname="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="https://msdn.microsoft.com/newsletter.aspx" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml">新闻稿</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml">隐私&amp; Cookie</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml">使用条款</a>
+      </li>
+      <li>
+        <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml">商标</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <span class="logoLegal">
+                <span class="logo"></span>
+                <span class="copyright">© 2015 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+    </div>
+
+        <div class="footerPrintView">
+            <div class="footerCopyrightPrintView">© 2015 Microsoft</div>
+        </div>
+
+        
+        
+
+        
+        
+        
+
+    <input id="tocPaddingPerLevel" type="hidden" value="17">
+
+
+
+        <input id="MtpsDevice" type="hidden" value="Default">
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+
+        
+        
+        
+            
+        
+
+
+
+
+
+
+<noscript>&lt;div&gt;&lt;img alt="DCSIMG" id="Img1" width="1" height="1" src="https://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;amp;WT.js=No" /&gt;&lt;/div&gt;</noscript>
+
+
+
+
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" type="hidden" value="LNoB0FJiuLRf9GVMFsDGI4ZD1U3WvQ1bfG93UB6UpOh5xtQTzbJ54HiiZwPWJ8wlVvqLVuuW9VsguQP-63VFTzMA_RQ1">
+</div>
+
+
+    </div>
+
+    
+    
+
+    
+
+    
+    
+    
+<script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"js\": \"https://i2-msdn.sec.s-msft.com\", \r\n\t\"css\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"xap\": \"https://msdn.microsoft.com\"\r\n});\r\n/**/" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/zh-cn/library/x98tx3cf(l=zh-cn,v=vs.140).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027zh-cn\u0027;\n  var wtsp = \u0027msdnlib_devtools_lang\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "//\n\n        window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n        //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Utilities,1:Layout,2:Header,3:Breadcrumbs,4:LibraryRightNavigationMenu,4:PrintExportButton,5:SkinnyRating,1:Rating,2:Footer,0:Topic,6:webtrendsscript,0:AppInsightsPerf,3:ResponsiveToc,0:ABTestControl,4:WEDCS,3:CmpgrpForHeader,0:livefyre,0:Comment,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Library/Content:3,/Areas/Library/Themes/Base/Content:4,/Areas/Library/Themes/Msdn/Content:5,/Areas/Global/Content/Webtrends/resources:6\u0026amp;hashKey=A0993E7E398069FAC3E026B62E3F9142\u0026amp;v=06C8F047F1395116A6369E01B8A5848A" },
+	{ url: "https://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026pgArea=header\u0026brand=Msdn\u0026loc=zh-cn\u0026focusOnInit=false\u0026emptyWatermark=true\u0026searchButtonTooltip=搜索 MSDN" },
+	{ txt: "//\n    MTPS = window.MTPS || {};\n    MTPS.Translation = window.MTPS.Translation || {};\n\n    MTPS.Translation.TranslationType =  0;\n    \n    \n        \n        MTPS.Translation.EditorLink = {\n            includeEditor : 0,\n            editLink: \"https://msdn.microsoft.com/zh-cn/library/translation/edit/x98tx3cf.aspx\",\n            editLinkText: \"建议更好的翻译\"\n        };\n        \n    //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:jquery.popup,0:Translator;/Areas/Library/Content:0\u0026amp;hashKey=16D24150BAC1A18066CEC17E9B28E03E\u0026amp;v=06C8F047F1395116A6369E01B8A5848A" },
+	{ txt: "MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = \u0027展开\u0027; MTPS.LocalizedStrings.CollapseButtonTooltip = \u0027折叠\u0027; MTPS.LocalizedStrings.EnhancedExpandTooltip = \u0027单击以展开。双击以全部展开。\u0027; MTPS.LocalizedStrings.EnhancedCollapseTooltip = \u0027单击以折叠。双击以全部折叠。\u0027; MTPS.LocalizedStrings.ExpandAllButtonTooltip = \u0027全部展开\u0027; MTPS.LocalizedStrings.CollapseAllButtonTooltip = \u0027全部折叠\u0027;" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:LibraryMemberFilter,1:Toc_Fixed,1:CodeSnippet,1:TopicNotInScope,0:ResponsiveSupport,1:VersionSelector,1:SurveyBroker;/Areas/Library/Content:0,/Areas/Epx/Content/Scripts:1\u0026amp;hashKey=CDA41F7EA7DE185FBCE7B189AEA99930\u0026amp;v=06C8F047F1395116A6369E01B8A5848A" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script>
+
+<div id="overlayMask"></div><div id="popup-loading0" class="popup-loading" style="display: none; z-index: 210; width: auto; height: auto; left: 320px; top: 4110.6px;">loading...</div><div id="popup0" class="MTPopup" style="z-index: 210; width: auto; height: auto; max-width: 750px; left: 320px; top: 4110.6px; display: none;"><div class="popup-main" style="z-index: 210;"><div class="popup-inner">Older versions of the Standard Template Library, earlier than Visual Studio .NET, caused <strong>_CrtDumpMemoryLeaks</strong> to report such false positives, but this has been fixed in recent releases.<div class="EditTranslation"><a href="https://msdn.microsoft.com/zh-cn/library/translation/edit/x98tx3cf.aspx?sentenceGuid=cf7710ded385efefa5cd9a5292c36b5b">建议更好的翻译</a></div></div></div></div><script src="./使用 CRT 库查找内存泄漏_files/broker-config.js"></script></body></html>

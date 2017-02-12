@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window needalphachannel="1" id="imageviewdlg" layer="1" back.render.type="color" width="500" height="500" back.render.color="dlg_bkg" font="default">
+			<Button id="btn_add" style="common_btn" width="75" height="28" layout.left="10" layout.top="5" text="add" />
+			<Button id="btn_del" style="common_btn" width="75" height="28" layout.left="93" layout.top="5" text="del" />
+			<ListBox id="imagelistview" style="editor_listctrl" width="300" itemheight="40">
+                <prop key="layout" left="10" top="40" bottom="10"/>
+				<VScrollBar id="__vscrollbar" width="10">
+					<Button id="__scrollbar_thumb" style="scroll.thumb.back" />
+				</VScrollBar>
+			</ListBox>
+			<HwndHost id="imagepreview" layout.left="315" layout.top="40" layout.right="10" layout.bottom="10" />
+			<SplitterBar id="splitterbar" cursor="idc_splitbar_v" width="5" layout.left="310" layout.top="40" layout.bottom="10" align="right" left.id="imagelistview" left.minsize="100" left.maxsize="-1" right.id="imagepreview" right.minsize="100" right.maxsize="-1" />
+		</Window>
+        <ListItem id="imageview.list">
+            <Label id="id" layout.align="top|bottom">
+                <prop key="layout" left="5" right="0" top="0" height="20"/>
+            </Label>
+            <Label id="path" layout.align="top|bottom">
+                <prop key="layout" left="20" right="0" bottom="0" height="20"/>
+                <prop key="text.render" color="#F40"/>
+            </Label>
+            <!--Panel height="1" layout.bottom="0" layout.left="0" layout.right="0">
+                <prop key="back.render" type="color" color="#ccc"/>
+            </Panel-->
+        </ListItem>
+	</layout>
+</skin>

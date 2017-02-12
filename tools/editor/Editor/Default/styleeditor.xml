@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<skin>
+  <Layout>
+    <Window id="addstylewnd"></Window>
+  </Layout>
+</skin>

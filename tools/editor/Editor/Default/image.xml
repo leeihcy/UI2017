@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<image>
+		<!-- Control Type Icon -->
+		<image id="control_AppWindow">img\ControlIcon\AppWindow.png</image>
+		<image id="control_button">img\ControlIcon\button.png</image>
+		<image id="control_menu">img\ControlIcon\menu.png</image>
+		<image id="control_tooltip">img\ControlIcon\tooltip.png</image>
+		<image id="control_checkbox">img\ControlIcon\checkbox.png</image>
+		<image id="control_combobox">img\ControlIcon\combobox.png</image>
+		<image id="control_groupbox">img\ControlIcon\groupbox.png</image>
+		<image id="control_hscrollbar">img\ControlIcon\hscrollbar.png</image>
+		<image id="control_hyperlink">img\ControlIcon\hyperlink.png</image>
+		<image id="control_image">img\ControlIcon\image.png</image>
+		<image id="control_label">img\ControlIcon\label.png</image>
+		<image id="control_listbox">img\ControlIcon\listbox.png</image>
+		<image id="control_picturebox">img\ControlIcon\picturebox.png</image>
+		<image id="control_radiobutton">img\ControlIcon\radiobutton.png</image>
+		<image id="control_richtextbox">img\ControlIcon\richtextbox.png</image>
+		<image id="control_tabcontrol">img\ControlIcon\tabcontrol.png</image>
+		<image id="control_textbox">img\ControlIcon\textbox.png</image>
+		<image id="control_trackbar">img\ControlIcon\trackbar.png</image>
+		<image id="control_treeview">img\ControlIcon\treeview.png</image>
+		<image id="control_vscrollbar">img\ControlIcon\vscrollbar.png</image>
+		<image id="control_webbrowser">img\ControlIcon\webbrowser.png</image>
+		<image id="control_panel">img\ControlIcon\panel.png</image>
+		<image id="control_progress">img\ControlIcon\progress.png</image>
+		<image id="control_listview">img\ControlIcon\listview.png</image>
+		<!-- Command Button Icon -->
+		<image id="command_save">img\CommandIcon\saveHS.png</image>
+		<image id="command_newwindow">img\CommandIcon\NewWindow.png</image>
+		<image id="command_undo">img\CommandIcon\Edit_UndoHS.png</image>
+		<image id="command_redo">img\CommandIcon\Edit_RedoHS.png</image>
+		<image id="command_preview">img\CommandIcon\preview.png</image>
+		<image id="command_delete_red">img\CommandIcon\delete_red.png</image>
+		<image id="command_movedown">img\CommandIcon\movedown.png</image>
+		<image id="command_moveup">img\CommandIcon\moveup.png</image>
+		<image id="command_movedown2">img\CommandIcon\movedown2.png</image>
+		<image id="command_moveup2">img\CommandIcon\moveup2.png</image>
+		<!-- Common -->
+		<image id="common_tabctrl_border">img\Common\tabctrl_border.png</image>
+		<imagelist id="common_tabctrl_btn_top" count="3">img\Common\tabctrl_btn_top.png</imagelist>
+		<imagelist id="common_tabctrl_btn_bottom" count="3">img\Common\tabctrl_btn_bottom.png</imagelist>
+	</image>
+</skin>

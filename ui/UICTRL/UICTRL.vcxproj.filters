@@ -1,0 +1,910 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Other">
+      <UniqueIdentifier>{6e413b0a-c457-49ea-aebe-a0796c77dd6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Inc">
+      <UniqueIdentifier>{754510bc-0273-4ca6-bf1a-e4ef395f2d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src">
+      <UniqueIdentifier>{baf8a921-cf97-4bab-8f8c-41be55c2b2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Inc\01. base">
+      <UniqueIdentifier>{d6c1cff6-4e37-407c-9973-690b0ee28a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control">
+      <UniqueIdentifier>{255ccd0d-2021-406a-8cff-65c9e4ecf85a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\01. Button">
+      <UniqueIdentifier>{7f9d83f1-f14a-4f25-9ff5-f9f48a836032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\02. Label">
+      <UniqueIdentifier>{912434f1-43ae-49f8-a9e9-7e606c7b5731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\03. Menu">
+      <UniqueIdentifier>{378d0fe6-c959-4a88-8a9c-e6ddcde80141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\03. Menu\scrollbar">
+      <UniqueIdentifier>{f16997bb-6017-4f7e-9a96-e49c186ffb85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\03. Menu\layout">
+      <UniqueIdentifier>{3d4b5865-1600-4668-942c-936e73b50dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\03. Menu\item">
+      <UniqueIdentifier>{eb1f46c5-d008-4103-8d63-184a63b7ce81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\04. ListBase">
+      <UniqueIdentifier>{c4a8a5f1-dd56-4859-89be-0c7a23127cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\04. ListBase\popupwindow">
+      <UniqueIdentifier>{a21b2c71-ebc1-423e-b5e1-c15f129dece0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit">
+      <UniqueIdentifier>{62afedba-7bd7-4552-a720-83a9481d0657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\06. Caret">
+      <UniqueIdentifier>{72bd035f-b3cd-41ad-9918-c7a89f282d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\06. Caret\ControlDraw">
+      <UniqueIdentifier>{1f3643bf-5d8f-418c-86c6-def526119298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit\即时编辑">
+      <UniqueIdentifier>{84e38ffe-bcfe-45b7-8b2a-ac99d66feb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit\acc">
+      <UniqueIdentifier>{b99abb4d-f1b4-456e-b523-59cecceb29ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit\edit">
+      <UniqueIdentifier>{3436f6c4-6968-4f7d-a8b8-d131d5b0a808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit\password">
+      <UniqueIdentifier>{4654e6b5-1523-4e38-81d7-fccc5f664845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\07. RadioButton">
+      <UniqueIdentifier>{a0108e2f-7047-4965-8a81-f8dcc7792d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\08. CheckButton">
+      <UniqueIdentifier>{3a892f42-5c16-4d68-bac4-2dfcc399d56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\09. ListBox">
+      <UniqueIdentifier>{17d87005-5d6c-4bc3-9f81-1faf4b39531f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\10. ComboBox">
+      <UniqueIdentifier>{62b34bd5-7183-4dde-bf67-c764ddf370ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\11. ScrollBar">
+      <UniqueIdentifier>{478bc823-c74b-4ed3-a87e-860dae688242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\12. HyperLink">
+      <UniqueIdentifier>{d9dc4a3c-07fb-4131-8f9b-e1f8385535bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\13. RichText">
+      <UniqueIdentifier>{1c76a248-148b-4097-bcfe-bde42d7093a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\13. RichText\model">
+      <UniqueIdentifier>{84674fa0-a526-42ac-9136-c344bb2518e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\13. RichText\parse">
+      <UniqueIdentifier>{8c80dcb2-3acb-4d48-86fa-8f1d7247cd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\13. RichText\uniscribe">
+      <UniqueIdentifier>{4b7272a0-52ca-4e1f-a052-a309d923cb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\14. TreeView">
+      <UniqueIdentifier>{e9ae4f5c-28c7-4da9-9259-ba4ea60da268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\05. Edit\filter">
+      <UniqueIdentifier>{80b08eac-61af-4b2d-81cb-c5ac90f3adbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\13. RichText\model\element">
+      <UniqueIdentifier>{57c2e796-fbfe-4285-bfe1-7eda6e51e703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit">
+      <UniqueIdentifier>{a9df04d7-1ffb-4070-8c68-75d6a77dd0fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\TextFilter">
+      <UniqueIdentifier>{29388756-5fa1-4fb0-8765-84740c4311f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Resource">
+      <UniqueIdentifier>{d112b97a-8c3d-46d1-9fc5-5244f20e020d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole">
+      <UniqueIdentifier>{92caaf98-715c-4b22-97fb-1aeb29119555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Timer">
+      <UniqueIdentifier>{c2030171-1b77-416b-97af-e51f7d5b0393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Gif">
+      <UniqueIdentifier>{ef2c5ea1-b484-4381-aebd-9d824e8f3273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Element">
+      <UniqueIdentifier>{967afc5a-cfae-442d-abcd-02ceba9516a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Element\button">
+      <UniqueIdentifier>{f028a56d-a879-49cf-9236-a519c76c65b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Element\gif">
+      <UniqueIdentifier>{9bcc3188-2c2e-4135-a4a8-e16d9d18fe92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Element\image">
+      <UniqueIdentifier>{08dd2cd7-b871-4283-b779-91b9cd37c828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Element\text">
+      <UniqueIdentifier>{07b6aaf0-be3d-4e8c-a945-c71ca34f1e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Composite">
+      <UniqueIdentifier>{f0b13197-b4a1-4d9d-bda8-2650b74f4cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Ole\Composite\Picture">
+      <UniqueIdentifier>{ae78afb9-231c-465a-a72b-c348629d72ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\inc">
+      <UniqueIdentifier>{4d935de9-15e8-44c5-856a-1e5a01c10f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 3rd">
+      <UniqueIdentifier>{e5aff5ac-f838-4bc4-82d2-7676725e6e2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 3rd\markup">
+      <UniqueIdentifier>{58a21a2d-fad1-47d3-95d3-5c4f49da4ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\15. RichEdit\Bubble">
+      <UniqueIdentifier>{f608647e-df3f-485d-a670-1174e8a9a6c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\16. Slider">
+      <UniqueIdentifier>{e17df080-73c8-49f9-9baa-9a95c04e0735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\17. CustomControl">
+      <UniqueIdentifier>{b3009a1f-1837-4004-9698-0a978667dbc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Src\01. Control\18. RectTracker">
+      <UniqueIdentifier>{bba04cbb-bd49-4670-a1eb-1f400a27f196}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Other/stdafx.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other/targetver.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other/UICTRL.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\xmldefine.h">
+      <Filter>01. Inc\01. base</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\controlapi.h">
+      <Filter>01. Inc\01. base</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\controldefine.h">
+      <Filter>01. Inc\01. base</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\inc.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Button\button_desc.h">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Button\button.h">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\ibutton.h">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\private_inc.h">
+      <Filter>01. Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Label\label.h">
+      <Filter>02. Src\01. Control\02. Label</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Label\label_desc.h">
+      <Filter>02. Src\01. Control\02. Label</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\ilabel.h">
+      <Filter>02. Src\01. Control\02. Label</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\menu.h">
+      <Filter>02. Src\01. Control\03. Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\menu_desc.h">
+      <Filter>02. Src\01. Control\03. Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\scrollbar\menuscrollbar.h">
+      <Filter>02. Src\01. Control\03. Menu\scrollbar</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\item\menustringitem.h">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\item\menupopupitem.h">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\item\menuseparatoritem.h">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Menu\layout\menulayout.h">
+      <Filter>02. Src\01. Control\03. Menu\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\imenu.h">
+      <Filter>02. Src\01. Control\03. Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ListBase\PopupControlWindow\popupcontrolwindow.h">
+      <Filter>02. Src\01. Control\04. ListBase\popupwindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\iedit.h">
+      <Filter>02. Src\01. Control\05. Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Caret\icaret.h">
+      <Filter>02. Src\01. Control\06. Caret</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Caret\caret.h">
+      <Filter>02. Src\01. Control\06. Caret</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Caret\controldraw\controldrawcaret.h">
+      <Filter>02. Src\01. Control\06. Caret\ControlDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Edit\instantedit.h">
+      <Filter>02. Src\01. Control\05. Edit\即时编辑</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Edit\edit_accessible.h">
+      <Filter>02. Src\01. Control\05. Edit\acc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Edit\edit.h">
+      <Filter>02. Src\01. Control\05. Edit\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Edit\edit_desc.h">
+      <Filter>02. Src\01. Control\05. Edit\edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Edit\password_edit.h">
+      <Filter>02. Src\01. Control\05. Edit\password</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\iradiobutton.h">
+      <Filter>02. Src\01. Control\07. RadioButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\icheckbutton.h">
+      <Filter>02. Src\01. Control\08. CheckButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RadioButton\radiobutton.h">
+      <Filter>02. Src\01. Control\07. RadioButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RadioButton\radiobutton_desc.h">
+      <Filter>02. Src\01. Control\07. RadioButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\CheckButton\checkbutton.h">
+      <Filter>02. Src\01. Control\08. CheckButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\CheckButton\checkbutton_desc.h">
+      <Filter>02. Src\01. Control\08. CheckButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ListBox\listbox.h">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ListBox\listbox_desc.h">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ListBox\listboxitem.h">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\ilistbox.h">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ScrollBar\systemscrollbar.h">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ScrollBar\vscrollbar_creator.h">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ScrollBar\hscrollbar_creator.h">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ScrollBar\scrollbar_desc.h">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\iscrollbar.h">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\icombobox.h">
+      <Filter>02. Src\01. Control\10. ComboBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ComboBox\combobox_desc.h">
+      <Filter>02. Src\01. Control\10. ComboBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\ComboBox\combobox.h">
+      <Filter>02. Src\01. Control\10. ComboBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\HyperLink\hyperlink_desc.h">
+      <Filter>02. Src\01. Control\12. HyperLink</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\HyperLink\hyperlink.h">
+      <Filter>02. Src\01. Control\12. HyperLink</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\ihyperlink.h">
+      <Filter>02. Src\01. Control\12. HyperLink</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\richtext.h">
+      <Filter>02. Src\01. Control\13. RichText</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\richtext_desc.h">
+      <Filter>02. Src\01. Control\13. RichText</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\run.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\style.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\doc.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\font.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\layout_context.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\line.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\page.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\parse.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_big.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_br.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_del.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_font.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_i.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_img.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_small.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_u.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlparser.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlconv.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_a.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\parser\htmlnode_b.h">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\irichtext.h">
+      <Filter>02. Src\01. Control\13. RichText</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\uniscribe\uniscribehelper.h">
+      <Filter>02. Src\01. Control\13. RichText\uniscribe</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\itreeview.h">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\TreeView\treeitem.h">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\TreeView\treeview.h">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\TreeView\treeview_desc.h">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\TreeView\normaltreeitem.h">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\Button\system_button.h">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Src\Control\RichText\model\paragraph.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\node.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\message.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\selection.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\mousekey.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\link.h">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\element\textelement.h">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\element\element.h">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichText\model\element\imageelement.h">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\richedit.h">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\richedit_desc.h">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\richedittable.h">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\windowlessrichedit.h">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\windowlessricheditex.h">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\digitfilter.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\numberfilterbase.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\numberop.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\phonenumberfilter.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\uintfilter.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\TextFilter\accountfilter.h">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\Resource\reresource.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\Resource\oleresource_update.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\comreole.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\reoleapi.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\reoleimpl.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\richeditolemgr.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Timer\reoletimer.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Gif\gifoleobject.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Element\oleelement.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Element\button\buttonoleelement.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\button</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Element\gif\gifoleelement.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\gif</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Element\image\imageoleelement.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\image</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Element\text\textoleelement.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\text</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Composite\compositereole.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\OLE\Composite\Picture\pictureole.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Composite\Picture</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\iricheditbubble.h">
+      <Filter>02. Src\01. Control\15. RichEdit\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\iricheditole.h">
+      <Filter>02. Src\01. Control\15. RichEdit\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\irichedit.h">
+      <Filter>02. Src\01. Control\15. RichEdit\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\markup\markup.h">
+      <Filter>03. 3rd\markup</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\Bubble\rebubble.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Bubble</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RichEdit\Bubble\rebubblemgr.h">
+      <Filter>02. Src\01. Control\15. RichEdit\Bubble</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\isliderctrl.h">
+      <Filter>02. Src\01. Control\16. Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\SliderCtrl\sliderctrl_desc.h">
+      <Filter>02. Src\01. Control\16. Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\SliderCtrl\sliderctrl.h">
+      <Filter>02. Src\01. Control\16. Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\CustomDraw\custom_control.h">
+      <Filter>02. Src\01. Control\17. CustomControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\icustom_control.h">
+      <Filter>02. Src\01. Control\17. CustomControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\CustomDraw\custom_control_desc.h">
+      <Filter>02. Src\01. Control\17. CustomControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interface\irectracker.h">
+      <Filter>02. Src\01. Control\18. RectTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RectTracker\recttracker.h">
+      <Filter>02. Src\01. Control\18. RectTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Control\RectTracker\recttracker_desc.h">
+      <Filter>02. Src\01. Control\18. RectTracker</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Other/dllmain.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Other/stdafx.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Other/UICTRL.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\controlapi.cpp">
+      <Filter>02. Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Button\ibutton.cpp">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Button\button.cpp">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Label\ilabel.cpp">
+      <Filter>02. Src\01. Control\02. Label</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Label\label.cpp">
+      <Filter>02. Src\01. Control\02. Label</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\imenu.cpp">
+      <Filter>02. Src\01. Control\03. Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\menu.cpp">
+      <Filter>02. Src\01. Control\03. Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\scrollbar\menuscrollbar.cpp">
+      <Filter>02. Src\01. Control\03. Menu\scrollbar</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\item\menustringitem.cpp">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\item\menupopupitem.cpp">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\item\menuseparatoritem.cpp">
+      <Filter>02. Src\01. Control\03. Menu\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Menu\layout\menulayout.cpp">
+      <Filter>02. Src\01. Control\03. Menu\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ListBase\PopupControlWindow\popupcontrolwindow.cpp">
+      <Filter>02. Src\01. Control\04. ListBase\popupwindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Edit\iedit.cpp">
+      <Filter>02. Src\01. Control\05. Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Caret\caret.cpp">
+      <Filter>02. Src\01. Control\06. Caret</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Caret\controldraw\controldrawcaret.cpp">
+      <Filter>02. Src\01. Control\06. Caret\ControlDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Edit\instantedit.cpp">
+      <Filter>02. Src\01. Control\05. Edit\即时编辑</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Edit\edit_accessible.cpp">
+      <Filter>02. Src\01. Control\05. Edit\acc</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Edit\edit.cpp">
+      <Filter>02. Src\01. Control\05. Edit\edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Edit\password_edit.cpp">
+      <Filter>02. Src\01. Control\05. Edit\password</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RadioButton\iradiobutton.cpp">
+      <Filter>02. Src\01. Control\07. RadioButton</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RadioButton\radiobutton.cpp">
+      <Filter>02. Src\01. Control\07. RadioButton</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\CheckButton\icheckbutton.cpp">
+      <Filter>02. Src\01. Control\08. CheckButton</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\CheckButton\checkbutton.cpp">
+      <Filter>02. Src\01. Control\08. CheckButton</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ListBox\listboxitem.cpp">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ListBox\ilistbox.cpp">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ListBox\listbox.cpp">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ScrollBar\systemscrollbar.cpp">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ScrollBar\vscrollbar_creator.cpp">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ScrollBar\hscrollbar_creator.cpp">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ScrollBar\iscrollbar.cpp">
+      <Filter>02. Src\01. Control\11. ScrollBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ComboBox\icombobox.cpp">
+      <Filter>02. Src\01. Control\10. ComboBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ComboBox\combobox.cpp">
+      <Filter>02. Src\01. Control\10. ComboBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\HyperLink\ihyperlink.cpp">
+      <Filter>02. Src\01. Control\12. HyperLink</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\HyperLink\hyperlink.cpp">
+      <Filter>02. Src\01. Control\12. HyperLink</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\irichtext.cpp">
+      <Filter>02. Src\01. Control\13. RichText</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\richtext.cpp">
+      <Filter>02. Src\01. Control\13. RichText</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\style.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\doc.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\font.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\layout_context.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\line.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\page.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\parse.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\run.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_br.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_del.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_font.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_i.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_img.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_small.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_u.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlparser.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlconv.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_a.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_b.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\parser\htmlnode_big.cpp">
+      <Filter>02. Src\01. Control\13. RichText\parse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\uniscribe\uniscribehelper.cpp">
+      <Filter>02. Src\01. Control\13. RichText\uniscribe</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\TreeView\treeview.cpp">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\TreeView\itreeview.cpp">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\TreeView\normaltreeitem.cpp">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\TreeView\treeitem.cpp">
+      <Filter>02. Src\01. Control\14. TreeView</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\Button\system_button.cpp">
+      <Filter>02. Src\01. Control\01. Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\paragraph.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\node.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\message.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\selection.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\mousekey.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\link.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\element\element.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\element\imageelement.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\element\textelement.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model\element</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\richedit.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\richedittable.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\windowlessricheditex.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\irichedit.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\TextFilter\numberfilterbase.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\TextFilter\phonenumberfilter.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\TextFilter\uintfilter.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\TextFilter\accountfilter.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\TextFilter\digitfilter.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\TextFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\Resource\reresource.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\Resource\oleresource_update.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\iricheditole.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\reoleimpl.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\richeditolemgr.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\comreole.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Timer\reoletimer.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Gif\gifoleobject.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Element\oleelement.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Element\button\buttonoleelement.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\button</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Element\gif\gifoleelement.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\gif</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Element\image\imageoleelement.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\image</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Element\text\textoleelement.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Element\text</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Composite\compositereole.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\OLE\Composite\Picture\pictureole.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Ole\Composite\Picture</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\windowlessrichedit.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\markup\markup.cpp">
+      <Filter>03. 3rd\markup</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\Bubble\rebubble.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Bubble</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\Bubble\rebubblemgr.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Bubble</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichEdit\Bubble\irebubble.cpp">
+      <Filter>02. Src\01. Control\15. RichEdit\Bubble</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\SliderCtrl\isliderctrl.cpp">
+      <Filter>02. Src\01. Control\16. Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\SliderCtrl\sliderctrl.cpp">
+      <Filter>02. Src\01. Control\16. Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\CustomDraw\custom_control.cpp">
+      <Filter>02. Src\01. Control\17. CustomControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\CustomDraw\icustom_control.cpp">
+      <Filter>02. Src\01. Control\17. CustomControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RichText\model\doc_insert.cpp">
+      <Filter>02. Src\01. Control\13. RichText\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RectTracker\recttracker.cpp">
+      <Filter>02. Src\01. Control\18. RectTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\RectTracker\irecttracker.cpp">
+      <Filter>02. Src\01. Control\18. RectTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Control\ListBox\listbox_edit.cpp">
+      <Filter>02. Src\01. Control\09. ListBox</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UICTRL.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="png1.png" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{75aae81f-798c-49f3-814e-32b25584b99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{e43544e2-8d7c-4306-953a-6a573144928c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="other">
+      <UniqueIdentifier>{705e8bd4-5e1c-41da-a23d-3ea2252f8526}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\mld.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hook.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mallocspy.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\memoryleakdetect.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\print.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\privateheap.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\symbol.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thread.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utility.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wnd.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>other</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\hook.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mallocspy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memoryleakdetect.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\print.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\privateheap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\symbol.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wnd.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<CustomWindow id="ComboBox.Default" transparent.type="layered">
+            <prop key="back.render" type="color" color="#fff" border="1" border.color="#000"/>
+			<ListBox style="combo.listbox" border="1,1,1,1" back.render.border="1,1,1,1" fore.render.colorlist.count="7" fore.render.border.color=";;;;;;" text.render.align="vcenter" text.render.colorlist.count="9" text.render.font="default" itempadding="2,0,2,0" transparent="" />
+		</CustomWindow>
+		<CustomWindow id="Menu.Default" transparent.type="layered">
+            <prop key="back.render" type="color" color="#fff" border="1" border.color="#777"/>
+			<Menu style="popup.layout.fill" icongutterwidth="20" />
+		</CustomWindow>
+	</layout>
+	<font>
+		<item id="default" face="微软雅黑" size="10" />
+		<item id="default_bold" face="微软雅黑" bold="1" size="10" />
+		<item id="default_underline" face="微软雅黑" underline="1" size="10" />
+	</font>
+	<color>
+		<item id="white">255,255,255,255</item>
+		<item id="black">0,0,0,255</item>
+		<item id="gray">128,128,128,255</item>
+		<item id="listbox.item.bkg">51,153,255,255</item>
+		<item id="dlg_bkg">241,237,237,255</item>
+		<item id="dlg_border">160,160,160,255</item>
+		<item id="firstpagedlgback">171,171,171,255</item>
+		<item id="toolbar_btn_hover_border">10,36,106,255</item>
+		<item id="toolbar_btn_hover_back">182,189,210,255</item>
+		<item id="toolbar_btn_press_border">10,36,106,255</item>
+		<item id="toolbar_btn_press_back">133,146,181,255</item>
+		<item id="link_normal">0,0,255,255</item>
+		<item id="link_hover">255,0,0,255</item>
+		<item id="link_press">255,0,0,255</item>
+	</color>
+	<style>
+		<class id="popup.layout.fill" layout.align="forcedesiredsize" layout.left="0" layout.top="0" layout.right="0" layout.bottom="0" />
+		<class id="combo.listbox" border="1" inherit=".popup.layout.fill" transparent="0" fore.render.type="colorlist" fore.render.color="white;listbox.item.bkg;listbox.item.bkg;;listbox.item.bkg;listbox.item.bkg;listbox.item.bkg" text.render.type="colorlist" text.render.color="black;white;white;white;white;white;white;white;white" text.render.align="left|vcenter" back.render.type="color" back.render.color="white" back.render.border="1" back.render.border.color="gray" />
+		<class id="theme_btn" back.render.type="theme.button" transparent="1" text.render.type="simple" text.render.font="default" text.render.align="center|vcenter" />
+        <class id="common_btn" drawfocus="0" transparent="1"  margin="1,0,1,0">
+            <prop key="back.render" type="colorlist" color=";toolbar_btn_hover_back;toolbar_btn_press_back;;toolbar_btn_hover_back;toolbar_btn_press_back;toolbar_btn_press_back;" border.color="toolbar_btn_hover_border;toolbar_btn_hover_border;toolbar_btn_press_border;;toolbar_btn_hover_border;toolbar_btn_press_border;toolbar_btn_press_border;" />
+            <prop key="text.render" type="colorlist" align="center|vcenter" color="black;black;white;black;black;white;white;black"/>
+        </class>
+        <class id="theme_edit" back.render.type="theme.edit" transparent="1" text.render.type="colorlist" text.render.color="0xF000;0xFFFF" text.render.align="vcenter|singleline" padding="3" />
+		<class id="child_edit" back.render.type="color" back.render.color="white" text.render.type="colorlist" text.render.color="0xF000;0xFFFF" text.render.align="vcenter|singleline" />
+		<class id="child_combobox" back.render.type="color" back.render.color="white" text.render.type="simple" text.render.font="normal" />
+        <class id="toolbar_btn" width="24" height="24" drawfocus="0" disable="1" fore.render.type="image" iconalign="center" transparent="1" margin="1,0,1,0" >
+            <prop key="layout" align="vcenter"/>
+            <prop key="back.render" type="colorlist" color=";toolbar_btn_hover_back;toolbar_btn_press_back" border.color=";toolbar_btn_hover_border;toolbar_btn_press_border"/>
+        </class >
+        <class id="toolbar_textbtn" drawfocus="0" transparent="1"  margin="1,0,1,0">
+            <prop key="layout" align="top|bottom"/>
+            <prop key="back.render" type="colorlist" color=";toolbar_btn_hover_back;toolbar_btn_press_back;;toolbar_btn_hover_back;toolbar_btn_press_back;toolbar_btn_press_back;" border.color=";toolbar_btn_hover_border;toolbar_btn_press_border;;toolbar_btn_hover_border;toolbar_btn_press_border;toolbar_btn_press_border;" />
+            <prop key="text.render" type="colorlist" align="center|vcenter" color="black;black;white;black;black;white;white;black"/>
+        </class>
+        <class id="toolbar_combo" border="1" padding="2,0,0,0">
+            <prop key="back.render" type="colorlist" border="1" border.color="#CCCEDB;#007ACC;#007ACC"/>
+            <prop key="layout" height="20" width="100" align="vcenter"/>
+        </class>
+        <class id="toolbar_combo_btn" margin="1,-1,-1,-1">
+            <prop key="layout" width="11" align="vcenter"/>
+            <prop key="back.render" type="colorlist" color=";#C9DEF5;#007ACC" border="10" border.color=";#007ACC;#007ACC"/>
+        </class>
+		<class id="tabctrlbtn" padding="10,2,10,2" back.render.type="imagelist" back.render.image.9region="3" back.render.image.drawtype="stretch" />
+		<class id="tabctrlbtn_bottom" back.render.image="common_tabctrl_btn_bottom" inherit=".tabctrlbtn" />
+		<class id="tabctrlbtn_top" back.render.image="common_tabctrl_btn_top" inherit=".tabctrlbtn" />
+		<class id="tabctrl_win32" head.layout="win32" back.render.type="image" back.render.image.drawtype="stretch" back.render.image.9region="2" back.render.image="common_tabctrl_border" contentpanel.padding="3" />
+		<class id="editor_listctrl" back.render.type="color" back.render.color="0xFFFFFFFF" fore.render.type="colorlist" fore.render.color=";;;;0xFFCEEDFA;0xFFCEEDFA;0xFFCEEDFA;;0xFFCEEDFA" fore.render.border.color=";0xFF3399FF;;;0xFF3399FF;0xFF3399FF;0xFF3399FF;;0xFF3399FF" fore.render.colorlist.count="9" back.render.border.color="0xFFCCCCCC" back.render.border="1" border="1" expandicon.render.type="theme.treeview.expandcollpase.icon" />
+		<class id="theme_combo" back.render.type="theme.combobox.bkg" padding="3,1,1,1" transparent="1" />
+        <class id="scroll.thumb.back">
+            <prop key="back.render" type="colorlist" color="#DEDFE7;#888888;#6A6A6A"/>
+        </class>
+	</style>
+</skin>

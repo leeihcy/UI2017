@@ -1,0 +1,184 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_IMAGEMERGETOOLS     ICON                    "imagemergetools.ico"
+IDI_SMALL               ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_IMAGEMERGETOOLS MENU 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "退出(&X)",                      IDM_EXIT
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于(&A) ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_IMAGEMERGETOOLS ACCELERATORS 
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAINDLG DIALOGEX 0, 0, 390, 234
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_ACCEPTFILES
+CAPTION "imagemergetools"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "取消",IDCANCEL,342,216,35,14,WS_GROUP
+    EDITTEXT        IDC_EDIT_INSERT_POS,81,188,37,14,ES_AUTOHSCROLL | ES_NUMBER | WS_DISABLED
+    PUSHBUTTON      "拆分到文件夹：",IDC_BTN_SPLIT,223,173,56,14,NOT WS_VISIBLE | WS_DISABLED | WS_GROUP
+    EDITTEXT        IDC_EDIT2,285,173,36,14,ES_AUTOHSCROLL | NOT WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "浏览",IDC_BUTTON1,327,173,21,14,NOT WS_VISIBLE | WS_DISABLED
+    LTEXT           "Width=",IDC_STATIC,11,21,25,9
+    EDITTEXT        IDC_EDIT_WIDTH,39,19,31,14,ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    GROUPBOX        "操作",IDC_STATIC,6,162,371,47
+    GROUPBOX        "信息",IDC_STATIC,6,5,73,149
+    LTEXT           "Hehgit=",IDC_STATIC,11,39,25,9
+    EDITTEXT        IDC_EDIT_HEIGHT,39,37,31,14,ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    LTEXT           "Count=",IDC_STATIC,10,58,25,9
+    EDITTEXT        IDC_EDIT_ITEMCOUNT,38,56,31,14,ES_AUTOHSCROLL | ES_NUMBER | WS_DISABLED
+    LTEXT           "ItemW=",IDC_STATIC,10,77,25,9
+    EDITTEXT        IDC_EDIT_ITEM_WIDTH,38,74,31,14,ES_AUTOHSCROLL | ES_NUMBER | WS_DISABLED
+    LTEXT           "ItemH=",IDC_STATIC,11,95,25,9
+    EDITTEXT        IDC_EDIT_ITEM_HEIGHT,39,93,31,14,ES_AUTOHSCROLL | ES_NUMBER | WS_DISABLED
+    CONTROL         "Horz",IDC_RADIO_H,"Button",BS_AUTORADIOBUTTON,12,136,27,10
+    CONTROL         "Vert",IDC_RADIO_V,"Button",BS_AUTORADIOBUTTON,42,136,27,10
+    PUSHBUTTON      "保存",IDC_BTN_SAVE,265,216,28,14,WS_DISABLED
+    PUSHBUTTON      "另存为",IDC_BTN_SAVEAS,300,216,33,14,WS_DISABLED
+    GROUPBOX        "预览",IDC_STATIC_PREV,88,5,292,149,BS_CENTER
+    CONTROL         "往后添加",IDC_BUTTON_ADD,"Button",BS_AUTORADIOBUTTON | WS_DISABLED | WS_GROUP,17,174,51,10
+    CONTROL         "插入到指定位置：",IDC_BUTTON_INSERT,"Button",BS_AUTORADIOBUTTON | WS_DISABLED,17,190,64,10
+    PUSHBUTTON      "重置",IDC_BTN_RESET,228,217,28,14
+    PUSHBUTTON      "插入空白",IDC_BTN_SPACE,80,170,38,14
+    LTEXT           "Padding=",IDC_STATIC,10,115,28,9
+    EDITTEXT        IDC_EDIT_ITEM_PADDING,39,113,31,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MAINDLG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 239
+        BOTTOMMARGIN, 107
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "imagemergetools"
+    IDC_IMAGEMERGETOOLS     "IMAGEMERGETOOLS"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

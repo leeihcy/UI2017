@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window needalphachannel="1" id="createwindowdlg" layer="1" back.render.type="color" width="380" height="180" back.render.color="0xFFFFFFFF" font="default" text="创建ui窗口">
+			<Panel layout.type="grid" layout.width="100,250" layout.height="30,30,30,30">
+				<Label text="窗口Id:" layout.col="0" layout.row="0" text.render.align="right|vcenter" />
+				<Edit id="edit_id" style="theme_edit" margin="10,4,0,0" padding="3,3,3,3" height="22" layout.col="1" text.render.colorlist.count="2" text.render.color="0xFF000000;0xFFFFFFFF" text.render.font="default" />
+				<Label text="窗口Class:" layout.col="0" layout.row="1" text.render.align="right|vcenter" />
+				<Label text="保存到皮肤文件:" layout.col="0" layout.row="2" text.render.align="right|vcenter" />
+				<ComboBox id="combo_class" style="theme_combo" margin="10,4,0,0" height="22" layout.col="1" layout.row="1">
+					<Edit id="__combo_edit" />
+					<Button id="__combo_button" transparent="1" back.render.type="theme.combobox.btn" layout.left="219" layout.top="0" tabstop="0" autosize="bkimage" />
+				</ComboBox>
+				<ComboBox id="combo_skin" style="theme_combo" margin="10,4,0,0" width="115" height="22" layout.col="1" layout.row="2">
+					<Edit id="__combo_edit" />
+					<Button id="__combo_button" transparent="1" back.render.type="theme.combobox.btn" layout.left="94" layout.top="0" tabstop="0" autosize="bkimage" />
+				</ComboBox>
+				<ComboBox id="combo_skinfile" style="theme_combo" margin="135,4,0,0" width="115" height="22" layout.col="1" layout.row="2">
+					<Edit id="__combo_edit" />
+					<Button id="__combo_button" transparent="1" back.render.type="theme.combobox.btn" layout.left="94" layout.top="0" tabstop="0" autosize="bkimage" />
+				</ComboBox>
+			</Panel>
+			<Button id="ok" style="theme_btn" width="64" height="28" layout.right="15" layout.bottom="10" text="确定" />
+		</Window>
+	</layout>
+</skin>

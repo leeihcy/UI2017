@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="08. Util">
+      <UniqueIdentifier>{3d98f731-301e-475a-a036-1b2f10399a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Util\trackrect">
+      <UniqueIdentifier>{1c8519bc-43e0-4e03-a9fc-ccfe5e54c535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面">
+      <UniqueIdentifier>{65856400-88d2-4b7d-be70-62246885899e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\01. 框架">
+      <UniqueIdentifier>{66568fe8-0e4f-42a8-9045-90459ce31086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口">
+      <UniqueIdentifier>{37817058-2362-4942-8625-35b799c39f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\01. 首页">
+      <UniqueIdentifier>{373adbde-9d38-4e97-9c8a-43a4f4b5a279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\02. 创建新窗口">
+      <UniqueIdentifier>{d1d58bee-1f54-4e65-8bc1-e90967745d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\03. 创建工程/新建皮肤">
+      <UniqueIdentifier>{48663517-691c-4bfd-b3f1-bbad473188ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\04. 设置控件依赖">
+      <UniqueIdentifier>{7e4bfb77-f101-4c23-8ee7-fa1c411cc59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\05. 皮肤编辑">
+      <UniqueIdentifier>{62ea1f0d-38f8-46ee-93fe-ea1bf7ae124a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\05. 皮肤编辑\02. 菜单">
+      <UniqueIdentifier>{812163f8-776e-458c-819f-8ada528730c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\06. 布局">
+      <UniqueIdentifier>{f2de35b0-a8cc-4d07-a3b2-38e986b54d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\07. 样式">
+      <UniqueIdentifier>{52d41abc-1b47-4056-8b8e-4e6def582742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\08. 图片">
+      <UniqueIdentifier>{6806238a-727d-447e-918a-05f444b341ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. Other">
+      <UniqueIdentifier>{2af90263-d1dc-4141-b60f-60d054994fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. Other\3rd">
+      <UniqueIdentifier>{6a680039-2019-408f-9744-09e8b7a27d37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. Other\other">
+      <UniqueIdentifier>{aed62dea-5c4f-4788-9474-a5cc6e9fdb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. Other\Resource">
+      <UniqueIdentifier>{e0010c46-dfee-4f52-87ae-1588bd04492c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令">
+      <UniqueIdentifier>{b8670080-f6ea-4498-9a91-9723b12ec2ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令\01. base">
+      <UniqueIdentifier>{18ac0bd5-c340-48db-9a83-c75aedf1fe8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令\02. command">
+      <UniqueIdentifier>{81aa98ba-4470-419a-b1f7-bd450e293771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. 全局数据">
+      <UniqueIdentifier>{038b3e33-2554-4abe-a6ae-6e358a87691a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程">
+      <UniqueIdentifier>{b60bf841-4ccc-4b03-933c-72c677633fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程\01. 工程数据">
+      <UniqueIdentifier>{13d2e7f4-58aa-4247-9ffb-c2bcc71e34d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程\02. 工程文件解析">
+      <UniqueIdentifier>{ee30658b-8d72-40f5-8cc6-8479cde1b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程\03. 编辑接口">
+      <UniqueIdentifier>{420919cd-75cb-44d5-aa63-d91168a542d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程\04. 依赖控件库">
+      <UniqueIdentifier>{df089bce-5293-49a7-badc-a0f8325ce833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. 工程\05. 最近打开文件">
+      <UniqueIdentifier>{a40b9b45-a5cc-48a2-93cd-3bce98af875a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skin">
+      <UniqueIdentifier>{2bcbe2ba-88d9-4dc0-91b1-7053b3eaa385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令\02. command\01. Object">
+      <UniqueIdentifier>{8e84df99-d209-4e65-93f6-e5b17a7db06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令\02. command\02. Image">
+      <UniqueIdentifier>{4db85439-91d3-449a-a430-c32496a67b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. 编辑命令\02. command\03. Style">
+      <UniqueIdentifier>{ae36b162-2195-4433-b50c-025591e3a8fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. 界面\02. 窗口\09. 多语言">
+      <UniqueIdentifier>{7037c5d8-681d-420f-a960-d8ed663097e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Util\util.cpp">
+      <Filter>08. Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\trackrect.cpp">
+      <Filter>08. Util\trackrect</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\childframe.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\mainframe.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\propertydialog.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\statusbar.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\toolbar.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\toolbox.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\CodeWebBrowser.cpp">
+      <Filter>03. 界面\02. 窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Dialogs.cpp">
+      <Filter>03. 界面\02. 窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\firstpagedlg.cpp">
+      <Filter>03. 界面\02. 窗口\01. 首页</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\createwindowdlg.cpp">
+      <Filter>03. 界面\02. 窗口\02. 创建新窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\newprojectdlg.cpp">
+      <Filter>03. 界面\02. 窗口\03. 创建工程/新建皮肤</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\projdependsctrldllconfigdlg.cpp">
+      <Filter>03. 界面\02. 窗口\04. 设置控件依赖</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\ColorBuildDlg.cpp">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\FontBuildDlg.cpp">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\MenuBuildDlg.cpp">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑\02. 菜单</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Layout\LayoutEditorWnd.cpp">
+      <Filter>03. 界面\02. 窗口\06. 布局</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Layout\layoutproperty_command.cpp">
+      <Filter>03. 界面\02. 窗口\06. 布局</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Layout\LayoutPropertyHandler.cpp">
+      <Filter>03. 界面\02. 窗口\06. 布局</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Style\StyleDialogs.cpp">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Style\StyleEditorWnd.cpp">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Style\StylePropertyHandler.cpp">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Image\add_image_dlg.cpp">
+      <Filter>03. 界面\02. 窗口\08. 图片</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\Image\image_editor_dlg.cpp">
+      <Filter>03. 界面\02. 窗口\08. 图片</Filter>
+    </ClCompile>
+    <ClCompile Include="Other\stdafx.cpp">
+      <Filter>09. Other\other</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\uieditorfunction.cpp">
+      <Filter>02. 编辑命令</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Command\Base\commandhistorymgr.cpp">
+      <Filter>02. 编辑命令\01. base</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\GlobalData.cpp">
+      <Filter>01. 全局数据</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\UIEditor.cpp">
+      <Filter>01. 全局数据</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\ProjectData\projectdata.cpp">
+      <Filter>04. 工程\01. 工程数据</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\UIProjParse\uiprojparse.cpp">
+      <Filter>04. 工程\02. 工程文件解析</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\UIEditor\IUIEditorAttrImpl.cpp">
+      <Filter>04. 工程\03. 编辑接口</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\UIEditor\IUIEditorImpl.cpp">
+      <Filter>04. 工程\03. 编辑接口</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\DependsCtrlDll\dependsctrldll.cpp">
+      <Filter>04. 工程\04. 依赖控件库</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Project\RecentProjFiles\recentprojlist.cpp">
+      <Filter>04. 工程\05. 最近打开文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rd\markup\markup.cpp">
+      <Filter>09. Other\3rd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UISDK\Src\Atl\image.cpp">
+      <Filter>09. Other\3rd</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Framework\project_tree_dialog.cpp">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\Module\i18n\i18n_editor_dlg.cpp">
+      <Filter>03. 界面\02. 窗口\09. 多语言</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Util\util.h">
+      <Filter>08. Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\trackrect.h">
+      <Filter>08. Util\trackrect</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\childframe.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\ipropertyhandler.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\mainframe.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\propertydialog.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\statusbar.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\toolbar.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\toolbox.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\CodeWebBrowser.h">
+      <Filter>03. 界面\02. 窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Dialogs.h">
+      <Filter>03. 界面\02. 窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\firstpagedlg.h">
+      <Filter>03. 界面\02. 窗口\01. 首页</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\createwindowdlg.h">
+      <Filter>03. 界面\02. 窗口\02. 创建新窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\newprojectdlg.h">
+      <Filter>03. 界面\02. 窗口\03. 创建工程/新建皮肤</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\projdependsctrldllconfigdlg.h">
+      <Filter>03. 界面\02. 窗口\04. 设置控件依赖</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\ColorBuildDlg.h">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\FontBuildDlg.h">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\MenuBuildDlg.h">
+      <Filter>03. 界面\02. 窗口\05. 皮肤编辑\02. 菜单</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Layout\LayoutEditorWnd.h">
+      <Filter>03. 界面\02. 窗口\06. 布局</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Layout\LayoutPropertyHandler.h">
+      <Filter>03. 界面\02. 窗口\06. 布局</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Style\StyleDialogs.h">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Style\StyleEditorWnd.h">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Style\StylePropertyHandler.h">
+      <Filter>03. 界面\02. 窗口\07. 样式</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Image\add_image_dlg.h">
+      <Filter>03. 界面\02. 窗口\08. 图片</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\Image\image_editor_dlg.h">
+      <Filter>03. 界面\02. 窗口\08. 图片</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\Resource.h">
+      <Filter>09. Other\other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\stdafx.h">
+      <Filter>09. Other\other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\targetver.h">
+      <Filter>09. Other\other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\UIEditor.h">
+      <Filter>09. Other\other</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\uieditorfunction.h">
+      <Filter>02. 编辑命令</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\Base\commandhistorymgr.h">
+      <Filter>02. 编辑命令\01. base</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\Base\icommand.h">
+      <Filter>02. 编辑命令\01. base</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\AddObjectAttributeCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\AddObjectCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\ClearObjectAttributeCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\ModifyObjectAttributeCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\MoveObjectUpDownCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\RemoveObjectAttributeCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\RemoveObjectCommnd.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\SetObjectPosCommand.h">
+      <Filter>02. 编辑命令\02. command\01. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\image\ImageItemCommand.h">
+      <Filter>02. 编辑命令\02. command\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Command\style\StyleCommand.h">
+      <Filter>02. 编辑命令\02. command\03. Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\GlobalData.h">
+      <Filter>01. 全局数据</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\ProjectData\projectdata.h">
+      <Filter>04. 工程\01. 工程数据</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\UIProjParse\uiprojparse.h">
+      <Filter>04. 工程\02. 工程文件解析</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\UIEditor\IUIEditorAttrImpl.h">
+      <Filter>04. 工程\03. 编辑接口</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\UIEditor\IUIEditorImpl.h">
+      <Filter>04. 工程\03. 编辑接口</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\DependsCtrlDll\dependsctrldll.h">
+      <Filter>04. 工程\04. 依赖控件库</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Project\RecentProjFiles\recentprojlist.h">
+      <Filter>04. 工程\05. 最近打开文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\markup\markup.h">
+      <Filter>09. Other\3rd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UISDK\Src\Atl\image.h">
+      <Filter>09. Other\3rd</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Framework\project_tree_dialog.h">
+      <Filter>03. 界面\01. 框架</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\Module\i18n\i18n_editor_dlg.h">
+      <Filter>03. 界面\02. 窗口\09. 多语言</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Other\ReadMe.txt">
+      <Filter>09. Other\other</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Other\UIEditor.ico">
+      <Filter>09. Other\other</Filter>
+    </Image>
+    <Image Include="res\transparent_bk.bmp">
+      <Filter>09. Other\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Other\UIEditor.rc">
+      <Filter>09. Other\other</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\cursor\hand.cur">
+      <Filter>09. Other\Resource</Filter>
+    </None>
+    <None Include="res\cursor\hand_press.cur">
+      <Filter>09. Other\Resource</Filter>
+    </None>
+    <None Include="res\Template\template.uiproj">
+      <Filter>09. Other\Resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\Template\skin.xml">
+      <Filter>09. Other\Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\res.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\skin.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\styleeditor.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\otherdlg.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\project.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\property.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\first_page.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\imageview.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\createwindow.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\image.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\toolbar.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\i18nview.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

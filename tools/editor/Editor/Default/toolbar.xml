@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skin>
+    <layout>
+        <Window id="ToolBar" layout.type="horz" padding="0,0,0,1">
+            <Panel id="normal" layout.type="horz"  class="toolbar_panel">
+                <Button id="save" style="toolbar_btn" tooltip="保存" fore.render.image="command_save" />
+                <Button id="newwindow" style="toolbar_btn" tooltip="新建窗口" fore.render.image="command_newwindow" />
+                <Button id="undo" style="toolbar_btn" tooltip="撤销" fore.render.image="command_undo" />
+                <Button id="redo" style="toolbar_btn" tooltip="还原" fore.render.image="command_redo" />
+            </Panel>
+            <Panel id="layoutview" layout.type="horz"  class="toolbar_panel">
+                <Button id="preview" style="toolbar_btn" disable="1" tooltip="预览" fore.render.image="command_preview" />
+            </Panel>
+            <Panel style="toolbar_panel" padding="4,0,4,0">
+                <ComboBox id="lang" style="toolbar_combo" width="60">
+                    <Button style="toolbar_combo_btn"/>
+                </ComboBox>
+            </Panel>
+        </Window>
+    </layout>
+    
+    <style>
+        <class id="toolbar_panel">
+            <prop key="layout" align="top|bottom"/>
+        </class>
+    </style>
+</skin>

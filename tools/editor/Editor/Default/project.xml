@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<skin>
+	<layout>
+		<Window id="ProjectTreeDialog" padding="10,10,10,10" layer="1" back.render.type="color" width="200" height="400" back.render.color="dlg_bkg" font="default">
+			<Panel layout.left="0" layout.top="0" layout.height="24" layout.right="0" layout.type="horz" layout.direction="lefttoright">
+				<RadioButton id="radio_layout" style="toolbar_textbtn" width="80" text="layout" />
+				<RadioButton id="radio_resource" style="toolbar_textbtn" width="80" text="resource" />
+			</Panel>
+			<Panel layout.left="0" layout.top="26" layout.right="0" layout.bottom="0" layout.type="card">
+				<ProjectTreeView id="treelayout" style="editor_listctrl" border="1,1,1,1" transparent="1" back.render.border="1,1,1,1" expandicon.render.type="theme.treeview.expandcollpase.icon">
+                    <VScrollBar id="__vscrollbar" width="10" back.render.type="theme.vscrollbar.bkg">
+                        <Button id="__scrollbar_thumb" style="scroll.thumb.back"/>
+                    </VScrollBar>
+                    <HScrollBar id="__hscrollbar" height="10" back.render.type="theme.hscrollbar.bkg">
+                        <Button id="__scrollbar_thumb" style="scroll.thumb.back"/>
+                    </HScrollBar>
+				</ProjectTreeView>
+				<ProjectTreeView id="treeresource" style="editor_listctrl" visible="hidden" transparent="1" expandicon.render.type="theme.treeview.expandcollpase.icon">
+					<VScrollBar id="__vscrollbar" width="10" back.render.type="theme.vscrollbar.bkg">
+						<Button id="__scrollbar_thumb" style="scroll.thumb.back"/>
+					</VScrollBar>
+					<HScrollBar id="__hscrollbar" height="10" back.render.type="theme.hscrollbar.bkg">
+						<Button id="__scrollbar_thumb" style="scroll.thumb.back"/>
+					</HScrollBar>
+				</ProjectTreeView>
+			</Panel>
+		</Window>
+	</layout>
+</skin>

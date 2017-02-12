@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{51A58115-5A39-413D-926D-A7A5ADEE84C2}</ProjectGuid>
+    <RootNamespace>UIEditor</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)tools\editor\</OutDir>
+    <IntDir>$(SolutionDir)Build\temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)tools\editor\</OutDir>
+    <IntDir>$(SolutionDir)Build\temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\3rd\wtl90\include;$(SolutionDir);$(ProjectDir);$(ProjectDir)..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(SolutionDir)Build\pdb\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\3rd\wtl90\include;$(SolutionDir);$(ProjectDir);$(ProjectDir)..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)Build\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(SolutionDir)Build\pdb\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\3rd\markup\markup.cpp" />
+    <ClCompile Include="..\UISDK\Src\Atl\image.cpp" />
+    <ClCompile Include="Dialog\Module\i18n\i18n_editor_dlg.cpp" />
+    <ClCompile Include="Util\util.cpp" />
+    <ClCompile Include="Util\trackrect.cpp" />
+    <ClCompile Include="Dialog\Framework\childframe.cpp" />
+    <ClCompile Include="Dialog\Framework\mainframe.cpp" />
+    <ClCompile Include="Dialog\Framework\project_tree_dialog.cpp" />
+    <ClCompile Include="Dialog\Framework\propertydialog.cpp" />
+    <ClCompile Include="Dialog\Framework\statusbar.cpp" />
+    <ClCompile Include="Dialog\Framework\toolbar.cpp" />
+    <ClCompile Include="Dialog\Framework\toolbox.cpp" />
+    <ClCompile Include="Dialog\Module\CodeWebBrowser.cpp" />
+    <ClCompile Include="Dialog\Module\Dialogs.cpp" />
+    <ClCompile Include="Dialog\Module\firstpagedlg.cpp" />
+    <ClCompile Include="Dialog\Module\createwindowdlg.cpp" />
+    <ClCompile Include="Dialog\Module\newprojectdlg.cpp" />
+    <ClCompile Include="Dialog\Module\projdependsctrldllconfigdlg.cpp" />
+    <ClCompile Include="Dialog\Module\ColorBuildDlg.cpp" />
+    <ClCompile Include="Dialog\Module\FontBuildDlg.cpp" />
+    <ClCompile Include="Dialog\Module\MenuBuildDlg.cpp" />
+    <ClCompile Include="Dialog\Module\Layout\LayoutEditorWnd.cpp" />
+    <ClCompile Include="Dialog\Module\Layout\layoutproperty_command.cpp" />
+    <ClCompile Include="Dialog\Module\Layout\LayoutPropertyHandler.cpp" />
+    <ClCompile Include="Dialog\Module\Style\StyleDialogs.cpp" />
+    <ClCompile Include="Dialog\Module\Style\StyleEditorWnd.cpp" />
+    <ClCompile Include="Dialog\Module\Style\StylePropertyHandler.cpp" />
+    <ClCompile Include="Dialog\Module\Image\add_image_dlg.cpp" />
+    <ClCompile Include="Dialog\Module\Image\image_editor_dlg.cpp" />
+    <ClCompile Include="Other\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Business\uieditorfunction.cpp" />
+    <ClCompile Include="Business\Command\Base\commandhistorymgr.cpp" />
+    <ClCompile Include="Business\GlobalData.cpp" />
+    <ClCompile Include="Business\UIEditor.cpp" />
+    <ClCompile Include="Business\Project\ProjectData\projectdata.cpp" />
+    <ClCompile Include="Business\Project\UIProjParse\uiprojparse.cpp" />
+    <ClCompile Include="Business\Project\UIEditor\IUIEditorAttrImpl.cpp" />
+    <ClCompile Include="Business\Project\UIEditor\IUIEditorImpl.cpp" />
+    <ClCompile Include="Business\Project\DependsCtrlDll\dependsctrldll.cpp" />
+    <ClCompile Include="Business\Project\RecentProjFiles\recentprojlist.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\3rd\markup\markup.h" />
+    <ClInclude Include="..\UISDK\Src\Atl\image.h" />
+    <ClInclude Include="Dialog\Module\i18n\i18n_editor_dlg.h" />
+    <ClInclude Include="Util\util.h" />
+    <ClInclude Include="Util\trackrect.h" />
+    <ClInclude Include="Dialog\Framework\childframe.h" />
+    <ClInclude Include="Dialog\Framework\ipropertyhandler.h" />
+    <ClInclude Include="Dialog\Framework\mainframe.h" />
+    <ClInclude Include="Dialog\Framework\project_tree_dialog.h" />
+    <ClInclude Include="Dialog\Framework\propertydialog.h" />
+    <ClInclude Include="Dialog\Framework\statusbar.h" />
+    <ClInclude Include="Dialog\Framework\toolbar.h" />
+    <ClInclude Include="Dialog\Framework\toolbox.h" />
+    <ClInclude Include="Dialog\Module\CodeWebBrowser.h" />
+    <ClInclude Include="Dialog\Module\Dialogs.h" />
+    <ClInclude Include="Dialog\Module\firstpagedlg.h" />
+    <ClInclude Include="Dialog\Module\createwindowdlg.h" />
+    <ClInclude Include="Dialog\Module\newprojectdlg.h" />
+    <ClInclude Include="Dialog\Module\projdependsctrldllconfigdlg.h" />
+    <ClInclude Include="Dialog\Module\ColorBuildDlg.h" />
+    <ClInclude Include="Dialog\Module\FontBuildDlg.h" />
+    <ClInclude Include="Dialog\Module\MenuBuildDlg.h" />
+    <ClInclude Include="Dialog\Module\Layout\LayoutEditorWnd.h" />
+    <ClInclude Include="Dialog\Module\Layout\LayoutPropertyHandler.h" />
+    <ClInclude Include="Dialog\Module\Style\StyleDialogs.h" />
+    <ClInclude Include="Dialog\Module\Style\StyleEditorWnd.h" />
+    <ClInclude Include="Dialog\Module\Style\StylePropertyHandler.h" />
+    <ClInclude Include="Dialog\Module\Image\add_image_dlg.h" />
+    <ClInclude Include="Dialog\Module\Image\image_editor_dlg.h" />
+    <ClInclude Include="Other\Resource.h" />
+    <ClInclude Include="Other\stdafx.h" />
+    <ClInclude Include="Other\targetver.h" />
+    <ClInclude Include="Other\UIEditor.h" />
+    <ClInclude Include="Business\uieditorfunction.h" />
+    <ClInclude Include="Business\Command\Base\commandhistorymgr.h" />
+    <ClInclude Include="Business\Command\Base\icommand.h" />
+    <ClInclude Include="Business\Command\AddObjectAttributeCommand.h" />
+    <ClInclude Include="Business\Command\AddObjectCommand.h" />
+    <ClInclude Include="Business\Command\ClearObjectAttributeCommand.h" />
+    <ClInclude Include="Business\Command\ModifyObjectAttributeCommand.h" />
+    <ClInclude Include="Business\Command\MoveObjectUpDownCommand.h" />
+    <ClInclude Include="Business\Command\RemoveObjectAttributeCommand.h" />
+    <ClInclude Include="Business\Command\RemoveObjectCommnd.h" />
+    <ClInclude Include="Business\Command\SetObjectPosCommand.h" />
+    <ClInclude Include="Business\Command\image\ImageItemCommand.h" />
+    <ClInclude Include="Business\Command\style\StyleCommand.h" />
+    <ClInclude Include="Business\GlobalData.h" />
+    <ClInclude Include="Business\Project\ProjectData\projectdata.h" />
+    <ClInclude Include="Business\Project\UIProjParse\uiprojparse.h" />
+    <ClInclude Include="Business\Project\UIEditor\IUIEditorAttrImpl.h" />
+    <ClInclude Include="Business\Project\UIEditor\IUIEditorImpl.h" />
+    <ClInclude Include="Business\Project\DependsCtrlDll\dependsctrldll.h" />
+    <ClInclude Include="Business\Project\RecentProjFiles\recentprojlist.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Other\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Other\UIEditor.ico" />
+    <Image Include="res\transparent_bk.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Other\UIEditor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\cursor\hand.cur" />
+    <None Include="res\cursor\hand_press.cur" />
+    <None Include="res\Template\template.uiproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\createwindow.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\first_page.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\i18nview.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\image.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\imageview.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\otherdlg.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\project.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\property.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\res.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\skin.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\styleeditor.xml" />
+    <Xml Include="..\..\Bin\Debug\UI\Editor\Default\toolbar.xml" />
+    <Xml Include="res\Template\skin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

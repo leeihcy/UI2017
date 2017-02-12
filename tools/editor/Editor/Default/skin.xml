@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<skin>
+  <include>res.xml</include>
+  <include>image.xml</include>
+  <include>first_page.xml</include>
+  <include>createwindow.xml</include>
+  <include>project.xml</include>
+  <include>property.xml</include>
+  <include>toolbar.xml</include>
+  <include>otherdlg.xml</include>
+  <include>imageview.xml</include>
+  <include>styleeditor.xml</include>
+  <include>i18nview.xml</include>
+</skin>
