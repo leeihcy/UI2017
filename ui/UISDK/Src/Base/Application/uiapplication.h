@@ -89,6 +89,7 @@ public:
     // gpu 
     bool  IsGpuCompositeEnable();
     bool  EnableGpuComposite();
+	void  ShutdownGpuCompositor();
 
 public:
     IUIApplication*  GetIUIApplication() { return m_pUIApplication; }

@@ -34,7 +34,8 @@ public:
 	}
 	~LoginWindow()
 	{
-		
+		if (m_pWindow)
+			m_pWindow->Release();
 	}
 	void  Create(UI::ISkinRes* p)
 	{
@@ -44,7 +45,7 @@ public:
 		m_pWindow->Create(L"login"); 
 
 		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		m_pPanel->EnableLayer(true);
+		//m_pPanel->EnableLayer(true);
 		m_pWindow->ShowWindow();
 	}
 
@@ -85,6 +86,14 @@ public:
 			storyboard->Begin();
 		}
 		return FALSE;
+	}
+
+	void  Destroy()
+	{
+		if (m_pWindow)
+		{
+			m_pWindow->DestroyWindow();
+		}
 	}
 
 	virtual void  OnAnimateStart(UIA::IStoryboard*) 
@@ -130,10 +139,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UI::Util::PathInBin(L"AniamteTestSkin", szResPath);
 	UI::ISkinRes* pRootSkinRes = pUIApp->LoadSkinRes(szResPath);
 
-	LoginWindow m;
-	m.Create(pRootSkinRes);
+	{
+		LoginWindow m;
+		m.Create(pRootSkinRes);
+		m.Destroy();
+	}
 
-	pUIApp->MsgHandleLoop();
+	//pUIApp->MsgHandleLoop();
 	pUIApp->Release();
 
 	return 0;

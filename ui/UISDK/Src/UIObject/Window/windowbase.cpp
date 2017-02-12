@@ -22,10 +22,32 @@
 
 using namespace UI;
 
+#ifdef _DEBUG
+//  避免有未正确释放的窗口对象，造成内存泄露
+class WindowBaseDebug
+{
+public:
+	WindowBaseDebug() { m_nCount = 0; }
+	~WindowBaseDebug() { 
+		UIASSERT(0 == m_nCount); 
+	}
+	static void Inc() { m_nCount++; }
+	static void Dec() {	m_nCount--;	}
+private:
+	static int  m_nCount;
+};
+int WindowBaseDebug::m_nCount = 0;
+WindowBaseDebug  g_WindowBaseDebug;
+#endif
+
 WindowBase::WindowBase(IWindowBase* p): Panel(p),
 m_oWindowRender(this),
 m_oMouseManager(*this)
 {
+#ifdef _DEBUG
+	WindowBaseDebug::Inc();
+#endif
+
     m_pIWindowBase = p;
 	this->m_hWnd = NULL;
 	this->m_oldWndProc = NULL;
@@ -51,6 +73,10 @@ m_oMouseManager(*this)
 
 WindowBase::~WindowBase()
 {
+#ifdef _DEBUG
+	WindowBaseDebug::Dec();
+#endif
+
 	UIASSERT( !IsWindow(m_hWnd) );          // 确保窗口已被销毁
 	UIASSERT( NULL == this->m_oldWndProc ); // 确保已经取消子类化
 	m_hWnd = NULL;

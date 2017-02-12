@@ -17,6 +17,7 @@ TopWindowManager::TopWindowManager(UIApplication* p)
 TopWindowManager::~TopWindowManager()
 {
     SAFE_DELETE(m_pITopWindowManager);
+	UIASSERT(m_lTopWindowObject.empty())
 }
 ITopWindowManager*  TopWindowManager::GetITopWindowManager()
 {

@@ -115,10 +115,10 @@ UIApplication::~UIApplication(void)
 
     Image::ReleaseGDIPlus();
 
-//     if (m_bGpuEnable)
-//     {
-//         ShutdownGpuCompositor();
-//     }
+    if (m_bGpuEnable)
+    {
+		ShutdownGpuCompositor();
+    }
 
     //	::CoUninitialize(); // do not call CoInitialize, CoInitializeEx, or CoUninitialize from the DllMain function. 
 	OleUninitialize();
@@ -698,6 +698,26 @@ bool  UIApplication::EnableGpuComposite()
 
 	m_bGpuEnable = true;
 	return true;
+}
+
+void UI::UIApplication::ShutdownGpuCompositor()
+{
+	if (!m_bGpuEnable)
+		return;
+
+	HMODULE hModule = GetModuleHandle(L"UICompositor.dll");
+	if (!hModule)
+		return;
+
+	typedef long(*pfnUIShutdownGpuCompositor)();
+	pfnUIShutdownGpuCompositor fn = (pfnUIShutdownGpuCompositor)
+		::GetProcAddress(hModule, "UIShutdownGpuCompositor");
+
+	if (!fn)
+		return;
+
+	fn();
+	m_bGpuEnable = false;
 }
 
 

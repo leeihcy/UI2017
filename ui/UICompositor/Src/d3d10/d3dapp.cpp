@@ -74,6 +74,13 @@ void  D3D10App::Destroy()
     SAFE_RELEASE(m_pSprite10);
 	SAFE_RELEASE(m_pDXGIFactory);
 
+// 	ID3D11Debug* pD3dDebug;
+// 	HRESULT hr = m_pDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&pD3dDebug));
+// 	if (SUCCEEDED(hr))
+// 	{
+// 		hr = pD3dDebug->ReportLiveDeviceObjects(D3D10_RLDO_DETAIL);
+// 	}
+
 	if (m_pDevice)
 	{
 		ULONG lRet = m_pDevice->Release();
