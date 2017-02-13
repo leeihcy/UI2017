@@ -993,7 +993,7 @@ unsigned char IObject::GetOpacity() const
 {
 	return __pImpl->GetOpacity();
 }
-void  IObject::SetOpacity(const unsigned char alpha, LayerAnimateParam& param)
+void  IObject::SetOpacity(const unsigned char alpha, LayerAnimateParam* param)
 {
 	__pImpl->SetOpacity(alpha, param);
 }
@@ -1003,7 +1003,7 @@ void  IObject::SetTranslate(float x, float y, float z)
 	__pImpl->SetTranslate(x,y,z);
 }
 
-void  IObject::SetTranslate(float x, float y, float z, LayerAnimateParam& param)
+void  IObject::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
 {
 	__pImpl->SetTranslate(x, y, z, param);
 }

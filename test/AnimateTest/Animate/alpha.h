@@ -8,18 +8,19 @@ class AlphaAnimate : public Animate
 public:
 	virtual void Init() override
 	{
-		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		UI::LayerAnimateParam param = { 0 };
-		param.bBlock = true;
-		m_pPanel->SetOpacity(0, param);
-		m_pPanel->SetOpacity(255);
+		UI::IPanel*  pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
+
+		UI::LayerAnimateParam param;
+		param.finishCallback =
+		[pPanel](const UI::LayerAnimateFinishParam& param)
+		{
+			pPanel->SetOpacity(255);
+		};
+		pPanel->SetOpacity(0, &param);
 	}
 
 	virtual void Release() override
 	{
 
 	}
-
-private:
-	UI::IPanel*  m_pPanel;
 };

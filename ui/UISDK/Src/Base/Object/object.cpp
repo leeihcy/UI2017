@@ -1916,6 +1916,8 @@ void  Object::EnableLayer(bool b)
     m_objStyle.layer = b;
     update_layer_ptr();
 
+
+
 	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
 	if (m_pParent)
 	{

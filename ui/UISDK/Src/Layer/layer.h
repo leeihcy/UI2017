@@ -66,7 +66,7 @@ class Layer : public UIA::IAnimateEventCallback
 {
 protected:
 	enum {
-		ANIMATE_DURATION = 250,
+		ANIMATE_DURATION = 2500,
 	};
 	Layer();
 	virtual ~Layer();

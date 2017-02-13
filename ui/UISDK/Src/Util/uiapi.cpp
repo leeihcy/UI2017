@@ -211,8 +211,8 @@ void UIAnimateShow(UI::IObject* piObj, long)
     pLayer->SetOpacity(0, nullptr);
     pObj->SetVisible(true);
 
-    LayerAnimateParam param = { 0 };
-    param.bBlock = true;
+    LayerAnimateParam param;
+    param.SetBlock(true);
     pLayer->SetOpacity(255, &param);
 
     if (!bOldLayer)
@@ -231,8 +231,8 @@ void UIAnimateHide(UI::IObject* piObj, long)
 
     Layer* pLayer = pObj->GetLayer();
 
-    LayerAnimateParam param = { 0 };
-    param.bBlock = true;
+    LayerAnimateParam param;
+    param.SetBlock(true);
     pLayer->SetOpacity(0, &param);
     pObj->SetVisible(false);
 

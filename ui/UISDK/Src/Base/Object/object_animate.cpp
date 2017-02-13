@@ -21,7 +21,7 @@ unsigned char Object::GetOpacity() const
 		return 255;
 	return m_pLayer->GetLayer()->GetOpacity();
 }
-void  Object::SetOpacity(const unsigned char alpha, LayerAnimateParam& param)
+void  Object::SetOpacity(const unsigned char alpha, LayerAnimateParam* param)
 {
 	if (!m_pLayer)
 	{
@@ -38,7 +38,10 @@ void  Object::SetOpacity(const unsigned char alpha, LayerAnimateParam& param)
 	if (!m_pLayer->GetLayer())
 		return;
 
-	m_pLayer->GetLayer()->SetOpacity(alpha, &param);
+	LayerAnimateParam defaultParam;
+	if (!param)
+		param = &defaultParam;
+	m_pLayer->GetLayer()->SetOpacity(alpha, param);
 }
 
 
@@ -51,7 +54,7 @@ void  Object::SetTranslate(float x, float y, float z)
 	m_pLayer->GetLayer()->SetTranslate(x, y, z);
 }
 
-void  Object::SetTranslate(float x, float y, float z, LayerAnimateParam& param)
+void  Object::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
 {
 	if (!m_pLayer)
 	{
@@ -68,5 +71,8 @@ void  Object::SetTranslate(float x, float y, float z, LayerAnimateParam& param)
 	if (!m_pLayer->GetLayer())
 		return;
 
-	m_pLayer->GetLayer()->SetTranslate(x, y, z, &param);
+	LayerAnimateParam defaultParam;
+	if (!param)
+		param = &defaultParam;
+	m_pLayer->GetLayer()->SetTranslate(x, y, z, param);
 }

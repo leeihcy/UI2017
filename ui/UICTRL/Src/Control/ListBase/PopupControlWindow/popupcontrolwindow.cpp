@@ -245,10 +245,8 @@ void PopupControlWindow::OnDestroy()
 //     idc_ibean。因此这里初始将透明度设置10.（测试设置为1不行）
 void  PopupControlWindow::start_show_animate()
 {
-	LayerAnimateParam param = { 0 };
-	param.bBlock = false;
 	SetOpacity(10);
-	SetOpacity(255, param);
+	SetOpacity(255, nullptr);
 }
 
 // Popup控件不参与换肤，目前

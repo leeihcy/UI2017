@@ -8,18 +8,22 @@ class MoveLeftToRightAnimate : public Animate
 public:
 	virtual void Init() override
 	{
-		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		m_pPanel->EnableLayer(true);
+		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
-		UI::LayerAnimateParam param = { 0 };
-		m_pPanel->SetTranslate(300, 0, 0, param);
+		UI::LayerAnimateParam param;
+		param.finishCallback = 
+		[pPanel](const UI::LayerAnimateFinishParam& param) 
+		{
+			if (param.endreason == UIA::ANIMATE_END_NORMAL)
+				pPanel->SetTranslate(0, 0, 0, nullptr);
+			else
+				pPanel->SetTranslate(0, 0, 0);
+		};
+		pPanel->SetTranslate(UI::ScaleByDpi(350), 0, 0, &param);
 	}
 
 	virtual void Release() override
 	{
 
 	}
-
-private:
-	UI::IPanel*  m_pPanel;
 };

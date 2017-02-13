@@ -37,37 +37,31 @@ private:
 };
 
 
-enum LAYER_ANIMATE_TYPE
-{
-    STORYBOARD_ID_OPACITY = 1,
-    STORYBOARD_ID_YROTATE = 2,
-    STORYBOARD_ID_TRANSLATE = 3,
-};
-
 interface ILayer;
-struct LayerAnimateFinishInfo
+struct LayerAnimateFinishParam
 {
-    ILayer* pLayer;
-    LAYER_ANIMATE_TYPE eAnimateType;
-    long* pUserData;
+	long  reversed;
+	UIA::E_ANIMATE_END_REASON  endreason;
 };
-typedef void(*pfnLayerAnimateFinish)(LayerAnimateFinishInfo*);
+typedef void(*pfnLayerAnimateFinish)(LayerAnimateFinishParam*);
 
 struct LayerAnimateParam
 {
 public:
-// 	LayerAnimateParam() {
-// 		bBlock = false;
-// 	}
+	LayerAnimateParam() {
+		m_bBlock = false;
+	}
 
 	void  SetBlock(bool b) {
-		bBlock = b;
+		m_bBlock = b;
 	}
-public:
-	bool  bBlock;
-	pfnLayerAnimateFinish* pCallback;
-	long* pUserData;
-	//std::function<void()>  finishCallback;
+	bool  IsBlock() {
+		return m_bBlock;
+	}
+
+	std::function<void(const LayerAnimateFinishParam&)>  finishCallback;
+private:
+	bool  m_bBlock;
 };
 
 

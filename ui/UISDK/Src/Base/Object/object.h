@@ -280,10 +280,10 @@ public:
 	// ∂Øª≠ Ù–‘
 	void  SetOpacity(const unsigned char alpha);
 	unsigned char GetOpacity() const;
-	void  SetOpacity(const unsigned char alpha, LayerAnimateParam& param);
+	void  SetOpacity(const unsigned char alpha, LayerAnimateParam* param);
 
 	void  SetTranslate(float x, float y, float z);
-	void  SetTranslate(float x, float y, float z, LayerAnimateParam& param);
+	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param);
 
 protected:
 	HRESULT  FinalConstruct(ISkinRes* pSkinRes);

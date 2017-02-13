@@ -4,8 +4,16 @@
 #include "Src\Base\Application\uiapplication.h"
 #include "..\Base\Object\object_layer.h"
 #include "..\Base\Object\object.h"
+#include <memory>
 
 using namespace UI;
+
+enum LAYER_ANIMATE_TYPE
+{
+    STORYBOARD_ID_OPACITY = 1,
+    STORYBOARD_ID_YROTATE = 2,
+    STORYBOARD_ID_TRANSLATE = 3,
+};
 
 Layer::Layer(): m_iLayer(this)
 {
@@ -37,6 +45,8 @@ Layer::Layer(): m_iLayer(this)
 // 	m_transfrom3d.set_transform_rotate_origin(
 // 		TRANSFORM_ROTATE_ORIGIN_LEFT, 0,
 // 		TRANSFORM_ROTATE_ORIGIN_CENTER, 0, 0);
+
+	UI_LOG_DEBUG(L"Create Layer");
 }
 
 Layer::~Layer()
@@ -76,6 +86,8 @@ Layer::~Layer()
 	}
 
 	SAFE_RELEASE(m_pRenderTarget);
+
+	UI_LOG_DEBUG(L"Layer Destroy");
 }
 
 ILayer*  Layer::GetILayer()
@@ -291,10 +303,11 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 			m_nOpacity, 
 			ANIMATE_DURATION);
 
-		pStoryboard->SetWParam((WPARAM)pParam->pCallback);
-		pStoryboard->SetLParam((LPARAM)pParam->pUserData);
+		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
+		*pSaveParam = *pParam;
+		pStoryboard->SetWParam((WPARAM)pSaveParam);
 
-		if (pParam->bBlock)
+		if (pParam->IsBlock())
 		{
 			pStoryboard->BeginBlock();
 		}
@@ -399,9 +412,11 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
             ANIMATE_DURATION);
 
 
-		pStoryboard->SetWParam((WPARAM)pParam->pCallback);
-		pStoryboard->SetLParam((LPARAM)pParam->pUserData);
-		if (pParam->bBlock)
+		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
+		*pSaveParam = *pParam;
+		pStoryboard->SetWParam((WPARAM)pSaveParam);
+
+		if (pParam->IsBlock())
 		{
 			pStoryboard->BeginBlock();
 		}
@@ -439,6 +454,11 @@ float  Layer::GetZTranslate()
 
 UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 {
+	LayerAnimateParam* pParam = (LayerAnimateParam*)pStoryboard->GetWParam();
+	bool isblock = false;
+	if (pParam)
+		isblock = pParam->IsBlock();
+
 	switch (pStoryboard->GetId())
 	{
 	case STORYBOARD_ID_OPACITY:
@@ -448,7 +468,10 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 
             static_cast<ObjectLayer*>(m_pLayerContent)->GetObjet().Invalidate();
 			// 有可能是block动画，需要立即刷新
-			m_pCompositor->DoInvalidate();
+			if (isblock)
+				m_pCompositor->DoInvalidate();
+			else
+				m_pCompositor->RequestInvalidate();
 		}
 		break;
 
@@ -457,7 +480,10 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 // 			m_transfrom3d.rotateY(pStoryboard->
 // 				GetTimeline(0)->GetCurrentValue());
 // 
-// 			m_pCompositor->DoInvalidate();
+// 			if (isblock)
+// 		m_pCompositor->DoInvalidate();
+// 	else
+// 		m_pCompositor->RequestInvalidate();
 // 		}
 // 		break;
 //
@@ -468,7 +494,10 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
                 pStoryboard->GetTimeline(1)->GetCurrentValue(),
                 pStoryboard->GetTimeline(2)->GetCurrentValue());
 
-			m_pCompositor->DoInvalidate();
+			if (isblock)
+				m_pCompositor->DoInvalidate();
+			else
+				m_pCompositor->RequestInvalidate();
         }
         break;
 	}
@@ -478,15 +507,14 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 
 void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REASON e)
 {
-	pfnLayerAnimateFinish pCallback = (pfnLayerAnimateFinish)pStoryboard->GetWParam();
-	long* pUserData = (long*)pStoryboard->GetLParam();
-	if (pCallback)
+	std::shared_ptr<LayerAnimateParam> pParam(
+		(LayerAnimateParam*)pStoryboard->GetWParam());
+
+	if (pParam->finishCallback)
 	{
-		LayerAnimateFinishInfo info = { 0 };
-		info.pLayer = &m_iLayer;
-		info.eAnimateType = (UI::LAYER_ANIMATE_TYPE)pStoryboard->GetId();
-		info.pUserData = pUserData;
-		pCallback(&info);
+		LayerAnimateFinishParam info = { 0 };
+		info.endreason = e;
+		pParam->finishCallback(info);
 	}
 
 	// 动画结束后是否需要删除引用
