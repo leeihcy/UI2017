@@ -36,8 +36,11 @@ UIApplication*  Compositor::GetUIApplication()
 Layer*  Compositor::CreateLayer()
 {
     Layer* pLayer = this->virtualCreateLayer();
-    if (pLayer)
-        pLayer->SetCompositorPtr(this);
+	if (pLayer)
+	{
+		pLayer->AddRef();
+		pLayer->SetCompositorPtr(this);
+	}
 
     return pLayer;
 }

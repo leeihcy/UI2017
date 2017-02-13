@@ -18,5 +18,6 @@ public:
     static ID3D10EffectShaderResourceVariable*  m_pFxTexture10;
 	static ID3D10EffectMatrixVariable*  m_pFxMatrix;
     static ID3D10EffectVectorVariable*  m_pFxVsDestPos;
-    static ID3D10EffectMatrixVariable*  m_pFxOrthMatrix;
+	static ID3D10EffectMatrixVariable*  m_pFxOrthMatrix;
+	static ID3D10EffectScalarVariable*  m_pFxAlpha;
 };

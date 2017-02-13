@@ -159,12 +159,7 @@ void  SystemScrollBar::OnInitialize()
 	if (m_bHoverVisible)
 	{
 		m_pISystemScrollBar->EnableLayer(true);
-		ILayer* p = m_pISystemScrollBar->GetLayer();
-		if (p)
-		{
-			p->SetOpacity(0, NULL);
-			//p->SetAlwaysUpdate(true);  // 因为滚动条的更新依赖于onpaint事件，每次都必须绘制
-		}
+		m_pISystemScrollBar->SetOpacity(0);
 	}
 
 	OBJSTYLE s = {0};

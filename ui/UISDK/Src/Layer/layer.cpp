@@ -9,6 +9,8 @@ using namespace UI;
 
 Layer::Layer(): m_iLayer(this)
 {
+	m_lRef = 0;
+
     m_pCompositor = NULL;
 	m_pRenderTarget = nullptr;
 
@@ -39,6 +41,11 @@ Layer::Layer(): m_iLayer(this)
 
 Layer::~Layer()
 {
+	if (m_pLayerContent)
+	{
+		m_pLayerContent->OnLayerDestory();
+	}
+
 	UIA::IAnimateManager* pAni = m_pCompositor->
 		GetUIApplication()->GetAnimateMgr();
 	if (pAni)
@@ -299,6 +306,11 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 	else
 	{
 		m_nOpacity_Render = m_nOpacity;
+		if (GetType() == Layer_Software)
+		{
+			if (m_pLayerContent)
+				m_pLayerContent->Invalidate();
+		}
 		m_pCompositor->RequestInvalidate();
 	}
 }
@@ -345,7 +357,7 @@ float  Layer::GetYRotate()
 	return m_fyRotate;
 }
 
-void  Layer::SetTranslate(float x, float y, float z)
+void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
 {
     if (m_xTranslate == x && 
         m_yTranslate == y &&
@@ -355,42 +367,61 @@ void  Layer::SetTranslate(float x, float y, float z)
     m_xTranslate = x;
     m_yTranslate = y;
     m_zTranslate = z;
+
         
     // 开启隐式动画
-//     if (IsAutoAnimate())
-//     {
-//         UIA::IAnimateManager* pAni = m_pCompositor->
-//             GetUIApplication()->GetAnimateMgr();
-// 
-//         pAni->RemoveStoryboardByNotityAndId(
-//             static_cast<UIA::IAnimateEventCallback*>(this),
-//             STORYBOARD_ID_TRANSLATE);
-// 
-//         UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
-//             static_cast<UIA::IAnimateEventCallback*>(this),
-//             STORYBOARD_ID_TRANSLATE);
-// 
-//         pStoryboard->CreateTimeline(0)->SetParam(
-//             m_transfrom3d.get_translateX(),
-//             m_xTranslate,
-//             ANIMATE_DURATION);
-// 
-//         pStoryboard->CreateTimeline(1)->SetParam(
-//             m_transfrom3d.get_translateY(),
-//             m_yTranslate,
-//             ANIMATE_DURATION);
-// 
-//         pStoryboard->CreateTimeline(2)->SetParam(
-//             m_transfrom3d.get_translateZ(),
-//             m_zTranslate,
-//             ANIMATE_DURATION);
-// 
-//         pStoryboard->Begin();
-//     }
-//     else
+    if (pParam)
+    {
+        UIA::IAnimateManager* pAni = m_pCompositor->
+            GetUIApplication()->GetAnimateMgr();
+
+        pAni->RemoveStoryboardByNotityAndId(
+            static_cast<UIA::IAnimateEventCallback*>(this),
+            STORYBOARD_ID_TRANSLATE);
+
+        UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
+            static_cast<UIA::IAnimateEventCallback*>(this),
+            STORYBOARD_ID_TRANSLATE);
+
+        pStoryboard->CreateTimeline(0)->SetParam(
+            m_transfrom3d.get_translateX(),
+            m_xTranslate,
+            ANIMATE_DURATION);
+
+        pStoryboard->CreateTimeline(1)->SetParam(
+            m_transfrom3d.get_translateY(),
+            m_yTranslate,
+            ANIMATE_DURATION);
+
+        pStoryboard->CreateTimeline(2)->SetParam(
+            m_transfrom3d.get_translateZ(),
+            m_zTranslate,
+            ANIMATE_DURATION);
+
+
+		pStoryboard->SetWParam((WPARAM)pParam->pCallback);
+		pStoryboard->SetLParam((LPARAM)pParam->pUserData);
+		if (pParam->bBlock)
+		{
+			pStoryboard->BeginBlock();
+		}
+		else
+		{
+			pStoryboard->Begin();
+		}
+    }
+    else
     {
         m_transfrom3d.translate3d(x, y, z);
     }
+
+	if (m_pLayerContent)
+	{
+		if (GetType() == Layer_Software)
+			m_pLayerContent->Invalidate();
+		else
+			m_pCompositor->RequestInvalidate();
+	}
 }
 
 float  Layer::GetXTranslate()
@@ -426,20 +457,20 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 // 			m_transfrom3d.rotateY(pStoryboard->
 // 				GetTimeline(0)->GetCurrentValue());
 // 
-// 			m_pCompositor->RequestCompositor();
+// 			m_pCompositor->DoInvalidate();
 // 		}
 // 		break;
 //
-//     case STORYBOARD_ID_TRANSLATE:
-//         {
-//             m_transfrom3d.translate3d(
-//                 pStoryboard->GetTimeline(0)->GetCurrentValue(),
-//                 pStoryboard->GetTimeline(1)->GetCurrentValue(),
-//                 pStoryboard->GetTimeline(2)->GetCurrentValue());
-// 
-//             m_pCompositor->RequestCompositor();
-//         }
-//         break;
+    case STORYBOARD_ID_TRANSLATE:
+        {
+            m_transfrom3d.translate3d(
+                pStoryboard->GetTimeline(0)->GetCurrentValue(),
+                pStoryboard->GetTimeline(1)->GetCurrentValue(),
+                pStoryboard->GetTimeline(2)->GetCurrentValue());
+
+			m_pCompositor->DoInvalidate();
+        }
+        break;
 	}
 
 	return UIA::ANIMATE_TICK_RESULT_CONTINUE;
@@ -449,15 +480,17 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 {
 	pfnLayerAnimateFinish pCallback = (pfnLayerAnimateFinish)pStoryboard->GetWParam();
 	long* pUserData = (long*)pStoryboard->GetLParam();
+	if (pCallback)
+	{
+		LayerAnimateFinishInfo info = { 0 };
+		info.pLayer = &m_iLayer;
+		info.eAnimateType = (UI::LAYER_ANIMATE_TYPE)pStoryboard->GetId();
+		info.pUserData = pUserData;
+		pCallback(&info);
+	}
 
-	if (!pCallback)
-		return;
-
-    LayerAnimateFinishInfo info = { 0 };
-    info.pLayer = &m_iLayer;
-    info.eAnimateType = (UI::LAYER_ANIMATE_TYPE)pStoryboard->GetId();
-    info.pUserData = pUserData;
-	pCallback(&info);
+	// 动画结束后是否需要删除引用
+	Release();
 }
 
 void  Layer::CopyDirtyRect(RectArray& arr)
@@ -499,4 +532,24 @@ IRenderTarget*  Layer::GetRenderTarget()
     }
 
     return m_pRenderTarget;
+}
+
+void UI::Layer::AddRef()
+{
+	m_lRef++;
+}
+
+void UI::Layer::Release()
+{
+	// 动画结束时，释放引用 
+	--m_lRef;
+	if (0 == m_lRef)
+	{
+		delete this;
+	}
+}
+void  Layer::Destroy()
+{
+	// ObjectLayer::~ObjectLayer中强制销毁 
+	delete this;
 }

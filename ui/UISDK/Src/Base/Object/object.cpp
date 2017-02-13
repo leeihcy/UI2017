@@ -1928,6 +1928,20 @@ bool  Object::HasLayer()
 	return m_objStyle.layer;
 }
 
+void  Object::OnLayerDestory()
+{
+	UIASSERT(m_pLayer);
+	SAFE_DELETE(m_pLayer);
+
+	m_objStyle.layer = false;
+
+	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
+	if (m_pParent)
+	{
+		m_pParent->Invalidate(&m_rcParent);
+	}
+}
+
 //  需要则创建，不需要则删除layer对象
 //  TODO: 在object在tree中的位置改变后，如何同步到layer tree 中?
 void  Object::update_layer_ptr()

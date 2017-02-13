@@ -13,6 +13,7 @@ ID3D10EffectShaderResourceVariable*  Effects::m_pFxTexture10 = NULL;
 ID3D10EffectMatrixVariable*  Effects::m_pFxMatrix = NULL;
 ID3D10EffectMatrixVariable*  Effects::m_pFxOrthMatrix = NULL;
 ID3D10EffectVectorVariable*  Effects::m_pFxVsDestPos = NULL;
+ID3D10EffectScalarVariable*  Effects::m_pFxAlpha = NULL;
 
 bool Effects::Init(ID3D10Device* pDevice)
 {
@@ -90,9 +91,7 @@ bool Effects::Init(ID3D10Device* pDevice)
     m_pFxMatrix = m_pEffect->GetVariableByName( "g_Matrix" )->AsMatrix();
     m_pFxOrthMatrix = m_pEffect->GetVariableByName( "g_orthMatrix" )->AsMatrix();
 	m_pFxVsDestPos = m_pEffect->GetVariableByName( "g_vsDestPos" )->AsVector();
-
-	float destPos[4] = {0};
-	m_pFxVsDestPos->SetFloatVector(destPos);
+	m_pFxAlpha = m_pEffect->GetVariableByName("g_alpha")->AsScalar();
 
     return true;
 }

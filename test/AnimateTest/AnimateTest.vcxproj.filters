@@ -9,6 +9,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Animate">
+      <UniqueIdentifier>{2b680476-1b92-4525-86ef-c0940db947fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animate\自定义动画函数动画">
+      <UniqueIdentifier>{b306dbd1-d4a0-4020-ab60-ffddf197181b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animate\位移动画">
+      <UniqueIdentifier>{058d8cd0-20c9-4d52-8b72-41aa469dbc9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animate\透明渐变">
+      <UniqueIdentifier>{ed5905bc-0aaa-4c76-b82d-29d3edd90f2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -34,6 +46,21 @@
     <ClInclude Include="stdafx.h">
       <Filter>other</Filter>
     </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\animate_base.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\custom_timing_function.h">
+      <Filter>Animate\自定义动画函数动画</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\move.h">
+      <Filter>Animate\位移动画</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\alpha.h">
+      <Filter>Animate\透明渐变</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimateTest.cpp">
@@ -41,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Animate\animate_base.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

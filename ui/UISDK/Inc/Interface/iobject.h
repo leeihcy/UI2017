@@ -12,6 +12,7 @@ namespace UI
 	interface ILayer;
 	interface IMapAttribute;
     interface ILayoutParam;
+	struct LayerAnimateParam;
 
 	typedef struct tagObjStyle
 	{
@@ -177,6 +178,15 @@ namespace UI
 
         void ForwardMessageToChildObject(UIMSG* pMsg);
         void ForwardMessageToChildObject2(UIMSG* pMsg, UIMSG* pMsg2);
+
+		// ∂Øª≠ Ù–‘
+		void  SetOpacity(const unsigned char alpha);
+		unsigned char GetOpacity() const;
+		void  SetOpacity(const unsigned char alpha, LayerAnimateParam& param);
+
+		void  SetTranslate(float x, float y, float z);
+		void  SetTranslate(float x, float y, float z, LayerAnimateParam& param);
+
 
 		UI_DECLARE_INTERFACE(Object);
 	};

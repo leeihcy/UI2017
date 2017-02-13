@@ -53,6 +53,7 @@ public:
 	Object*  GetLayerCreator();
 	void  EnableLayer(bool b);
 	bool  HasLayer();
+	void  OnLayerDestory();
 
 	void  Invalidate();
 	void  Invalidate(LPCRECT prcObj);
@@ -275,6 +276,14 @@ public:
 
 	static void  ChildPoint2ParentPoint(Object* pObjChild, const POINT* ptChild, POINT*  ptOut);
 	static void  ChildRect2ParentRect(Object* pObjChild, LPCRECT prc, RECT*  pOut);
+
+	// ∂Øª≠ Ù–‘
+	void  SetOpacity(const unsigned char alpha);
+	unsigned char GetOpacity() const;
+	void  SetOpacity(const unsigned char alpha, LayerAnimateParam& param);
+
+	void  SetTranslate(float x, float y, float z);
+	void  SetTranslate(float x, float y, float z, LayerAnimateParam& param);
 
 protected:
 	HRESULT  FinalConstruct(ISkinRes* pSkinRes);

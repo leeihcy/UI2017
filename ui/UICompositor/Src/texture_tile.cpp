@@ -186,37 +186,28 @@ void  TextureTile::Compositor(
     if (!m_pShaderResourceView)
         return ;
 
-//     UI::RECTF  rcTexture;
-//     rcTexture.left   = (float)0;
-//     rcTexture.right  = (float)1;
-//     rcTexture.top    = (float)0;
-//     rcTexture.bottom = (float)1;
-
-    // TODO: fAlpha 透明度如何实现，怎么将color传递到vb当中去
+	float pos[2] =
+	{
+		(float)(pContext->m_xOffset),
+		(float)(pContext->m_yOffset)
+	};
+	Effects::m_pFxVsDestPos->SetFloatVector(pos);
 
     ID3D10EffectTechnique*  pTech = NULL;
     if (pContext->m_bTransformValid)
     {
-//         UI::RECTF rcLocal;
-//         rcLocal.left = (float)(pContext->m_xOffset + xOffset);
-//         rcLocal.top = (float)(pContext->m_yOffset + yOffset);
-//         rcLocal.right = (float)(pContext->m_xOffset + xOffset + TILE_SIZE);
-//         rcLocal.bottom = (float)(pContext->m_yOffset + yOffset + TILE_SIZE);
+        Effects::m_pFxMatrix->SetMatrix(
+			(float*)(D3DXMATRIX*)pContext->m_matrixTransform);
 
-        Effects::m_pFxMatrix->SetMatrix((float*)(D3DXMATRIX*)pContext->m_matrixTransform);
         pTech = Effects::m_pTechDrawTextureMatrix;
     }
     else
     {
-		D3DXVECTOR3 pos;
-		pos.x = (float)(pContext->m_xOffset/* + xOffset*/);
-		pos.y = (float)(pContext->m_yOffset/* + yOffset*/);
-		pos.z = 0;
-		HRESULT hr = Effects::m_pFxVsDestPos->SetFloatVector((float*)&pos);
-		UIASSERT(SUCCEEDED(hr));
         pTech = Effects::m_pTechDrawTexture;
     }
 
+	if (pContext->m_fAlpha != 1.0f)
+		Effects::m_pFxAlpha->SetFloat(pContext->m_fAlpha);
     Effects::m_pFxTexture10->SetResource(m_pShaderResourceView);
 
     D3D10_TECHNIQUE_DESC techDesc;
@@ -226,6 +217,11 @@ void  TextureTile::Compositor(
         pTech->GetPassByIndex(p)->Apply(0);
         D3D10App::Get()->m_pDevice->Draw(4, vertexStartIndex);
     }
+
+	if (pContext->m_fAlpha != 1.0f)
+	{
+		Effects::m_pFxAlpha->SetFloat(1.0f);
+	}
 }
 
 

@@ -22,12 +22,17 @@ ObjectLayer::ObjectLayer(Object& o) : m_obj(o)
     else
     {
         // 在resize的时候创建
+		UIASSERT(0);
     }
 }
 
 ObjectLayer::~ObjectLayer()
 {
-    SAFE_DELETE(m_pLayer);
+	Layer*  p = m_pLayer;
+	m_pLayer = nullptr;
+
+	if (p)
+		p->Destroy();
 }
 
 void  ObjectLayer::Draw(UI::IRenderTarget* pRenderTarget) 
@@ -80,4 +85,18 @@ void  ObjectLayer::OnObjPosInTreeChanged()
 
     m_pLayer->RemoveMeInTheTree();
     pParentLayer->AddSubLayer(m_pLayer, m_obj.FindNextLayer(pParentLayer));
+}
+
+void UI::ObjectLayer::OnLayerDestory()
+{
+	if (m_pLayer)  // 由ObjectLayer::~ObjectLayer()触发的，不通知
+	{
+		m_pLayer = nullptr;
+		m_obj.OnLayerDestory();
+	}
+}
+
+void UI::ObjectLayer::Invalidate()
+{
+	m_obj.Invalidate();
 }

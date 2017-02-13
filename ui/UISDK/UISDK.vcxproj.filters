@@ -1478,6 +1478,9 @@
     <ClCompile Include="Src\UIObject\Panel\ScrollPanel\iscrollpanel.cpp">
       <Filter>02. Src\02. UI对象\07. scrollpanel</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Base\Object\object_animate.cpp">
+      <Filter>02. Src\01. UI对象基类\02. object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Other\UISDK.rc">

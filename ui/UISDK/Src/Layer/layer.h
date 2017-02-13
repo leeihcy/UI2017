@@ -50,8 +50,10 @@ interface ILayerContent
     virtual bool  IsChildOf(Object*) = 0;
     virtual bool  IsSelfVisible() = 0;
     virtual void  Draw(UI::IRenderTarget*) = 0;
+	virtual void  Invalidate() = 0;
     virtual void  GetWindowRect(RECT* prcOut) = 0;
     virtual void  GetParentWindowRect(RECT* prcOut) = 0;
+	virtual void  OnLayerDestory() = 0;
 };
 
 enum LayerType
@@ -66,10 +68,14 @@ protected:
 	enum {
 		ANIMATE_DURATION = 250,
 	};
+	Layer();
+	virtual ~Layer();
 
 public:
-	Layer();
-    virtual ~Layer();
+
+	void  AddRef();
+	void  Release();
+	void  Destroy();
 	
     ILayer*  GetILayer();
     void  SetCompositorPtr(Compositor*);
@@ -100,11 +106,11 @@ public:
 
     // property
 	byte  GetOpacity();
-	void  SetOpacity(byte, LayerAnimateParam*);
+	void  SetOpacity(byte, LayerAnimateParam* param = nullptr);
     
     void  SetYRotate(float);
     float  GetYRotate();
-    void  SetTranslate(float x, float y, float z);
+	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param = nullptr);
     float  GetXTranslate();
     float  GetYTranslate();
     float  GetZTranslate();
@@ -128,6 +134,9 @@ private:
     void  on_layer_tree_changed();
 
 protected:
+	// 做动画时添加layer引用计数，在动画结束时自动将layer销毁掉
+	long  m_lRef;
+
     ILayer  m_iLayer;
     Compositor*  m_pCompositor;
 

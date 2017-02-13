@@ -159,7 +159,7 @@ void  PopupControlWindow::Show(
         if (lShowType != SW_HIDE)
         {
             // 解决showwindow将窗口直接显示成alpha 255的问题
-            GetLayer()->SetOpacity(10, nullptr);
+            SetOpacity(10);
             GetWindowRender()->InvalidateNow();
 
             ::ShowWindow(hPopupWnd, lShowType);
@@ -247,8 +247,8 @@ void  PopupControlWindow::start_show_animate()
 {
 	LayerAnimateParam param = { 0 };
 	param.bBlock = false;
-	GetLayer()->SetOpacity(10, nullptr);
-	GetLayer()->SetOpacity(255, &param);
+	SetOpacity(10);
+	SetOpacity(255, param);
 }
 
 // Popup控件不参与换肤，目前

@@ -403,6 +403,7 @@
     <ClCompile Include="Src\Base\Message\message.cpp" />
     <ClCompile Include="Src\Base\Object\iobject.cpp" />
     <ClCompile Include="Src\Base\Object\object.cpp" />
+    <ClCompile Include="Src\Base\Object\object_animate.cpp" />
     <ClCompile Include="Src\Base\Object\object_attrib.cpp" />
     <ClCompile Include="Src\Base\Object\object_layer.cpp" />
     <ClCompile Include="Src\Base\Object\object_rect.cpp" />

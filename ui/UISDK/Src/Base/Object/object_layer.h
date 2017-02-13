@@ -26,6 +26,8 @@ protected:
     virtual void  Draw(UI::IRenderTarget*) override;
     virtual void  GetWindowRect(RECT* prcOut) override;
     virtual void  GetParentWindowRect(RECT* prcOut) override;
+	virtual void  OnLayerDestory() override;
+	virtual void  Invalidate() override;
 
 private:
     Object&  m_obj;

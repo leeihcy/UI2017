@@ -55,9 +55,19 @@ typedef void(*pfnLayerAnimateFinish)(LayerAnimateFinishInfo*);
 
 struct LayerAnimateParam
 {
+public:
+// 	LayerAnimateParam() {
+// 		bBlock = false;
+// 	}
+
+	void  SetBlock(bool b) {
+		bBlock = b;
+	}
+public:
 	bool  bBlock;
 	pfnLayerAnimateFinish* pCallback;
 	long* pUserData;
+	//std::function<void()>  finishCallback;
 };
 
 
@@ -67,20 +77,20 @@ interface UIAPI ILayer
     ILayer(Layer*);
     IRenderTarget*  GetRenderTarget();
 
-    bool  IsAutoAnimate();
-    void  EnableAutoAnimate(bool);
-    void  SetAnimateFinishCallback(pfnLayerAnimateFinish, long*);
-
-	void SetOpacity(unsigned char, LayerAnimateParam*);
-	unsigned char GetOpacity();
-
-    void  SetYRotate(float);
-    float  GetYRotate();
-
-    void  SetTranslate(float x, float y, float z);
-    float  GetXTranslate();
-    float  GetYTranslate();
-    float  GetZTranslate();
+//     bool  IsAutoAnimate();
+//     void  EnableAutoAnimate(bool);
+//     void  SetAnimateFinishCallback(pfnLayerAnimateFinish, long*);
+// 
+// 	void SetOpacity(unsigned char, LayerAnimateParam*);
+// 	unsigned char GetOpacity();
+// 
+//     void  SetYRotate(float);
+//     float  GetYRotate();
+// 
+//     void  SetTranslate(float x, float y, float z);
+//     float  GetXTranslate();
+//     float  GetYTranslate();
+//     float  GetZTranslate();
 
 private:
     Layer* m_pImpl;

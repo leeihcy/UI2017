@@ -20,5 +20,11 @@
 #include <memory.h>
 #include <tchar.h>
 
-
-// TODO: 在此处引用程序需要的其他头文件
+#include "UI\UISDK\Inc\inc.h"
+#include "UI\UICTRL\Inc\inc.h"
+#include "ui\UISDK\Inc\Interface\iwindow.h"
+#include "ui\UISDK\Inc\Interface\icustomwindow.h"
+#include "ui\UISDK\Inc\Util\util.h"
+#include "ui\UISDK\Inc\Interface\ianimate.h"
+#pragma comment(lib,"uisdk.lib")
+#pragma comment(lib,"uictrl.lib")

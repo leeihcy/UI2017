@@ -62,6 +62,7 @@ IRenderTarget*  ILayer::GetRenderTarget()
     return m_pImpl->GetRenderTarget();
 }
 
+#if 0
 bool  ILayer::IsAutoAnimate()
 {
 	return m_pImpl->IsAutoAnimate();
@@ -110,3 +111,4 @@ float  ILayer::GetZTranslate()
 {
 	return m_pImpl->GetZTranslate();
 }
+#endif
