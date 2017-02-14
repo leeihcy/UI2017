@@ -30,7 +30,7 @@
 using namespace UI;
 
 
-Object::Object(IObject* p) : ObjTree(p)
+Object::Object(IObject* p) : ObjTree(p), m_objLayer(*this)
 {
     m_pIObject = p;
 	::SetRectEmpty(&m_rcParent);
@@ -40,9 +40,6 @@ Object::Object(IObject* p) : ObjTree(p)
 	::SetRectEmpty(&m_rcBorder);
 
 	// m_lCanRedrawRef = 0;
-	// m_nStyle2 = 0;
-	// m_pUserData = NULL;
-	// m_pUIApplication = NULL;
 	m_pSkinRes = NULL;
 	m_ppOutRef = NULL;
     m_lzOrder = 0;
@@ -54,11 +51,9 @@ Object::Object(IObject* p) : ObjTree(p)
 	m_pBkgndRender = NULL;
 	m_pForegndRender = NULL;
 	m_pTextRender = NULL;
-	//m_pCursor = NULL;
 
     m_pIMapAttributeRemain = NULL;
     m_pLayoutParam = NULL;
-    m_pLayer = NULL;
 	m_pAccessible = NULL;
     m_pDescription = UndefineDescription::Get();
 
@@ -111,8 +106,9 @@ void Object::FinalRelease()
 	SAFE_RELEASE(m_pBkgndRender);
 	SAFE_RELEASE(m_pForegndRender);
 	SAFE_RELEASE(m_pTextRender);
-	//SAFE_RELEASE(m_pCursor);
-	SAFE_DELETE(m_pLayer);
+
+	// 在析构之前销毁，避免窗口的window compositor已经销毁了，但layer还没有被销毁
+	m_objLayer.DestroyLayer();
 }
 
 IObject*  Object::GetIObject() 
@@ -133,76 +129,10 @@ LPCTSTR  Object::GetId()
     return m_strId.c_str(); 
 }
 
-// void Object::SetCanRedraw(bool bReDraw)
-// {
-// 	if (bReDraw)
-// 		m_lCanRedrawRef --;
-// 	else
-// 		m_lCanRedrawRef ++;
-// }
-// 
-// // TODO: 需要往上递归进行判断
-bool Object::CanRedraw()
+Layer* Object::GetSelfLayer() const
 {
-// 	return 0==m_lCanRedrawRef;
-	return true;
+	return m_objLayer.GetLayer();
 }
-
-// TODO: 大部分控件是没有配置鼠标的，因此也没有必要将这个属性保存到基类当中。
-// 
-// bool Object::SetCursorId(LPCTSTR szCursorId)
-// {
-// 	SAFE_RELEASE(m_pCursor);
-// 	if (!szCursorId || szCursorId[0] == _T('\0'))
-// 		return true;
-// 
-// 	CursorRes* pCursorRes = m_pSkinRes->GetImageManager()->GetCursorRes();
-// 	if (NULL == pCursorRes)
-// 		return false;
-// 
-//     pCursorRes->GetCursor(szCursorId, &m_pCursor); 
-// 	if (NULL == m_pCursor)
-// 	{
-// 		UI_LOG_WARN(_T("get cursor failed. Object id=%s, cursor id=%s"), m_strId.c_str(), szCursorId);	
-// 		return false;
-// 	}
-// 
-// 	return true;
-// }
-// LPCTSTR Object::SaveCursorId()
-// {
-// 	if (NULL == m_pCursor)
-// 		return NULL;
-// 
-// 	CursorRes* pCursorRes = m_pSkinRes->GetImageManager()->GetCursorRes();
-// 	if (NULL == pCursorRes)
-// 		return NULL;
-// 
-// 	return pCursorRes->GetCursorId(m_pCursor);
-// }
-
-// 获取自己本身的layer指针
-// RenderLayer*  Object::GetSelfRenderLayer2()
-// {
-//     return m_pRenderLayer;
-// }
-// // 获取自己所在的layer指针
-// RenderLayer*  Object::GetRenderLayer2()
-// {
-//     RenderLayer*  pRenderLayer = NULL;
-// 
-//     Object* pObj = this;
-//     while (pObj)
-//     {
-//         pRenderLayer = pObj->GetSelfRenderLayer2();
-//         if (pRenderLayer)
-//             break;
-// 
-//         pObj = pObj->m_pParent;
-//     }
-// 
-//     return pRenderLayer;
-// }
 
 // 获取对象所在Layer
 Layer*  Object::GetLayer()
@@ -216,19 +146,16 @@ Layer*  Object::GetLayer()
 
 ObjectLayer*  Object::GetLayerEx()
 {
-    ObjectLayer*  pLayer = NULL;
-
     Object* pObj = this;
     while (pObj)
     {
-        pLayer = pObj->m_pLayer;
-        if (pLayer)
-            break;
+        if (pObj->GetSelfLayer())
+            return &pObj->m_objLayer;
 
         pObj = pObj->m_pParent;
     }
 
-    return pLayer;
+    return nullptr;
 }
 
 // Layer Tree 生成关键函数，参照webkit：
@@ -276,15 +203,13 @@ ObjectLayer*  Object::GetLayerEx()
 //     return NULL;
 // }
 
-// 判断思路：这个对象的下一个层，只会在这个对象的下一对Object中出现。
+// 判断思路：这个对象的下一个层，只会在这个对象的下一个Object中出现。
 Layer*  Object::FindNextLayer(Layer* pParentLayer)
 {
     Object* pNextTreeObject = GetNextTreeItemObject();
     while (pNextTreeObject)
     {
-        Layer* pThisLayer = NULL;
-        if (pNextTreeObject->m_pLayer)
-            pThisLayer = pNextTreeObject->m_pLayer->GetLayer();
+        Layer* pThisLayer = pNextTreeObject->GetSelfLayer();
 
         // 找回到父layer了，说明自己就是最后一个，没有next
         if (pThisLayer && pThisLayer == pParentLayer)
@@ -664,7 +589,8 @@ UINT Object::OnHitTest(POINT* ptInParent, __out POINT* ptInChild)
 // 		    return HTCLIENT;
 // 	}
 
-    if (m_pLayer && m_pLayer->GetLayer())
+	Layer* layer = GetSelfLayer();
+    if (layer)
     {
 		POINT ptObj = 
 		{
@@ -672,7 +598,7 @@ UINT Object::OnHitTest(POINT* ptInParent, __out POINT* ptInChild)
 			ptInParent->y-m_rcParent.top
 		};
 
-		m_pLayer->GetLayer()->MapView2Layer(&ptObj);
+		layer->MapView2Layer(&ptObj);
 
 		RECT rcObj = {0, 0, m_rcParent.Width(), m_rcParent.Height()};
 		if (PtInRect(&rcObj, ptObj))
@@ -1507,7 +1433,7 @@ void  Object::SetZorderDirect(int z)
 {
     m_lzOrder = z;
 
-    bool bOldHasLayer = !!m_pLayer;
+    //bool bOldHasLayer = GetSelfLayer()?true:false;
     bool bPosChanged = false;
 
     // 更新了zorder，修改自己在parent中的位置
@@ -1526,12 +1452,12 @@ void  Object::SetZorderDirect(int z)
         }
     }
     
-    update_layer_ptr();
-    
-    bool bNowHasLayer = !!m_pLayer;
-    if (bOldHasLayer && bNowHasLayer && bPosChanged)
+//     update_layer_ptr();
+//     
+//     bool bNowHasLayer = GetSelfLayer() ? true : false;
+    if (/*bOldHasLayer && bNowHasLayer && */bPosChanged)
     {
-        m_pLayer->OnObjPosInTreeChanged();
+        m_objLayer.OnObjPosInTreeChanged();
     }
 }
 
@@ -1889,40 +1815,22 @@ void  Object::load_layer_config(bool b)
 
 void  Object::EnableLayer(bool b)
 {
-#if 0
 	if (b)
 	{
-		m_objStyle.layer = true;
-		if (m_pRenderLayer)
-			return;
-
-		WindowRender* pWndRender = GetWindowRender();
-		if (pWndRender)
-		{
-			m_pRenderLayer = pWndRender->CreateRenderLayer(this);
-		}
-		else
-		{
-			// 在resize的时候创建
-		}
+		m_objLayer.CreateLayer();
 	}
 	else
 	{
-		m_objStyle.layer = false;
-		SAFE_DELETE(m_pRenderLayer);
+		m_objLayer.ReleaseLayer();
 	}
-#endif
-
-    m_objStyle.layer = b;
-    update_layer_ptr();
-
-
-
+	
 	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
-	if (m_pParent)
+	if (m_pParent && m_objStyle.layer != b)
 	{
 		m_pParent->Invalidate(&m_rcParent);
 	}
+
+	m_objStyle.layer = b;
 }
 
 bool  Object::HasLayer()
@@ -1932,9 +1840,6 @@ bool  Object::HasLayer()
 
 void  Object::OnLayerDestory()
 {
-	UIASSERT(m_pLayer);
-	SAFE_DELETE(m_pLayer);
-
 	m_objStyle.layer = false;
 
 	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
@@ -1943,37 +1848,6 @@ void  Object::OnLayerDestory()
 		m_pParent->Invalidate(&m_rcParent);
 	}
 }
-
-//  需要则创建，不需要则删除layer对象
-//  TODO: 在object在tree中的位置改变后，如何同步到layer tree 中?
-void  Object::update_layer_ptr()
-{
-    if (m_objStyle.layer) // || m_lzOrder > 0 ??
-    {
-        if (!m_pLayer)
-        {
-            m_pLayer = new ObjectLayer(*this);
-            if (!m_rcParent.IsRectEmpty())
-                m_pLayer->OnSize(m_rcParent.Width(), m_rcParent.Height());
-        }
-    }
-    else
-    {
-        SAFE_DELETE(m_pLayer);
-    }
-}
-// 
-// GRAPHICS_RENDER_LIBRARY_TYPE  Object::GetGraphicsRenderLibraryType()
-// {
-//     WindowRender*  pWindowRender = GetWindowRender();
-//     if (!pWindowRender)
-//     {
-// 		return GRAPHICS_RENDER_LIBRARY_TYPE_GDI;
-// 		//return (GRAPHICS_RENDER_LIBRARY_TYPE)UISendMessage(m_pIObject, UI_WM_GET_GRAPHICS_RENDER_LIBRARY_TYPE);
-//     }
-// 
-//     return pWindowRender->GetGraphicsRenderType();
-// }
 
 
 // 序列化辅助函数

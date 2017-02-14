@@ -280,14 +280,6 @@ bool LayeredWindowWrap::Commit()
 	Layer*  pLayer = m_pWindow->GetLayer();
 	IRenderTarget* pRenderTarget = pLayer->GetRenderTarget();
 
-	// 	RECT  rcOffset;
-	// 	pLayer->GetRectDrawInBuffer(&rcOffset);
-
-	// 主要是为了防止在分层窗口大小改变时，需要重新创建缓存，
-	// 在缓存完整绘制完一次之前禁止提交到窗口上
-	if (!m_pWindow->CanRedraw())
-		return true;
-
 	// TBD: 窗口还不可见（ComboBox的listbox），但触发了invalidate操作，会导致update layered window失败
 	// 这里先这么处理。
 	if (m_sizeWindow.cx <= 0 ||

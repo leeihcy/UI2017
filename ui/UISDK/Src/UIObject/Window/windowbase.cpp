@@ -60,15 +60,12 @@ m_oMouseManager(*this)
 
 	memset(&m_windowStyle, 0, sizeof(m_windowStyle));
 
-
 	// 取消Panel基本中的透明属性
 	OBJSTYLE s = {0};
 	s.default_transparent = 1;
 	ModifyObjectStyle(0, &s);
 
 	m_pCallbackProxy = nullptr;
-// 	m_bFirstTimePaintWindow = true;
-// 	m_oWindowRender.SetCanCommit(false);
 }
 
 WindowBase::~WindowBase()

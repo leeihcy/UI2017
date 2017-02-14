@@ -176,5 +176,8 @@ void  Object::OnSerialize(SERIALIZEDATA* pData)
 void  Object::virtualOnLoad()
 {
     // 等对象在树中位置确定了，相关属性确定了之后，再创建layer
-    update_layer_ptr();
+	if (m_objStyle.layer && !GetSelfLayer())
+	{
+		m_objLayer.CreateLayer();
+	}
 }

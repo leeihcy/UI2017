@@ -1,5 +1,6 @@
 #pragma once
 #include "objtree.h"
+#include "object_layer.h"
 
 namespace UI
 {
@@ -7,7 +8,6 @@ class SkinRes;
 class UIApplication;
 class WindowBase;
 class Layer;
-class ObjectLayer;
 interface UIElement;
 interface IRenderBase;
 interface ITextRenderBase;
@@ -48,6 +48,7 @@ public:
 	HWND  GetHWND();
 
 	Layer*  GetLayer();
+	Layer*  GetSelfLayer() const;
 	ObjectLayer*  GetLayerEx();
 	Layer*  FindNextLayer(Layer* pParentLayer);
 	Object*  GetLayerCreator();
@@ -70,7 +71,6 @@ public:
 	Object*  GetChildObjectByIndex(unsigned long lIndex);
 	unsigned long  GetChildObjectIndex(Object* pChild);
 
-	bool  CanRedraw();
 	bool  IsTransparent();
 	void  SetTransparent(bool b);
 	bool  IsNoClip();
@@ -288,7 +288,6 @@ public:
 protected:
 	HRESULT  FinalConstruct(ISkinRes* pSkinRes);
 	void  FinalRelease();
-	void*  QueryInterface(const IID* pIID);
 	UINT  OnHitTest(POINT* ptInParent, __out POINT* ptInChild);
 	void  OnVisibleChanged(BOOL bVisible, IObject* pObjChanged);
 	void  OnSerialize(SERIALIZEDATA* pData);
@@ -305,7 +304,6 @@ protected:
 	LPCTSTR  get_textrender_name(ITextRenderBase*& pTextRender);
 
 	void  load_layer_config(bool b);
-	void  update_layer_ptr();
 
 public:
 	void  notify_WM_SIZE(UINT nType, UINT nWidth, UINT nHeight);
@@ -353,8 +351,8 @@ protected:
 	OBJSTYLE   m_objStyle;
 	OBJSTATE   m_objState;
 
-	// byte  m_lCanRedrawRef;         // 用于解决多处调用SetRedraw(false)后，必须所有地方放开SetRedraw(true)才能进行绘制
-	// UINT  m_nStyle2;               // 控件样式，与的关系
+	ObjectLayer  m_objLayer;
+
 	int  m_lzOrder;                   // 控件z序，用于实现控件重叠时的刷新判断依据
 
 	// 控件的最大尺寸限制
@@ -367,16 +365,8 @@ protected:
 	IRenderBase*      m_pBkgndRender;          // 背景渲染
 	IRenderBase*      m_pForegndRender;        // 前景渲染
 	ITextRenderBase*  m_pTextRender;           // 文字渲染，由control负责读取该属性
-	//IUICursor*        m_pCursor;               // 对象的鼠标样式
-	//RenderLayer*      m_pRenderLayer;          // 该对象是否创建了一个layer-- 过期，后续使用m_pLayer
 	IAccessible*      m_pAccessible;
 
-	// 是否创建一个layer，目前由以下条件决定：
-	// 1. 指定了layer style
-	// 2. z order > 0。(目前未实现z order < 0的layer)
-	ObjectLayer*  m_pLayer;
-
-	// void*      m_pUserData;             // 自定义数据（目前是用于在UIBuilder做数据关联）
 	void**     m_ppOutRef;              // 为了解决一个类成员对象，有可能被自己的父对象删除后，这个类却不知道，再删除该对象时崩溃了.
 
 	friend class ObjectAccessible;

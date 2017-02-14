@@ -568,10 +568,7 @@ void  Object::notify_WM_SIZE(UINT nType, UINT nWidth, UINT nHeight)
 
 void  Object::virtualOnSize(UINT nType, UINT nWidth, UINT nHeight)
 {
-    if (m_pLayer)
-    {
-        m_pLayer->OnSize(nWidth, nHeight);
-    }
+	m_objLayer.OnSize(nWidth, nHeight);
 }
 void  Object::notify_WM_MOVE(int x, int y)
 {

@@ -157,7 +157,7 @@ void  Object::Invalidate(LPCRECT prcObj)
 	if (!prcObj)
 		return;
 
-	if (!IsVisible() || !CanRedraw())
+	if (!IsVisible())
 		return;
 
 	ObjectLayer* pLayer = GetLayerEx();
@@ -254,9 +254,9 @@ void  Object::DrawChildObject__(IRenderTarget* pRenderTarget, Object* pChildStar
             continue;
         }
 
-        if (pChild->m_pLayer)
+		Layer* pChildLayer = pChild->GetSelfLayer();
+        if (pChildLayer)
         {
-            Layer* pChildLayer = pChild->m_pLayer->GetLayer();
             // 硬件合成，每个层单独绘制。
             if (pChildLayer->GetType() == Layer_Hardware)
             {
@@ -281,23 +281,19 @@ void  Object::DrawChildObject__(IRenderTarget* pRenderTarget, Object* pChildStar
             pChild->m_rcParent.left, 
             pChild->m_rcParent.top);
 
-        if (pChild->m_pLayer)
+        if (pChildLayer/* && pChildLayer->GetType() == Layer_Software*/)
         {
             // 软件渲染模式下面，子层要画在父层上面
-            Layer* pChildLayer = pChild->m_pLayer->GetLayer();
-            if (pChildLayer/* && pChildLayer->GetType() == Layer_Software*/)
-            {
-                pChildLayer->UpdateDirty();
+			pChildLayer->UpdateDirty();
 
-                Render2TargetParam param = {0};
-                param.xSrc = param.xDst = 0;
-                param.ySrc = param.yDst = 0;
-                param.wSrc = param.wDst = pChild->GetWidth();
-                param.hSrc = param.hDst = pChild->GetHeight();
-                param.bAlphaBlend = true;
-                param.opacity = pChildLayer->GetOpacity();
-                pChildLayer->GetRenderTarget()->Render2Target(pRenderTarget, &param);
-            }
+			Render2TargetParam param = { 0 };
+			param.xSrc = param.xDst = 0;
+			param.ySrc = param.yDst = 0;
+			param.wSrc = param.wDst = pChild->GetWidth();
+			param.hSrc = param.hDst = pChild->GetHeight();
+			param.bAlphaBlend = true;
+			param.opacity = pChildLayer->GetOpacity();
+			pChildLayer->GetRenderTarget()->Render2Target(pRenderTarget, &param);
         }
         else
         {

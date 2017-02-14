@@ -8,26 +8,58 @@ using namespace UI;
 
 ObjectLayer::ObjectLayer(Object& o) : m_obj(o)
 {
-	WindowRender* pWndRender = NULL;
-
-	WindowBase* pWindow = o.GetWindowObject();
-	if (pWindow)
-		pWndRender = pWindow->GetWindowRender();
-
-    if (pWndRender)
-    {
-        m_pLayer = pWndRender->CreateLayer(&m_obj);
-        m_pLayer->SetContent(this);
-    }
-    else
-    {
-        // 在resize的时候创建
-		UIASSERT(0);
-    }
+	m_pLayer = nullptr;
 }
 
 ObjectLayer::~ObjectLayer()
 {
+	DestroyLayer();
+}
+
+void UI::ObjectLayer::CreateLayer()
+{
+	if (m_pLayer)
+	{
+		m_pLayer->AddRef();
+	}
+	else
+	{
+		WindowRender* pWndRender = NULL;
+
+		WindowBase* pWindow = m_obj.GetWindowObject();
+		if (pWindow)
+			pWndRender = pWindow->GetWindowRender();
+
+		if (pWndRender)
+		{
+			m_pLayer = pWndRender->CreateLayer(&m_obj);
+			m_pLayer->SetContent(this);
+
+			CRect rcParent;
+			m_obj.GetParentRect(&rcParent);
+			if (!IsRectEmpty(&rcParent))
+				OnSize(rcParent.Width(), rcParent.Height());
+		}
+		else
+		{
+			// 在resize的时候创建
+			UIASSERT(0);
+		}
+	}
+}
+
+void  ObjectLayer::ReleaseLayer()
+{
+	if (m_pLayer)
+	{
+		m_pLayer->Release();
+	}
+}
+void  ObjectLayer::DestroyLayer()
+{
+	if (!m_pLayer)
+		return;
+
 	Layer*  p = m_pLayer;
 	m_pLayer = nullptr;
 

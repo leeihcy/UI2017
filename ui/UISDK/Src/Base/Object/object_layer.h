@@ -11,8 +11,12 @@ class ObjectLayer : public ILayerContent
 public:
     ObjectLayer(Object& o);
     ~ObjectLayer();
+	
+	void  CreateLayer();
+	void  ReleaseLayer();
+	void  DestroyLayer();
 
-    Layer*  GetLayer() {
+    Layer*  GetLayer() const {
                 return m_pLayer; }
     Object&  GetObjet() {
                 return m_obj;  }
