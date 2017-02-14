@@ -381,17 +381,16 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
     m_yTranslate = y;
     m_zTranslate = z;
 
+	UIA::IAnimateManager* pAni = m_pCompositor->
+		GetUIApplication()->GetAnimateMgr();
+
+	pAni->RemoveStoryboardByNotityAndId(
+		static_cast<UIA::IAnimateEventCallback*>(this),
+		STORYBOARD_ID_TRANSLATE);
         
     // ¿ªÆôÒþÊ½¶¯»­
     if (pParam)
     {
-        UIA::IAnimateManager* pAni = m_pCompositor->
-            GetUIApplication()->GetAnimateMgr();
-
-        pAni->RemoveStoryboardByNotityAndId(
-            static_cast<UIA::IAnimateEventCallback*>(this),
-            STORYBOARD_ID_TRANSLATE);
-
         UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
             static_cast<UIA::IAnimateEventCallback*>(this),
             STORYBOARD_ID_TRANSLATE);

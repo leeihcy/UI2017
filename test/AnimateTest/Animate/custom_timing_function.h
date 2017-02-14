@@ -9,22 +9,23 @@ float __stdcall TimingFuction(float f)
 	return sin(PI * f * 2);
 }
 
-
+const float duration = 2500/*800*/;
 class CustomTimingFuctionAnimate : public Animate
 {
 public:
+
 	virtual void Init() override
 	{
 		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
 		UIA::IStoryboard* storyboard = CreateStoryboard();
 		UIA::IFromToTimeline* x = storyboard->CreateTimeline(0)
-			->SetParam(10, UI::ScaleByDpi(380), 800);
+			->SetParam(10, UI::ScaleByDpi(380), duration);
 		x->SetEaseType(UIA::linear);
 		x->SetAutoReverse(true);
 
 		UIA::IFromToTimeline* y = storyboard->CreateTimeline(1)
-			->SetParam(0, -UI::ScaleByDpi(200), 800);
+			->SetParam(0, -UI::ScaleByDpi(200), duration);
 		y->SetAutoReverse(true);
 		y->SetCustomTimingFuction(TimingFuction);
 

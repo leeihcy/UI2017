@@ -66,7 +66,7 @@ class Layer : public UIA::IAnimateEventCallback
 {
 protected:
 	enum {
-		ANIMATE_DURATION = 250,
+		ANIMATE_DURATION = 2500,
 	};
 	Layer();
 	virtual ~Layer();
@@ -129,8 +129,6 @@ protected:
     virtual void  virtualOnSize(uint nWidth, uint nHeight) {};
 
 private:
-    bool  do_add_sub_layer(Layer*);
-    bool  do_insert_sub_layer(Layer* p, Layer* pInsertAfter);
     void  on_layer_tree_changed();
 
 protected:

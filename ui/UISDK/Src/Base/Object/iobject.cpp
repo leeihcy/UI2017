@@ -62,6 +62,14 @@ ILayer*  IObject::GetLayer()
     return p->GetILayer();
 }
 
+ILayer*  IObject::GetSelfLayer()
+{
+	UI::Layer* layer = __pImpl->GetSelfLayer();
+	if (layer)
+		return layer->GetILayer();
+	return nullptr;
+}
+
 void  IObject::EnableLayer(bool b)
 {
 	return __pImpl->EnableLayer(b);

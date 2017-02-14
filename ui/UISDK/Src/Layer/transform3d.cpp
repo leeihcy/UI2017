@@ -201,6 +201,7 @@ void  Transform3D::update()
 	POINT pt= {50,50};
 	mappoint_view_2_layer(&pt);
 	mappoint_layer_2_view(&pt);
+	UIASSERT(pt.x == 50 && pt.y == 50);
 #endif
 }
 

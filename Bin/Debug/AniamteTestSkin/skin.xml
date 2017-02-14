@@ -5,9 +5,11 @@
       <xprop key="back.render" type="image" image="bkg" image.drawtype="stretch" image.9region="10"/>
       <prop key="back.render" type="color" color="#fff"/>
       <Panel id="panel">
-        <xprop key="fore.render" type="color" color="#300f"/>
-        <prop key="back.render" type="image" image="red"/>
         <prop key="layout" left="10" top="200" width="100" height="100"/>
+        <Button>
+          <prop key="layout" left="0" top="0" right="0" bottom="0"/>
+          <prop key="back.render" type="colorlist" color="#f00;#f0f;#0ff"/>
+        </Button>
       </Panel>
     </CustomWindow>
 	</layout>

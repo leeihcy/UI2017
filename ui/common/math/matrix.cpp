@@ -342,8 +342,8 @@ float  Matrix44::Determinant()
 
 void  Matrix44::Inverse(LPMATRIX44 pMatrix)
 {
-	Matrix33 mIndentify;
-	memcpy(pMatrix, &mIndentify, sizeof(MATRIX33));
+	memset(pMatrix, 0, sizeof(MATRIX44));
+	pMatrix->m11 = pMatrix->m22 = pMatrix->m33 = pMatrix->m44 = 1;
 
 	if (IsIdentityOrTranslation()) 
 	{
