@@ -16,6 +16,7 @@ public:
 
 	virtual void Init() override
 	{
+		m_bDestroying = false;
 		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
 		UIA::IStoryboard* storyboard = CreateStoryboard();
@@ -37,7 +38,8 @@ public:
 
 	virtual void Release() override
 	{
-
+		m_bDestroying = true;
+		ClearStoryboard();
 	}
 
 	virtual void OnAnimateStart(UIA::IStoryboard*) override
@@ -48,7 +50,8 @@ public:
 	virtual void OnAnimateEnd(UIA::IStoryboard*, UIA::E_ANIMATE_END_REASON e) override
 	{
 		m_pPanel->EnableLayer(false);
-		Destroy(this);
+		if (!m_bDestroying)
+			Destroy(this);
 	}
 
 	virtual UIA::E_ANIMATE_TICK_RESULT OnAnimateTick(UIA::IStoryboard* story) override
@@ -66,4 +69,5 @@ public:
 
 private:
 	UI::IPanel*  m_pPanel;
+	bool  m_bDestroying;
 };

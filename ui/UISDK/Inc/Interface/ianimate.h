@@ -224,7 +224,7 @@ private:
 enum E_ANIMATE_END_REASON
 {
 	ANIMATE_END_NORMAL,  // 正常结束
-	ANIMATE_END_CANCEL,  // 被新动画取代，
+	ANIMATE_END_CANCEL,  // 被新动画取消
 	ANIMATE_END_DISCARD, // 进程退出，强制结束
 };
 enum E_ANIMATE_TICK_RESULT
