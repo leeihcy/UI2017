@@ -80,5 +80,7 @@ namespace UI
 
     UIAPI long GetDpi();
     UIAPI long ScaleByDpi(long x);
+#define dpi(x)  UI::ScaleByDpi(x)
+
 }
 #endif

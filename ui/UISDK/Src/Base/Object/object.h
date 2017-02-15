@@ -279,12 +279,14 @@ public:
 	static void  ChildRect2ParentRect(Object* pObjChild, LPCRECT prc, RECT*  pOut);
 
 	// ∂Øª≠ Ù–‘
-	void  SetOpacity(const unsigned char alpha);
 	unsigned char GetOpacity() const;
 	void  SetOpacity(const unsigned char alpha, LayerAnimateParam* param);
 
-	void  SetTranslate(float x, float y, float z);
-	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param);
+	void  TranslateBy(float x, float y, float z, LayerAnimateParam* param);
+	void  TranslateTo(float x, float y, float z, LayerAnimateParam* param);
+	void  TranslateXTo(float x, LayerAnimateParam* param);
+	void  TranslateYTo(float y, LayerAnimateParam* param);
+	void  TranslateToParent(int x, int y, LayerAnimateParam* param);
 
 	void  RotateYTo(float degree, LayerAnimateParam* param);
 	void  RotateYBy(float degree, LayerAnimateParam* param);

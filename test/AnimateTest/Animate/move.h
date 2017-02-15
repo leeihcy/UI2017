@@ -11,22 +11,22 @@ public:
 		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
 		UI::LayerAnimateParam param;
-		param.finishCallback = 
+		param.finishCallback =  
 		[pPanel](const UI::LayerAnimateFinishParam& param) 
 		{
-			if (param.endreason == UIA::ANIMATE_END_NORMAL)
-				pPanel->SetTranslate(0, 0, 0, nullptr);
+			if (param.endreason == UIA::ANIMATE_END_NORMAL) 
+				pPanel->TranslateXTo(-dpi(350), DefaultLayerAnimateParam);
 			else
-				pPanel->SetTranslate(0, 0, 0);
+				pPanel->TranslateXTo(-dpi(350));
 		};
-		pPanel->SetTranslate(UI::ScaleByDpi(350), 0, 0, &param);
+		pPanel->TranslateTo(dpi(350), 0, 0, &param);
 	}
 
 	virtual void Release() override
 	{
 		// Í£Ö¹¶¯»­
 		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		pPanel->SetTranslate(0, 0, 0);
+		pPanel->TranslateTo(0, 0, 0);
 	}
 };
 
@@ -51,18 +51,20 @@ public:
 		param.finishCallback =
 			[pPanel](const UI::LayerAnimateFinishParam& param)
 		{
+			RECT rcParent;
+			pPanel->GetParentRect(&rcParent);
 			if (param.endreason == UIA::ANIMATE_END_NORMAL)
-				pPanel->SetTranslate(0, 0, 0, nullptr);
+				pPanel->TranslateToParent(dpi(10), rcParent.top, DefaultLayerAnimateParam);
 			else
-				pPanel->SetTranslate(0, 0, 0);
+				pPanel->TranslateToParent(dpi(10), rcParent.top);
 		};
-		pPanel->SetTranslate(UI::ScaleByDpi(350), 0, 0, &param);
+		pPanel->TranslateTo(dpi(350), 0, 0, &param);
 	}
 
 	virtual void Release() override
 	{
 		// Í£Ö¹¶¯»­
 		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		pPanel->SetTranslate(0, 0, 0);
+		pPanel->TranslateTo(0, 0, 0);
 	}
 };

@@ -73,6 +73,7 @@ private:
 	bool  m_bBlock;
 	float  m_fDuration;  // 为0表示使用默认值 
 };
+#define DefaultLayerAnimateParam (UI::LayerAnimateParam*)0xFFFFFFFF
 
 
 class Layer;

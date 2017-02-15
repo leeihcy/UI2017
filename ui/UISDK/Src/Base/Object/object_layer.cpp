@@ -127,15 +127,3 @@ void UI::ObjectLayer::OnLayerDestory()
 	}
 }
 
-void UI::ObjectLayer::Invalidate()
-{
-	m_obj.Invalidate();
-}
-
-// 用于layer在动画结束时，判断自己是否需要被销毁。如果是控件层强制启用的layer，则不释放
-bool UI::ObjectLayer::TestLayerStyle()
-{
-	OBJSTYLE s = { 0 };
-	s.layer = 1;
-	return m_obj.TestObjectStyle(s);
-}

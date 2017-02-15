@@ -7,6 +7,7 @@
 #include <memory>
 
 using namespace UI;
+static LayerAnimateParam  s_defaultLayerAnimateParam;
 
 enum LAYER_ANIMATE_TYPE
 {
@@ -41,7 +42,9 @@ Layer::Layer(): m_iLayer(this)
 // 		TRANSFORM_ROTATE_ORIGIN_LEFT, 0,
 // 		TRANSFORM_ROTATE_ORIGIN_CENTER, 0, 0);
 
+#ifdef _DEBUG
 	UI_LOG_DEBUG(L"Create Layer");
+#endif
 }
 
 Layer::~Layer()
@@ -82,7 +85,9 @@ Layer::~Layer()
 
 	SAFE_RELEASE(m_pRenderTarget);
 
+#ifdef _DEBUG
 	UI_LOG_DEBUG(L"Layer Destroy");
+#endif
 }
 
 ILayer*  Layer::GetILayer()
@@ -271,7 +276,6 @@ void  Layer::PostCompositorRequest()
    m_pCompositor->RequestInvalidate();
 } 
 
-
 void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 {
 	if (m_nOpacity == b)
@@ -279,6 +283,10 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 
 	m_nOpacity = b;
 
+	if (pParam == DefaultLayerAnimateParam)
+	{
+		pParam = &s_defaultLayerAnimateParam;
+	}
 	// 开启隐式动画
 	if (pParam)
 	{
@@ -316,8 +324,9 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 		m_nOpacity_Render = m_nOpacity;
 		if (GetType() == Layer_Software)
 		{
-			if (m_pLayerContent)
-				m_pLayerContent->Invalidate();
+			Object* obj = GetLayerContentObject();
+			if (obj)
+				obj->Invalidate();
 		}
 		else
 		{
@@ -350,7 +359,10 @@ void  Layer::RotateYTo(float f, LayerAnimateParam* pParam)
 		static_cast<UIA::IAnimateEventCallback*>(this),
 		STORYBOARD_ID_YROTATE);
 
-	// 开启隐式动画
+	if (pParam == DefaultLayerAnimateParam)
+	{
+		pParam = &s_defaultLayerAnimateParam;
+	}
 	if (pParam)
 	{
 		UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
@@ -387,7 +399,20 @@ float  Layer::GetYRotate()
 	return m_fyRotate;
 }
 
-void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
+void  Layer::TranslateXTo(float x, LayerAnimateParam* param)
+{
+	TranslateTo(x, m_yTranslate, m_zTranslate, param);
+}
+void  Layer::TranslateYTo(float y, LayerAnimateParam* param)
+{
+	TranslateTo(m_xTranslate, y, m_zTranslate, param);
+}
+
+void  Layer::TranslateBy(float x, float y, float z, LayerAnimateParam* param)
+{
+	TranslateTo(m_xTranslate+x, m_yTranslate+y, m_zTranslate+z, param);
+}
+void  Layer::TranslateTo(float x, float y, float z, LayerAnimateParam* pParam)
 {
     if (m_xTranslate == x && 
         m_yTranslate == y &&
@@ -405,7 +430,10 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
 		static_cast<UIA::IAnimateEventCallback*>(this),
 		STORYBOARD_ID_TRANSLATE);
         
-    // 开启隐式动画
+	if (pParam == DefaultLayerAnimateParam)
+	{
+		pParam = &s_defaultLayerAnimateParam;
+	}
     if (pParam)
     {
         UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
@@ -449,9 +477,15 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
 	if (m_pLayerContent)
 	{
 		if (GetType() == Layer_Software)
-			m_pLayerContent->Invalidate();
+		{
+			Object* obj = GetLayerContentObject();
+			if (obj)
+				obj->Invalidate();
+		}
 		else
+		{
 			m_pCompositor->RequestInvalidate();
+		}
 	}
 }
 
@@ -526,6 +560,25 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 	std::shared_ptr<LayerAnimateParam> pParam(
 		(LayerAnimateParam*)pStoryboard->GetWParam());
 
+	if (pStoryboard->GetId() == STORYBOARD_ID_TRANSLATE)
+	{
+		// 偏移类动画结束后，将偏移量转嫁到控件位置坐标上面..z轴仍然保留，如果有的话
+		Object* obj = GetLayerContentObject();
+		if (obj)
+		{
+			RECT rcParent = { 0 };
+			obj->GetParentRect(&rcParent);
+
+			obj->SetObjectPos( 
+				rcParent.left + (int)m_xTranslate, 
+				rcParent.top + (int)m_yTranslate,
+				0, 0, SWP_NOSIZE|SWP_NOREDRAW);
+		}
+
+		m_xTranslate = 0;
+		m_yTranslate = 0;
+		m_transfrom3d.translate3d(0, 0, m_zTranslate);
+	}
 	if (pParam->finishCallback)
 	{
 		LayerAnimateFinishParam info = { 0 };
@@ -591,8 +644,14 @@ bool  Layer::CanDestroy()
 	if (!m_transfrom3d.is_identity())
 		return false;
 
-	if (m_pLayerContent && m_pLayerContent->TestLayerStyle())
-		return false;
+	Object* obj = GetLayerContentObject();
+	if (obj)
+	{
+		OBJSTYLE s = { 0 };
+		s.layer = 1;
+		if (obj->TestObjectStyle(s))
+			return false;
+	}
 
 	if (m_fyRotate > 0.0001)
 	{
@@ -603,4 +662,15 @@ bool  Layer::CanDestroy()
 	}
 
 	return true;
+}
+
+Object*  Layer::GetLayerContentObject()
+{
+	if (!m_pLayerContent)
+		return nullptr;
+
+	if (m_pLayerContent->Type() != LayerContentTypeObject)
+		return nullptr;
+
+	return &static_cast<IObjectLayerContent*>(m_pLayerContent)->GetObject();
 }

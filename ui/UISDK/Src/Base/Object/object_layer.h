@@ -6,7 +6,7 @@ namespace UI
 class Object;
 class Layer;
 
-class ObjectLayer : public ILayerContent
+class ObjectLayer : public IObjectLayerContent
 {
 public:
     ObjectLayer(Object& o);
@@ -25,14 +25,13 @@ public:
     void  OnObjPosInTreeChanged();
 
 protected:
+	virtual Object&  GetObject() override { return m_obj;  }
     virtual bool  IsChildOf(Object*) override;
     virtual bool  IsSelfVisible() override;
     virtual void  Draw(UI::IRenderTarget*) override;
     virtual void  GetWindowRect(RECT* prcOut) override;
     virtual void  GetParentWindowRect(RECT* prcOut) override;
 	virtual void  OnLayerDestory() override;
-	virtual void  Invalidate() override;
-	virtual bool  TestLayerStyle() override;
 
 private:
     Object&  m_obj;

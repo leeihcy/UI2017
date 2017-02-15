@@ -180,15 +180,17 @@ namespace UI
         void ForwardMessageToChildObject2(UIMSG* pMsg, UIMSG* pMsg2);
 
 		// ∂Øª≠ Ù–‘
-		void  SetOpacity(const unsigned char alpha);
 		unsigned char GetOpacity() const;
-		void  SetOpacity(const unsigned char alpha, LayerAnimateParam* param);
+		void  SetOpacity(const unsigned char alpha, LayerAnimateParam* param = nullptr);
 
-		void  SetTranslate(float x, float y, float z);
-		void  SetTranslate(float x, float y, float z, LayerAnimateParam* param);
+		void  TranslateBy(float x, float y, float z, LayerAnimateParam* param = nullptr);
+		void  TranslateTo(float x, float y, float z, LayerAnimateParam* param = nullptr);
+		void  TranslateToParent(int x, int y, LayerAnimateParam* param = nullptr);
+		void  TranslateXTo(float x, LayerAnimateParam* param = nullptr);
+		void  TranslateYTo(float x, LayerAnimateParam* param = nullptr);
 
-		void  RotateYTo(float degree, LayerAnimateParam* param);
-		void  RotateYBy(float degree, LayerAnimateParam* param);
+		void  RotateYTo(float degree, LayerAnimateParam* param = nullptr);
+		void  RotateYBy(float degree, LayerAnimateParam* param = nullptr);
 
 		UI_DECLARE_INTERFACE(Object);
 	};

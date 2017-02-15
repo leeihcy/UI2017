@@ -989,10 +989,6 @@ void IObject::ForwardMessageToChildObject2(UIMSG* pMsg, UIMSG* pMsg2)
     Object::ForwardMessageToChildObject2(__pImpl, pMsg, pMsg2);
 }
 
-void  IObject::SetOpacity(const unsigned char alpha)
-{
-	__pImpl->SetOpacity(alpha);
-}
 unsigned char IObject::GetOpacity() const
 {
 	return __pImpl->GetOpacity();
@@ -1002,16 +998,28 @@ void  IObject::SetOpacity(const unsigned char alpha, LayerAnimateParam* param)
 	__pImpl->SetOpacity(alpha, param);
 }
 
-void  IObject::SetTranslate(float x, float y, float z)
+void  IObject::TranslateBy(float x, float y, float z, LayerAnimateParam* param)
 {
-	__pImpl->SetTranslate(x,y,z);
+	__pImpl->TranslateBy(x,y,z, param);
 }
 
-void  IObject::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
+void  IObject::TranslateTo(float x, float y, float z, LayerAnimateParam* param)
 {
-	__pImpl->SetTranslate(x, y, z, param);
+	__pImpl->TranslateTo(x, y, z, param);
 }
+void  IObject::TranslateToParent(int x, int y, LayerAnimateParam* param)
+{
+	__pImpl->TranslateToParent(x, y, param);
 
+}
+void  IObject::TranslateXTo(float x, LayerAnimateParam* param)
+{
+	__pImpl->TranslateXTo(x, param);
+}
+void  IObject::TranslateYTo(float y, LayerAnimateParam* param)
+{
+	__pImpl->TranslateYTo(y, param);
+}
 void  IObject::RotateYTo(float degree, LayerAnimateParam* param)
 {
 	__pImpl->RotateYTo(degree, param);

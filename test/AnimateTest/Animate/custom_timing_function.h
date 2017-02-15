@@ -6,7 +6,8 @@
 #define PI 3.141592653f
 float __stdcall TimingFuction(float f)
 {
-	return sin(PI * f * 2);
+	//return sin(PI * f * 2);
+	return sin(4 * PI * f);
 }
 
 const float duration = 800;
@@ -25,9 +26,11 @@ public:
 
 	virtual void Action() override
 	{
+		ClearStoryboard();
+
 		UIA::IStoryboard* storyboard = CreateStoryboard();
 		UIA::IFromToTimeline* x = storyboard->CreateTimeline(0)
-			->SetParam(10, UI::ScaleByDpi(380), duration);
+			->SetParam(0, UI::ScaleByDpi(380), duration);
 		x->SetEaseType(UIA::linear);
 		x->SetAutoReverse(true);
 
@@ -61,7 +64,7 @@ public:
 		s.layer = 1;
 		m_pPanel->ModifyObjectStyle(0, &s);
 
-		if (!m_bDestroying)
+		if (!m_bDestroying && e == UIA::ANIMATE_END_NORMAL)
 			Destroy(this);
 	}
 
@@ -73,8 +76,7 @@ public:
 		// 		m_pPanel->SetObjectPos(x, y, 0, 0, SWP_NOSIZE);
 		// 		m_pWindow->GetWindowRender()->InvalidateNow();
 
-		m_pPanel->SetTranslate(x, y, 0);
-
+		m_pPanel->TranslateTo(x, y, 0);
 		return UIA::ANIMATE_TICK_RESULT_CONTINUE;
 	}
 

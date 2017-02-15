@@ -45,16 +45,27 @@ namespace UI
 
 class Object;
 
+enum LayerContentType
+{
+	LayerContentTypeNormal,
+	LayerContentTypeObject,
+};
 interface ILayerContent
 {
+	virtual LayerContentType Type() = 0;
+	virtual void  OnLayerDestory() = 0;
+
     virtual bool  IsChildOf(Object*) = 0;
     virtual bool  IsSelfVisible() = 0;
     virtual void  Draw(UI::IRenderTarget*) = 0;
-	virtual void  Invalidate() = 0;
     virtual void  GetWindowRect(RECT* prcOut) = 0;
     virtual void  GetParentWindowRect(RECT* prcOut) = 0;
-	virtual void  OnLayerDestory() = 0;
-	virtual bool  TestLayerStyle() = 0;
+
+};
+interface IObjectLayerContent : public ILayerContent
+{
+	virtual LayerContentType Type() { return LayerContentTypeObject;  }
+	virtual Object&  GetObject() = 0;
 };
 
 enum LayerType
@@ -109,7 +120,11 @@ public:
 	void  RotateYTo(float, LayerAnimateParam* param = nullptr);
 	void  RotateYBy(float, LayerAnimateParam* param = nullptr);
     float  GetYRotate();
-	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param = nullptr);
+	void  TranslateTo(float x, float y, float z, LayerAnimateParam* param = nullptr);
+	void  TranslateBy(float x, float y, float z, LayerAnimateParam* param = nullptr);
+	void  TranslateXTo(float x, LayerAnimateParam* param = nullptr);
+	void  TranslateYTo(float y, LayerAnimateParam* param = nullptr);
+
     float  GetXTranslate();
     float  GetYTranslate();
     float  GetZTranslate();
@@ -123,9 +138,10 @@ protected:
     virtual void  OnAnimateEnd(UIA::IStoryboard*, UIA::E_ANIMATE_END_REASON e) override;
     virtual void  virtualOnSize(uint nWidth, uint nHeight) {};
 
+	Object*  GetLayerContentObject();
+
 private:
     void  on_layer_tree_changed();
-
 protected:
     ILayer  m_iLayer;
     Compositor*  m_pCompositor;
@@ -153,6 +169,7 @@ protected:
 
  	Transform3D  m_transfrom3d;  // 动画过程中的值
  	float  m_fyRotate;   // 设置的值
+	// 相对于控件m_rcParent的相对值
     float  m_xTranslate; // 设置的值
     float  m_yTranslate; // 设置的值
     float  m_zTranslate; // 设置的值

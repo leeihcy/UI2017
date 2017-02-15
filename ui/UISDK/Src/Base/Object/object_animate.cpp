@@ -3,12 +3,6 @@
 #include "Src\Layer\layer.h"
 #include "object_layer.h"
 
-void  Object::SetOpacity(const unsigned char alpha)
-{
-	Layer* layer = GetSelfLayer();
-	if (layer)
-		layer->SetOpacity(alpha);
-}
 unsigned char Object::GetOpacity() const
 {
 	Layer* layer = GetSelfLayer();
@@ -19,39 +13,38 @@ unsigned char Object::GetOpacity() const
 }
 void  Object::SetOpacity(const unsigned char alpha, LayerAnimateParam* param)
 {
-	LayerAnimateParam defaultParam;
-	if (!param)
-		param = &defaultParam;
 	GetLayerForAnimate()->SetOpacity(alpha, param);
 }
-
-void  Object::SetTranslate(float x, float y, float z)
+void  Object::TranslateBy(float x, float y, float z, LayerAnimateParam* param)
 {
-	Layer* layer = GetSelfLayer();
-	if (layer)
-		layer->SetTranslate(x, y, z);
+	GetLayerForAnimate()->TranslateBy(x, y, z, param);
 }
-
-void  Object::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
+void  Object::TranslateTo(float x, float y, float z, LayerAnimateParam* param)
 {
-	LayerAnimateParam defaultParam;
-	if (!param)
-		param = &defaultParam;
-	GetLayerForAnimate()->SetTranslate(x, y, z, param);
+	GetLayerForAnimate()->TranslateTo(x, y, z, param);
 }
-
+void  Object::TranslateXTo(float x, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->TranslateXTo(x, param);
+}
+void  Object::TranslateYTo(float y, LayerAnimateParam* param)
+{
+	y = y - m_rcParent.top;
+	GetLayerForAnimate()->TranslateYTo(y, param);
+}
+void  Object::TranslateToParent(int x, int y, LayerAnimateParam* param)
+{
+	int xTranslate = x - m_rcParent.left;
+	int yTranslate = y - m_rcParent.top;
+	GetLayerForAnimate()->TranslateTo(
+		(float)xTranslate, (float)yTranslate, 0, param);
+}
 void  Object::RotateYTo(float degree, LayerAnimateParam* param)
 {
-	LayerAnimateParam defaultParam;
-	if (!param)
-		param = &defaultParam;
 	GetLayerForAnimate()->RotateYTo(degree, param);
 }
 
 void  Object::RotateYBy(float degree, LayerAnimateParam* param)
 {
-	LayerAnimateParam defaultParam;
-	if (!param)
-		param = &defaultParam;
 	GetLayerForAnimate()->RotateYBy(degree, param);
 }
