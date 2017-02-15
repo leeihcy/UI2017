@@ -57,17 +57,35 @@ void Transform3D::identity()
 	m_matrixInverse.Identity();
 }
 
+bool  TestDegreeEmpty(float f)
+{
+	if (f < 0.0001)
+		return true;
+
+	if (abs(f - 360) < 0.0001)
+		return true;
+
+	if (abs(f - 720) < 0.0001)
+		return true;
+
+	float m = f - floor(f / 360.0f) * 360.f;
+	if (f < 0.0001)
+		return true;
+
+	return false;
+}
+
 bool  Transform3D::is_identity()
 {
 	if (m_xPos == 0 &&
 		m_yPos == 0 &&
 		m_zPos == 0 &&
-		m_xRotate == 0 &&
-		m_yRotate == 0 &&
-		m_zRotate == 0 &&
 		m_xScale == 1 &&
 		m_yScale == 1 &&
-		m_zScale == 1)
+		m_zScale == 1 && 
+		TestDegreeEmpty(m_xRotate) &&
+		TestDegreeEmpty(m_yRotate) &&
+		TestDegreeEmpty(m_zRotate))
 	{
 		return true;
 	}

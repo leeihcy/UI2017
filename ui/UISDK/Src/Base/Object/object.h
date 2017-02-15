@@ -53,9 +53,9 @@ public:
 	ObjectLayer*  GetLayerEx();
 	Layer*  FindNextLayer(Layer* pParentLayer);
 	Object*  GetLayerCreator();
-	void  EnableLayer(bool b);
 	bool  HasLayer();
 	void  OnLayerDestory();
+	void  OnLayerCreate();
 
 	void  Invalidate();
 	void  Invalidate(LPCRECT prcObj);

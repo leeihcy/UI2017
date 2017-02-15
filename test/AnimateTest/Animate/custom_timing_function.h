@@ -50,12 +50,17 @@ public:
 
 	virtual void OnAnimateStart(UIA::IStoryboard*) override
 	{
-		m_pPanel->EnableLayer(true);
+		UI::OBJSTYLE s = { 0 };
+		s.layer = 1;
+		m_pPanel->ModifyObjectStyle(&s, 0);
 	}
 
 	virtual void OnAnimateEnd(UIA::IStoryboard*, UIA::E_ANIMATE_END_REASON e) override
 	{
-		m_pPanel->EnableLayer(false);
+		UI::OBJSTYLE s = { 0 };
+		s.layer = 1;
+		m_pPanel->ModifyObjectStyle(0, &s);
+
 		if (!m_bDestroying)
 			Destroy(this);
 	}

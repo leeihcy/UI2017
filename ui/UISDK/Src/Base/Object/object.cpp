@@ -148,17 +148,13 @@ Layer*  Object::GetLayer()
 Layer*  Object::GetLayerForAnimate()
 {
 	Layer* layer = GetSelfLayer();
-	if (!layer)
-	{
-		EnableLayer(true);
-		return GetSelfLayer();
-	}
-	else
-	{
-		layer->AddRef();
+	if (layer)
 		return layer;
-	}
+
+	m_objLayer.CreateLayer();
+	return GetSelfLayer();
 }
+
 ObjectLayer*  Object::GetLayerEx()
 {
     Object* pObj = this;
@@ -727,7 +723,7 @@ void  Object::ModifyObjectStyle(OBJSTYLE* add, OBJSTYLE* remove)
 		__ADD(tabstop);
 
 		if (add->layer)
-			EnableLayer(true);
+			m_objLayer.CreateLayer();
 
 		// 默认值为1时，如果没有在xml中配置，不会触发setter函数
 		// 因此在设置默认值的时候，应该同步一次该值
@@ -775,7 +771,7 @@ void  Object::ModifyObjectStyle(OBJSTYLE* add, OBJSTYLE* remove)
 		__REMOVE(clip_client);
 		__REMOVE(tabstop);
 		if (remove->layer)
-			EnableLayer(false);
+			m_objLayer.TryDestroyLayer();
 
 		if (remove->default_ncobject)
 		{
@@ -1828,26 +1824,6 @@ void  Object::load_layer_config(bool b)
     m_objStyle.layer = b;
 }
 
-void  Object::EnableLayer(bool b)
-{
-	if (b)
-	{
-		m_objLayer.CreateLayer();
-	}
-	else
-	{
-		m_objLayer.ReleaseLayer();
-	}
-	
-	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
-	if (m_pParent && m_objStyle.layer != b)
-	{
-		m_pParent->Invalidate(&m_rcParent);
-	}
-
-	m_objStyle.layer = b;
-}
-
 bool  Object::HasLayer()
 {
 	return m_objStyle.layer;
@@ -1857,6 +1833,14 @@ void  Object::OnLayerDestory()
 {
 	m_objStyle.layer = false;
 
+	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
+	if (m_pParent)
+	{
+		m_pParent->Invalidate(&m_rcParent);
+	}
+}
+void  Object::OnLayerCreate()
+{
 	// 通知父layer更新缓存，子对象有自己的缓存，或者需要缓存子对象
 	if (m_pParent)
 	{

@@ -78,9 +78,6 @@ namespace UI
                     GRAPHICS_RENDER_LIBRARY_TYPE eType,
                     bool bNeedAlphaChannel);
 
-    UIAPI void UIAnimateShow(UI::IObject* pObj, long);
-    UIAPI void UIAnimateHide(UI::IObject* pObj, long);
-
     UIAPI long GetDpi();
     UIAPI long ScaleByDpi(long x);
 }

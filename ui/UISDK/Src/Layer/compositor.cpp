@@ -38,7 +38,6 @@ Layer*  Compositor::CreateLayer()
     Layer* pLayer = this->virtualCreateLayer();
 	if (pLayer)
 	{
-		pLayer->AddRef();
 		pLayer->SetCompositorPtr(this);
 	}
 

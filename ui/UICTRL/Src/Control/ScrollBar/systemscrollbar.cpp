@@ -158,7 +158,9 @@ void  SystemScrollBar::OnInitialize()
 
 	if (m_bHoverVisible)
 	{
-		m_pISystemScrollBar->EnableLayer(true);
+		OBJSTYLE s = { 0 };
+		s.layer = 1;
+		m_pISystemScrollBar->ModifyObjectStyle(&s, 0);
 		m_pISystemScrollBar->SetOpacity(0);
 	}
 

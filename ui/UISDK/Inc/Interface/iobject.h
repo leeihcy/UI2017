@@ -175,7 +175,6 @@ namespace UI
 		void  SetTextRender(ITextRenderBase*);
 		ILayer*  GetLayer();
 		ILayer*  GetSelfLayer();
-		void  EnableLayer(bool);
 
         void ForwardMessageToChildObject(UIMSG* pMsg);
         void ForwardMessageToChildObject2(UIMSG* pMsg, UIMSG* pMsg2);

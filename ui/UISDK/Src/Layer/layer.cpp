@@ -17,8 +17,6 @@ enum LAYER_ANIMATE_TYPE
 
 Layer::Layer(): m_iLayer(this)
 {
-	m_lRef = 0;
-
     m_pCompositor = NULL;
 	m_pRenderTarget = nullptr;
 
@@ -30,9 +28,6 @@ Layer::Layer(): m_iLayer(this)
     m_size.cx = m_size.cy = 0;
     m_pLayerContent = NULL;
     m_bClipLayerInParentObj = true;
- 	m_bAutoAnimate = 0;
-//     m_pAnimateFinishCallback = NULL;
-//     m_pAnimateFinishCallbackUserData = NULL;
 
 	m_nOpacity = m_nOpacity_Render = 255;
 	m_fyRotate = 0;
@@ -324,7 +319,10 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 			if (m_pLayerContent)
 				m_pLayerContent->Invalidate();
 		}
-		m_pCompositor->RequestInvalidate();
+		else
+		{
+			m_pCompositor->RequestInvalidate();
+		}
 	}
 }
 
@@ -446,7 +444,6 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
     else
     {
         m_transfrom3d.translate3d(x, y, z);
-
     }
 
 	if (m_pLayerContent)
@@ -529,7 +526,6 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 	std::shared_ptr<LayerAnimateParam> pParam(
 		(LayerAnimateParam*)pStoryboard->GetWParam());
 
-	
 	if (pParam->finishCallback)
 	{
 		LayerAnimateFinishParam info = { 0 };
@@ -537,33 +533,17 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 		pParam->finishCallback(info);
 	}
 
-	// 动画结束后是否需要删除引用
-	Release();
+	// !=normal时，可能是当前动画正在被新的动画取代，这个时候不去尝试销毁，由新的动画结束后触发
+	if (e == UIA::ANIMATE_END_NORMAL)
+	{
+		TryDestroy();
+	}
 }
 
 void  Layer::CopyDirtyRect(RectArray& arr)
 {   
     arr = m_dirtyRectangles;
 }
-
-bool  Layer::IsAutoAnimate()
-{
-    return m_bAutoAnimate == 0 ? true : false;
-}
-void  Layer::EnableAutoAnimate(bool b)
-{
-    if (b)
-        ++m_bAutoAnimate;
-    else
-        --m_bAutoAnimate;
-}
-
-// void  Layer::SetAnimateFinishCallback(pfnLayerAnimateFinish pfn, long* pUserData)
-// {
-//     m_pAnimateFinishCallback = pfn;
-//     m_pAnimateFinishCallbackUserData = pUserData;
-// }
-
 
 IRenderTarget*  Layer::GetRenderTarget()
 {
@@ -582,22 +562,45 @@ IRenderTarget*  Layer::GetRenderTarget()
     return m_pRenderTarget;
 }
 
-void UI::Layer::AddRef()
-{
-	m_lRef++;
-}
-
-void UI::Layer::Release()
-{
-	// 动画结束时，释放引用 
-	--m_lRef;
-	if (0 == m_lRef)
-	{
-		delete this;
-	}
-}
+// 强制销毁 
 void  Layer::Destroy()
 {
-	// ObjectLayer::~ObjectLayer中强制销毁 
 	delete this;
+}
+
+void  Layer::TryDestroy()
+{
+	if (CanDestroy())
+		Destroy();
+}
+// 判断一个控件的layer当前是否可以被销毁，如果有动画，则不销毁。在动画结束后判断一次
+bool  Layer::CanDestroy()
+{
+	if (m_nOpacity_Render != 255)
+		return false;
+	if (m_nOpacity != 255)
+		return false;
+
+	if (m_xTranslate != 0)
+		return false;
+	if (m_yTranslate != 0)
+		return false;
+	if (m_zTranslate != 0)
+		return false;
+
+	if (!m_transfrom3d.is_identity())
+		return false;
+
+	if (m_pLayerContent && m_pLayerContent->TestLayerStyle())
+		return false;
+
+	if (m_fyRotate > 0.0001)
+	{
+		// float 不能直接用%来计算余数
+		float m = m_fyRotate - floor(m_fyRotate / 360.0f) * 360.f;
+		if (m > 0.00001)
+			return false;
+	}
+
+	return true;
 }

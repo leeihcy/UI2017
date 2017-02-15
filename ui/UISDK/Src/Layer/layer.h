@@ -54,6 +54,7 @@ interface ILayerContent
     virtual void  GetWindowRect(RECT* prcOut) = 0;
     virtual void  GetParentWindowRect(RECT* prcOut) = 0;
 	virtual void  OnLayerDestory() = 0;
+	virtual bool  TestLayerStyle() = 0;
 };
 
 enum LayerType
@@ -70,9 +71,9 @@ protected:
 
 public:
 
-	void  AddRef();
-	void  Release();
 	void  Destroy();
+	bool  CanDestroy();
+	void  TryDestroy();
 	
     ILayer*  GetILayer();
     void  SetCompositorPtr(Compositor*);
@@ -117,10 +118,6 @@ public:
 	virtual void  MapView2Layer(POINT* pPoint){};
     virtual LayerType  GetType() = 0;
 
-    bool  IsAutoAnimate();
-    void  EnableAutoAnimate(bool);
-//     void  SetAnimateFinishCallback(pfnLayerAnimateFinish, long*);
-
 protected:
 	virtual UIA::E_ANIMATE_TICK_RESULT  OnAnimateTick(UIA::IStoryboard*) override;
     virtual void  OnAnimateEnd(UIA::IStoryboard*, UIA::E_ANIMATE_END_REASON e) override;
@@ -130,9 +127,6 @@ private:
     void  on_layer_tree_changed();
 
 protected:
-	// 做动画时添加layer引用计数，在动画结束时自动将layer销毁掉
-	long  m_lRef;
-
     ILayer  m_iLayer;
     Compositor*  m_pCompositor;
 
@@ -152,10 +146,6 @@ protected:
 
     // 将layer剪裁到父对象中(注：不是父layer中)
     bool  m_bClipLayerInParentObj;
-
- 	long  m_bAutoAnimate;
-//     pfnLayerAnimateFinish  m_pAnimateFinishCallback;
-//     long*  m_pAnimateFinishCallbackUserData;
 
 	// 属性
 	byte  m_nOpacity;         // 设置的值

@@ -13,7 +13,6 @@ public:
 	virtual void Init() override
 	{
 		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		pPanel->EnableLayer(true);
 	}
 
 	virtual void Action() override
@@ -26,13 +25,11 @@ public:
 		[pPanel](const UI::LayerAnimateFinishParam& param) 
 		{
 		};
-		pPanel->RotateYBy(75, &param);
+		pPanel->RotateYBy(90, &param);
 	}
 
 	virtual void Release() override
 	{
-		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
-		pPanel->EnableLayer(false);
 	}
 };
 

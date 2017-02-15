@@ -180,10 +180,9 @@ bool WindowBase::CreateUI(LPCTSTR szId)
 	// SetWindowTheme(m_hWnd, L"explorer", NULL);
 
 
-    // 分层
-    
-    EnableLayer(true);
-    
+    // 窗口作为根结点，一定会创建一个缓存
+	m_objStyle.layer = 1;
+	m_objLayer.CreateLayer();
 	return true;
 }
 

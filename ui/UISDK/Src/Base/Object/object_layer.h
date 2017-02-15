@@ -13,7 +13,7 @@ public:
     ~ObjectLayer();
 	
 	void  CreateLayer();
-	void  ReleaseLayer();
+	void  TryDestroyLayer();
 	void  DestroyLayer();
 
     Layer*  GetLayer() const {
@@ -32,6 +32,7 @@ protected:
     virtual void  GetParentWindowRect(RECT* prcOut) override;
 	virtual void  OnLayerDestory() override;
 	virtual void  Invalidate() override;
+	virtual bool  TestLayerStyle() override;
 
 private:
     Object&  m_obj;

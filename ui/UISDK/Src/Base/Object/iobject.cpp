@@ -70,15 +70,11 @@ ILayer*  IObject::GetSelfLayer()
 	return nullptr;
 }
 
-void  IObject::EnableLayer(bool b)
-{
-	return __pImpl->EnableLayer(b);
-}
-
 HWND  IObject::GetHWND()                                   
 {
 	return __pImpl->GetHWND(); 
 }
+
 IUIApplication* IObject::GetUIApplication()                
 {
 	UIApplication* p = __pImpl->GetUIApplication();
