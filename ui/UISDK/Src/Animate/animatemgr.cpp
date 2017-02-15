@@ -4,10 +4,6 @@
 #include "..\Base\Application\uiapplication.h"
 #include "..\Util\Stopwatch\stopwatch.h"
 
-//#include "UISDK\Project\VSync\inc\vsync_inc.h"
-//#pragma comment(lib, "vsync.lib")
-//#include "UISDK\Kernel\Src\Util\Stopwatch\stopwatch.h"
-
 using namespace UIA;
 AnimateManager* g_pAnimateManager = nullptr;
 AnimateManager::AnimateManager()
@@ -161,8 +157,6 @@ void AnimateManager::ClearStoryboardOfNotify(IAnimateEventCallback* pNotify)
 			++iter;
 			continue;
 		}
-
-		
 
 		if (m_bHandlingTimerCallback)  
 		{
@@ -363,9 +357,9 @@ void  AnimateManager::OnTick()
 
 		if (pStoryboard && pStoryboard->IsFinish())
 		{
+			iter = m_listStoryboard.erase(iter);
 			pStoryboard->NotifyEnd(); 
 			delete pStoryboard;
-			iter = m_listStoryboard.erase(iter);
 		}
 		else
 		{

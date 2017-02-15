@@ -9,7 +9,7 @@ float __stdcall TimingFuction(float f)
 	return sin(PI * f * 2);
 }
 
-const float duration = 2500/*800*/;
+const float duration = 800;
 class CustomTimingFuctionAnimate : public Animate
 {
 public:
