@@ -13,12 +13,18 @@ const float duration = 800;
 class CustomTimingFuctionAnimate : public Animate
 {
 public:
+	virtual int  Type() override {
+		return AnimateType_CustomTimingFunction;
+	}
 
 	virtual void Init() override
 	{
 		m_bDestroying = false;
 		m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
+	}
 
+	virtual void Action() override
+	{
 		UIA::IStoryboard* storyboard = CreateStoryboard();
 		UIA::IFromToTimeline* x = storyboard->CreateTimeline(0)
 			->SetParam(10, UI::ScaleByDpi(380), duration);

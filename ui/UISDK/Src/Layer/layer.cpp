@@ -301,7 +301,7 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_nOpacity_Render, 
 			m_nOpacity, 
-			ANIMATE_DURATION);
+			pParam->GetDuration());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -332,38 +332,57 @@ byte Layer::GetOpacity()
 {
 	return m_nOpacity_Render;
 }
-void  Layer::SetYRotate(float f)
+
+void  Layer::RotateYBy(float f, LayerAnimateParam* param)
+{
+	RotateYTo(m_fyRotate + f, param);
+}
+
+void  Layer::RotateYTo(float f, LayerAnimateParam* pParam)
 {
 	if (m_fyRotate == f)
 		return;
 
 	m_fyRotate = f;
 
+	UIA::IAnimateManager* pAni = m_pCompositor->
+		GetUIApplication()->GetAnimateMgr();
+
+	pAni->RemoveStoryboardByNotityAndId(
+		static_cast<UIA::IAnimateEventCallback*>(this),
+		STORYBOARD_ID_YROTATE);
+
 	// 开启隐式动画
-// 	if (IsAutoAnimate())
-// 	{
-// 		UIA::IAnimateManager* pAni = m_pCompositor->
-// 			GetUIApplication()->GetAnimateMgr();
-// 
-// 		pAni->RemoveStoryboardByNotityAndId(
-// 			static_cast<UIA::IAnimateEventCallback*>(this), 
-// 			STORYBOARD_ID_YROTATE);
-// 
-// 		UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
-// 			static_cast<UIA::IAnimateEventCallback*>(this), 
-// 			STORYBOARD_ID_YROTATE);
-// 
-// 		pStoryboard->CreateTimeline(0)->SetParam(
-// 			m_transfrom3d.get_rotateY(), 
-// 			m_fyRotate, 
-// 			ANIMATE_DURATION);
-// 
-// 		pStoryboard->Begin();
-// 	}
-// 	else
-// 	{
-// 		m_transfrom3d.rotateY(f);
-// 	}
+	if (pParam)
+	{
+		UIA::IStoryboard* pStoryboard = pAni->CreateStoryboard(
+			static_cast<UIA::IAnimateEventCallback*>(this), 
+			STORYBOARD_ID_YROTATE);
+
+		pStoryboard->CreateTimeline(0)->SetParam(
+			m_transfrom3d.get_rotateY(), 
+			m_fyRotate, 
+			pParam->GetDuration());
+
+		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
+		*pSaveParam = *pParam;
+		pStoryboard->SetWParam((WPARAM)pSaveParam);
+
+		m_transfrom3d.perspective(2000);
+
+		if (pParam->IsBlock())
+		{
+			pStoryboard->BeginBlock();
+		}
+		else
+		{
+			pStoryboard->Begin();
+		}
+	}
+	else
+	{
+		m_transfrom3d.rotateY(f);
+	}
 }
 float  Layer::GetYRotate() 
 {
@@ -398,17 +417,17 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
         pStoryboard->CreateTimeline(0)->SetParam(
             m_transfrom3d.get_translateX(),
             m_xTranslate,
-            ANIMATE_DURATION);
+			pParam->GetDuration());
 
         pStoryboard->CreateTimeline(1)->SetParam(
             m_transfrom3d.get_translateY(),
             m_yTranslate,
-            ANIMATE_DURATION);
+			pParam->GetDuration());
 
         pStoryboard->CreateTimeline(2)->SetParam(
             m_transfrom3d.get_translateZ(),
             m_zTranslate,
-            ANIMATE_DURATION);
+			pParam->GetDuration());
 
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
@@ -427,6 +446,7 @@ void  Layer::SetTranslate(float x, float y, float z, LayerAnimateParam* pParam)
     else
     {
         m_transfrom3d.translate3d(x, y, z);
+
     }
 
 	if (m_pLayerContent)
@@ -461,44 +481,44 @@ UIA::E_ANIMATE_TICK_RESULT Layer::OnAnimateTick(UIA::IStoryboard* pStoryboard)
 	switch (pStoryboard->GetId())
 	{
 	case STORYBOARD_ID_OPACITY:
-		{
-			m_nOpacity_Render = (byte)pStoryboard->
-				GetTimeline(0)->GetCurrentIntValue();
+	{
+		m_nOpacity_Render = (byte)pStoryboard->
+			GetTimeline(0)->GetCurrentIntValue();
 
-            static_cast<ObjectLayer*>(m_pLayerContent)->GetObjet().Invalidate();
-			// 有可能是block动画，需要立即刷新
-			if (isblock)
-				m_pCompositor->DoInvalidate();
-			else
-				m_pCompositor->RequestInvalidate();
-		}
-		break;
+		static_cast<ObjectLayer*>(m_pLayerContent)->GetObjet().Invalidate();
+		// 有可能是block动画，需要立即刷新
+		if (isblock)
+			m_pCompositor->DoInvalidate();
+		else
+			m_pCompositor->RequestInvalidate();
+	}
+	break;
 
-// 	case STORYBOARD_ID_YROTATE:
-// 		{
-// 			m_transfrom3d.rotateY(pStoryboard->
-// 				GetTimeline(0)->GetCurrentValue());
-// 
-// 			if (isblock)
-// 		m_pCompositor->DoInvalidate();
-// 	else
-// 		m_pCompositor->RequestInvalidate();
-// 		}
-// 		break;
-//
-    case STORYBOARD_ID_TRANSLATE:
-        {
-            m_transfrom3d.translate3d(
-                pStoryboard->GetTimeline(0)->GetCurrentValue(),
-                pStoryboard->GetTimeline(1)->GetCurrentValue(),
-                pStoryboard->GetTimeline(2)->GetCurrentValue());
+	case STORYBOARD_ID_YROTATE:
+	{
+		m_transfrom3d.rotateY(pStoryboard->
+			GetTimeline(0)->GetCurrentValue());
 
-			if (isblock)
-				m_pCompositor->DoInvalidate();
-			else
-				m_pCompositor->RequestInvalidate();
-        }
-        break;
+		if (isblock)
+			m_pCompositor->DoInvalidate();
+		else
+			m_pCompositor->RequestInvalidate();
+	}
+	break;
+
+	case STORYBOARD_ID_TRANSLATE:
+	{
+		m_transfrom3d.translate3d(
+			pStoryboard->GetTimeline(0)->GetCurrentValue(),
+			pStoryboard->GetTimeline(1)->GetCurrentValue(),
+			pStoryboard->GetTimeline(2)->GetCurrentValue());
+
+		if (isblock)
+			m_pCompositor->DoInvalidate();
+		else
+			m_pCompositor->RequestInvalidate();
+	}
+	break;
 	}
 
 	return UIA::ANIMATE_TICK_RESULT_CONTINUE;
@@ -509,6 +529,7 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 	std::shared_ptr<LayerAnimateParam> pParam(
 		(LayerAnimateParam*)pStoryboard->GetWParam());
 
+	
 	if (pParam->finishCallback)
 	{
 		LayerAnimateFinishParam info = { 0 };

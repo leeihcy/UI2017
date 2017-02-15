@@ -6,6 +6,7 @@ enum AnimateType
 	AnimateType_CustomTimingFunction = 0,
 	AnimateType_MoveLeftToRight,
 	AnimateType_Alpha,
+	AnimateType_RotateY,
 
 	//-----------------------
 	AnimateType_Count,
@@ -15,6 +16,7 @@ class Animate : public UIA::IAnimateEventCallback
 {
 public:
 	virtual ~Animate();
+	virtual int  Type() = 0;
 
 	static  Animate*  Create(long type, UI::IWindow* p);
 	static  void  Quit();
@@ -26,6 +28,7 @@ public:
 
 	virtual void  Init() {}
 	virtual void  Release() {}
+	virtual void  Action() = 0;
 
 	virtual void  OnAnimateStart(
 		UIA::IStoryboard*) { }

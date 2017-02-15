@@ -3,6 +3,7 @@
 #include "custom_timing_function.h"
 #include "move.h"
 #include "alpha.h"
+#include "yrotate.h"
 
 Animate*  Animate::s_pCurrentAnimate = nullptr;
 
@@ -25,6 +26,11 @@ Animate* Animate::Create(long type, UI::IWindow* pWindow)
 {
 	if (s_pCurrentAnimate)
 	{
+		if (s_pCurrentAnimate->Type() == type)
+		{
+			return s_pCurrentAnimate;
+		}
+
 		Animate::Destroy(s_pCurrentAnimate);
 		s_pCurrentAnimate = nullptr;
 	}
@@ -39,6 +45,7 @@ Animate* Animate::Create(long type, UI::IWindow* pWindow)
 MAPCREATOR(AnimateType_CustomTimingFunction, CustomTimingFuctionAnimate);
 MAPCREATOR(AnimateType_MoveLeftToRight, MoveLeftToRightAnimate);
 MAPCREATOR(AnimateType_Alpha, AlphaAnimate);
+MAPCREATOR(AnimateType_RotateY, RotateYAnimate);
 	}
 
 	if (p)

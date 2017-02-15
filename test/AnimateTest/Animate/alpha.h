@@ -6,7 +6,15 @@
 class AlphaAnimate : public Animate
 {
 public:
+	virtual int  Type() override {
+		return AnimateType_Alpha;
+	}
+
 	virtual void Init() override
+	{
+	}
+
+	virtual void Action() override
 	{
 		UI::IPanel*  pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 

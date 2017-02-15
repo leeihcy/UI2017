@@ -1015,3 +1015,13 @@ void  IObject::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
 {
 	__pImpl->SetTranslate(x, y, z, param);
 }
+
+void  IObject::RotateYTo(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateYTo(degree, param);
+}
+void  IObject::RotateYBy(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateYBy(degree, param);
+
+}

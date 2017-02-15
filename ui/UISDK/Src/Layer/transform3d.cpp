@@ -197,7 +197,7 @@ void  Transform3D::update()
 	// 求出反转值
 	m_matrix.Inverse(&m_matrixInverse);
 
-#ifdef _DEBUG
+#ifdef _DEBUGx
 	POINT pt= {50,50};
 	mappoint_view_2_layer(&pt);
 	mappoint_layer_2_view(&pt);

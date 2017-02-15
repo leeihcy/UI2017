@@ -65,9 +65,6 @@ enum LayerType
 class Layer : public UIA::IAnimateEventCallback
 {
 protected:
-	enum {
-		ANIMATE_DURATION = 250,
-	};
 	Layer();
 	virtual ~Layer();
 
@@ -108,7 +105,8 @@ public:
 	byte  GetOpacity();
 	void  SetOpacity(byte, LayerAnimateParam* param = nullptr);
     
-    void  SetYRotate(float);
+	void  RotateYTo(float, LayerAnimateParam* param = nullptr);
+	void  RotateYBy(float, LayerAnimateParam* param = nullptr);
     float  GetYRotate();
 	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param = nullptr);
     float  GetXTranslate();

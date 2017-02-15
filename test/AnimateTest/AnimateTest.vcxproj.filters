@@ -21,6 +21,9 @@
     <Filter Include="Animate\透明渐变">
       <UniqueIdentifier>{ed5905bc-0aaa-4c76-b82d-29d3edd90f2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animate\旋转y轴">
+      <UniqueIdentifier>{8ae20dc9-74eb-42e0-b79d-b1b4f46ba560}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -60,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="Animate\alpha.h">
       <Filter>Animate\透明渐变</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\yrotate.h">
+      <Filter>Animate\旋转y轴</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

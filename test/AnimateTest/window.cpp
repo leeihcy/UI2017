@@ -59,7 +59,7 @@ void LoginWindow::Destroy()
 
 void LoginWindow::ShowAnimate(long type)
 {
-	Animate::Create(type, m_pWindow);
+	Animate::Create(type, m_pWindow)->Action();
 }
 
 void LoginWindow::OnKeydown(UINT key)

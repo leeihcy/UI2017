@@ -144,6 +144,21 @@ Layer*  Object::GetLayer()
     return NULL;
 }
 
+// 为动画准备一个layer，如果没有则创建layer
+Layer*  Object::GetLayerForAnimate()
+{
+	Layer* layer = GetSelfLayer();
+	if (!layer)
+	{
+		EnableLayer(true);
+		return GetSelfLayer();
+	}
+	else
+	{
+		layer->AddRef();
+		return layer;
+	}
+}
 ObjectLayer*  Object::GetLayerEx()
 {
     Object* pObj = this;

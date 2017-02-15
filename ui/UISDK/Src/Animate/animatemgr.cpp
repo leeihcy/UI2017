@@ -204,11 +204,13 @@ void  AnimateManager::RemoveStoryboardByNotityAndId(
         if (m_bHandlingTimerCallback)
         {
             pStoryboard->SetFinish();
+			pStoryboard->NotifyCancel();
             ++iter;
         }
         else
         {
             iter = m_listStoryboard.erase(iter);
+			pStoryboard->NotifyCancel();
             SAFE_DELETE(pStoryboard);
         }
     }

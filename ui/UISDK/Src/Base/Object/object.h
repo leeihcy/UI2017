@@ -48,6 +48,7 @@ public:
 	HWND  GetHWND();
 
 	Layer*  GetLayer();
+	Layer*  GetLayerForAnimate();
 	Layer*  GetSelfLayer() const;
 	ObjectLayer*  GetLayerEx();
 	Layer*  FindNextLayer(Layer* pParentLayer);
@@ -284,6 +285,9 @@ public:
 
 	void  SetTranslate(float x, float y, float z);
 	void  SetTranslate(float x, float y, float z, LayerAnimateParam* param);
+
+	void  RotateYTo(float degree, LayerAnimateParam* param);
+	void  RotateYBy(float degree, LayerAnimateParam* param);
 
 protected:
 	HRESULT  FinalConstruct(ISkinRes* pSkinRes);

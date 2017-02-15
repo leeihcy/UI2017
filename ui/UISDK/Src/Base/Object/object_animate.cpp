@@ -19,23 +19,10 @@ unsigned char Object::GetOpacity() const
 }
 void  Object::SetOpacity(const unsigned char alpha, LayerAnimateParam* param)
 {
-	Layer* layer = GetSelfLayer();
-	if (!layer)
-	{
-		EnableLayer(true);
-		layer = GetSelfLayer();
-		if (!layer)
-			return;
-	}
-	else
-	{
-		layer->AddRef();
-	}
-
 	LayerAnimateParam defaultParam;
 	if (!param)
 		param = &defaultParam;
-	layer->SetOpacity(alpha, param);
+	GetLayerForAnimate()->SetOpacity(alpha, param);
 }
 
 void  Object::SetTranslate(float x, float y, float z)
@@ -47,21 +34,24 @@ void  Object::SetTranslate(float x, float y, float z)
 
 void  Object::SetTranslate(float x, float y, float z, LayerAnimateParam* param)
 {
-	Layer* layer = GetSelfLayer();
-	if (!layer)
-	{
-		EnableLayer(true);
-		layer = GetSelfLayer();
-		if (!layer)
-			return;
-	}
-	else
-	{
-		layer->AddRef();
-	}
-
 	LayerAnimateParam defaultParam;
 	if (!param)
 		param = &defaultParam;
-	layer->SetTranslate(x, y, z, param);
+	GetLayerForAnimate()->SetTranslate(x, y, z, param);
+}
+
+void  Object::RotateYTo(float degree, LayerAnimateParam* param)
+{
+	LayerAnimateParam defaultParam;
+	if (!param)
+		param = &defaultParam;
+	GetLayerForAnimate()->RotateYTo(degree, param);
+}
+
+void  Object::RotateYBy(float degree, LayerAnimateParam* param)
+{
+	LayerAnimateParam defaultParam;
+	if (!param)
+		param = &defaultParam;
+	GetLayerForAnimate()->RotateYBy(degree, param);
 }

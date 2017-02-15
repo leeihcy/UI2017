@@ -45,11 +45,14 @@ struct LayerAnimateFinishParam
 };
 typedef void(*pfnLayerAnimateFinish)(LayerAnimateFinishParam*);
 
+#define DEFAULT_ANIMATE_DURATION 250
+
 struct LayerAnimateParam
 {
 public:
 	LayerAnimateParam() {
 		m_bBlock = false;
+		m_fDuration = DEFAULT_ANIMATE_DURATION;
 	}
 
 	void  SetBlock(bool b) {
@@ -58,10 +61,17 @@ public:
 	bool  IsBlock() {
 		return m_bBlock;
 	}
+	void  SetDuration(float ms) {
+		m_fDuration = ms;
+	}
+	float  GetDuration() {
+		return m_fDuration;
+	}
 
 	std::function<void(const LayerAnimateFinishParam&)>  finishCallback;
 private:
 	bool  m_bBlock;
+	float  m_fDuration;  // 为0表示使用默认值 
 };
 
 

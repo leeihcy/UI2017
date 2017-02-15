@@ -18,7 +18,7 @@
 // warning C4481: 使用了非标准扩展: 请重写说明符“override”
 #pragma warning(disable:4481)
 
-#pragma warning(diable:4838)
+#pragma warning(disable:4838)
 
 #include <windows.h>
 #include <tchar.h>

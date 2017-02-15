@@ -188,6 +188,8 @@ namespace UI
 		void  SetTranslate(float x, float y, float z);
 		void  SetTranslate(float x, float y, float z, LayerAnimateParam* param);
 
+		void  RotateYTo(float degree, LayerAnimateParam* param);
+		void  RotateYBy(float degree, LayerAnimateParam* param);
 
 		UI_DECLARE_INTERFACE(Object);
 	};
