@@ -12,7 +12,8 @@ AeroWindowWrap::AeroWindowWrap()
     m_pIAeroWindowWrap = NULL;
     m_eAeroDisableMode = WINDOW_TRANSPARENT_TYPE_LAYERED;
     m_eMode = AERO_MODE_BLUR;
-    ::SetRect(&blur.m_regionBlur, -1, -1, -1, -1);
+	::SetRectEmpty(&blur.m_regionBlur);
+    //::SetRect(&blur.m_regionBlur, -1, -1, -1, -1);
     blur.m_hrgnBlurRgn = NULL;
     blur.m_bAutoClipChildCtrl = false;
 }

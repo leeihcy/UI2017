@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Other">
+      <UniqueIdentifier>{70789fee-8a4a-4db4-ab89-eba6aa7e5388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skin">
+      <UniqueIdentifier>{7a42b39a-49fc-4150-a014-38eaf83aa357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{734db99c-9b64-42be-9b32-a1c6bd1d74fb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Other\Resource.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\stdafx.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\targetver.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Other\VirtualDesktop.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\dock_window.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Other\stdafx.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Other\VirtualDesktop.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\dock_window.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Other\small.ico">
+      <Filter>Other</Filter>
+    </Image>
+    <Image Include="VirtualDesktop.ico">
+      <Filter>Other</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Other\VirtualDesktop.rc">
+      <Filter>Other</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Bin\Debug\VirtualDesktopSkin\skin.xml">
+      <Filter>Skin</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
