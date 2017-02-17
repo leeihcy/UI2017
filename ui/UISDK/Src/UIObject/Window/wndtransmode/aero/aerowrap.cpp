@@ -12,8 +12,7 @@ AeroWindowWrap::AeroWindowWrap()
     m_pIAeroWindowWrap = NULL;
     m_eAeroDisableMode = WINDOW_TRANSPARENT_TYPE_LAYERED;
     m_eMode = AERO_MODE_BLUR;
-	::SetRectEmpty(&blur.m_regionBlur);
-    //::SetRect(&blur.m_regionBlur, -1, -1, -1, -1);
+    ::SetRect(&blur.m_regionBlur, -1, -1, -1, -1);
     blur.m_hrgnBlurRgn = NULL;
     blur.m_bAutoClipChildCtrl = false;
 }
@@ -295,21 +294,32 @@ void  AeroWindowWrap::UpdateRgn()
                 }
                 else
                 {
-                    CRect  rcClient;
-                    ::GetClientRect(hWnd, &rcClient);
-                    rcClient.DeflateRect(blur.m_regionBlur.left, 
-                        blur.m_regionBlur.top, 
-                        blur.m_regionBlur.right, 
-                        blur.m_regionBlur.bottom);
+					// TBD: blurbehind.hRgnBlur的意义和MSDN上说的结果相反。
+					//      blurbehind.hRgnBlur试验出来的结果是不需要blur的区域，而
+					//      不是需要blur的区域。因此要将整个窗口都设置为blur，现在的做法
+					//      是创建一个特殊的rgn(-1,-1,0,0)
+					HRGN hRgn = nullptr;
+					if (blur.m_regionBlur.left == -1 &&
+						blur.m_regionBlur.top == -1 &&
+						blur.m_regionBlur.right == -1 &&
+						blur.m_regionBlur.bottom == -1
+						)
+					{
+						hRgn = CreateRectRgn(-1, -1, 0, 0);
+					}
+					else
+					{
+						CRect  rcClient;
+						::GetClientRect(hWnd, &rcClient);
+						rcClient.DeflateRect(blur.m_regionBlur.left,
+							blur.m_regionBlur.top,
+							blur.m_regionBlur.right,
+							blur.m_regionBlur.bottom);
 
-                    HRGN hRgn = CreateRectRgnIndirect(&rcClient);
+						hRgn = CreateRectRgnIndirect(&rcClient);
+					}
 
-//                     RECT rc = {10, 10, 200, 500};
-//                     HRGN hRgnChild = CreateRectRgnIndirect(&rc);
-//                     ::CombineRgn(hRgn, hRgn, hRgnChild, RGN_DIFF);
-//                     DeleteObject(hRgnChild);
-
-                    blurbehind.hRgnBlur = hRgn;
+					blurbehind.hRgnBlur = hRgn;
                     pDwm->pDwmEnableBlurBehindWindow(hWnd, &blurbehind);
                     DeleteObject(hRgn);
                 }

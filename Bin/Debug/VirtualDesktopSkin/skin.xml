@@ -2,8 +2,8 @@
 <skin>
 	<layout>
     <CustomWindow id="dock" width="500" height="100" layout.bottom="0" resizecapability="all" resizeborder="10"
-            Xtransparent.type="aero" xtransparent.aero.mode="blur">
-      <prop key="back.render" type="color" color="#8fff"/>
+            transparent.type="aero" transparent.aero.mode="blur" xtransparent.aero.blur.region="-1">
+      <prop key="back.render" type="color" color="#3000"/>
     </CustomWindow>
 	</layout>
 	<font>
