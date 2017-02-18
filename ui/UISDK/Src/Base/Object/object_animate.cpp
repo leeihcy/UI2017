@@ -39,6 +39,15 @@ void  Object::TranslateToParent(int x, int y, LayerAnimateParam* param)
 	GetLayerForAnimate()->TranslateTo(
 		(float)xTranslate, (float)yTranslate, 0, param);
 }
+void  Object::RotateXTo(float degree, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->RotateXTo(degree, param);
+}
+
+void  Object::RotateXBy(float degree, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->RotateXBy(degree, param);
+}
 void  Object::RotateYTo(float degree, LayerAnimateParam* param)
 {
 	GetLayerForAnimate()->RotateYTo(degree, param);
@@ -47,4 +56,17 @@ void  Object::RotateYTo(float degree, LayerAnimateParam* param)
 void  Object::RotateYBy(float degree, LayerAnimateParam* param)
 {
 	GetLayerForAnimate()->RotateYBy(degree, param);
+}
+void  Object::RotateZTo(float degree, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->RotateZTo(degree, param);
+}
+
+void  Object::RotateZBy(float degree, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->RotateZBy(degree, param);
+}
+void  Object::ScaleTo(float x, float y, LayerAnimateParam* param)
+{
+	GetLayerForAnimate()->ScaleTo(x, y, param);
 }

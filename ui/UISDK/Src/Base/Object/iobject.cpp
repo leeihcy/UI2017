@@ -1020,6 +1020,14 @@ void  IObject::TranslateYTo(float y, LayerAnimateParam* param)
 {
 	__pImpl->TranslateYTo(y, param);
 }
+void  IObject::RotateXTo(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateXTo(degree, param);
+}
+void  IObject::RotateXBy(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateXBy(degree, param);
+}
 void  IObject::RotateYTo(float degree, LayerAnimateParam* param)
 {
 	__pImpl->RotateYTo(degree, param);
@@ -1027,5 +1035,16 @@ void  IObject::RotateYTo(float degree, LayerAnimateParam* param)
 void  IObject::RotateYBy(float degree, LayerAnimateParam* param)
 {
 	__pImpl->RotateYBy(degree, param);
-
+}
+void  IObject::RotateZTo(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateZTo(degree, param);
+}
+void  IObject::RotateZBy(float degree, LayerAnimateParam* param)
+{
+	__pImpl->RotateZBy(degree, param);
+}
+void  IObject::ScaleTo(float x, float y, LayerAnimateParam* param)
+{
+	__pImpl->ScaleTo(x, y, param);
 }

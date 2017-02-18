@@ -288,8 +288,14 @@ public:
 	void  TranslateYTo(float y, LayerAnimateParam* param);
 	void  TranslateToParent(int x, int y, LayerAnimateParam* param);
 
+	void  RotateXTo(float degree, LayerAnimateParam* param);
+	void  RotateXBy(float degree, LayerAnimateParam* param);
 	void  RotateYTo(float degree, LayerAnimateParam* param);
 	void  RotateYBy(float degree, LayerAnimateParam* param);
+	void  RotateZTo(float degree, LayerAnimateParam* param);
+	void  RotateZBy(float degree, LayerAnimateParam* param);
+
+	void  ScaleTo(float x, float y, LayerAnimateParam* param = nullptr);
 
 protected:
 	HRESULT  FinalConstruct(ISkinRes* pSkinRes);

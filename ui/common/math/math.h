@@ -87,6 +87,9 @@ float Fast_Cos(float theta);
 int   Fast_Distance_2D(int x, int y);
 float Fast_Distance_3D(float x, float y, float z);
 
+bool  fequ(float f1, float f2);
+bool  IsEmptyDegree(float degree);
+
 }
 
 #endif // _UI_MATH_H_

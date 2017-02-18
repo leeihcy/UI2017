@@ -189,8 +189,14 @@ namespace UI
 		void  TranslateXTo(float x, LayerAnimateParam* param = nullptr);
 		void  TranslateYTo(float x, LayerAnimateParam* param = nullptr);
 
+		void  RotateXTo(float degree, LayerAnimateParam* param = nullptr);
+		void  RotateXBy(float degree, LayerAnimateParam* param = nullptr);
 		void  RotateYTo(float degree, LayerAnimateParam* param = nullptr);
 		void  RotateYBy(float degree, LayerAnimateParam* param = nullptr);
+		void  RotateZTo(float degree, LayerAnimateParam* param = nullptr);
+		void  RotateZBy(float degree, LayerAnimateParam* param = nullptr);
+		
+		void  ScaleTo(float x, float y, LayerAnimateParam* param = nullptr); 
 
 		UI_DECLARE_INTERFACE(Object);
 	};

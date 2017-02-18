@@ -4,6 +4,9 @@
 #include "move.h"
 #include "alpha.h"
 #include "yrotate.h"
+#include "scale.h"
+#include "xrotate.h"
+#include "zrotate.h"
 
 Animate*  Animate::s_pCurrentAnimate = nullptr;
 
@@ -45,7 +48,10 @@ Animate* Animate::Create(long type, UI::IWindow* pWindow)
 MAPCREATOR(AnimateType_CustomTimingFunction, CustomTimingFuctionAnimate);
 MAPCREATOR(AnimateType_MoveLeftToRight, MoveLeftToRightAnimate);
 MAPCREATOR(AnimateType_Alpha, AlphaAnimate);
+MAPCREATOR(AnimateType_RotateX, RotateXAnimate);
 MAPCREATOR(AnimateType_RotateY, RotateYAnimate);
+MAPCREATOR(AnimateType_RotateZ, RotateZAnimate);
+MAPCREATOR(AnimateType_Scale, ScaleAnimate)
 	}
 
 	if (p)

@@ -94,7 +94,10 @@
     <ClInclude Include="Animate\animate_base.h" />
     <ClInclude Include="Animate\custom_timing_function.h" />
     <ClInclude Include="Animate\move.h" />
+    <ClInclude Include="Animate\scale.h" />
+    <ClInclude Include="Animate\xrotate.h" />
     <ClInclude Include="Animate\yrotate.h" />
+    <ClInclude Include="Animate\zrotate.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

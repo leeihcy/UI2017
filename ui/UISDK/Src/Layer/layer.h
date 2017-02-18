@@ -117,15 +117,21 @@ public:
 	byte  GetOpacity();
 	void  SetOpacity(byte, LayerAnimateParam* param = nullptr);
     
+	void  RotateXTo(float, LayerAnimateParam* param = nullptr);
+	void  RotateXBy(float, LayerAnimateParam* param = nullptr);
 	void  RotateYTo(float, LayerAnimateParam* param = nullptr);
+	void  RotateZBy(float, LayerAnimateParam* param = nullptr);
+	void  RotateZTo(float, LayerAnimateParam* param = nullptr);
 	void  RotateYBy(float, LayerAnimateParam* param = nullptr);
     float  GetYRotate();
+	void  ScaleTo(float x, float y, LayerAnimateParam* param = nullptr);
+
 	void  TranslateTo(float x, float y, float z, LayerAnimateParam* param = nullptr);
 	void  TranslateBy(float x, float y, float z, LayerAnimateParam* param = nullptr);
 	void  TranslateXTo(float x, LayerAnimateParam* param = nullptr);
 	void  TranslateYTo(float y, LayerAnimateParam* param = nullptr);
 
-    float  GetXTranslate();
+	float  GetXTranslate();
     float  GetYTranslate();
     float  GetZTranslate();
 
@@ -168,7 +174,11 @@ protected:
 	byte  m_nOpacity_Render;  // 动画过程中的值
 
  	Transform3D  m_transfrom3d;  // 动画过程中的值
- 	float  m_fyRotate;   // 设置的值
+	float  m_fxRotate;   // 设置的值
+	float  m_fyRotate;   // 设置的值
+	float  m_fzRotate;   // 设置的值
+	float  m_fxScale;    // 设置的值
+	float  m_fyScale;    // 设置的值
 	// 相对于控件m_rcParent的相对值
     float  m_xTranslate; // 设置的值
     float  m_yTranslate; // 设置的值

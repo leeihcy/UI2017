@@ -3,10 +3,13 @@
 
 enum AnimateType
 {
-	AnimateType_CustomTimingFunction = 0,
-	AnimateType_MoveLeftToRight,
-	AnimateType_Alpha,
+	AnimateType_RotateX,
 	AnimateType_RotateY,
+	AnimateType_RotateZ,
+	AnimateType_Alpha,
+	AnimateType_Scale,
+	AnimateType_MoveLeftToRight,
+	AnimateType_CustomTimingFunction,
 
 	//-----------------------
 	AnimateType_Count,

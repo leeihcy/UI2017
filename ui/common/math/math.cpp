@@ -142,4 +142,30 @@ namespace UI
 
 	} // end Fast_Distance_3D
 
+	bool fequ(float f1, float f2)
+	{
+		if (abs(f1 - f2) < EPSILON_E4)
+			return true;
+
+		return false;
+	}
+
+	bool  IsEmptyDegree(float f)
+	{
+		if (f < 0.0001)
+			return true;
+
+		if (fequ(f, 360))
+			return true;
+
+		if (fequ(f, 720))
+			return true;
+
+		float m = f - floor(f / 360.0f) * 360.f;
+		if (m < EPSILON_E4)
+			return true;
+
+		return false;
+	}
+
 }

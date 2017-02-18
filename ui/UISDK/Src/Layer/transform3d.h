@@ -53,8 +53,11 @@ public:
                 return m_yPos; }
     float  get_translateZ() {
                 return m_zPos; }
-    float  get_rotateY() {
-                return m_yRotate; }
+	float  get_rotateX() { return m_xRotate; }
+	float  get_rotateY() { return m_yRotate; }
+	float  get_rotateZ() { return m_zRotate; }
+	float  get_scaleX() { return m_xScale; }
+	float  get_scaleY() { return m_yScale; }
 
 	void  identity();
 	bool  is_identity();

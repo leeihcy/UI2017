@@ -23,6 +23,23 @@ void LoginWindow::Create(UI::ISkinRes* p)
 	m_pWindow->Create(L"login");
 
 	m_pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
+
+	
+
+	srand(GetTickCount());
+
+	int nResult = rand() % 2;
+	if (nResult == 0)
+	{
+		m_pPanel->TranslateXTo(dpi(-200));
+		m_pPanel->TranslateXTo(dpi(0), DefaultLayerAnimateParam);
+	}
+	else if (nResult == 1)
+	{
+		m_pPanel->SetOpacity(0);
+		m_pPanel->SetOpacity(255, DefaultLayerAnimateParam);
+	}
+
 	m_pWindow->ShowWindow();
 }
 

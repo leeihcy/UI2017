@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "transform3d.h"
+#include "..\common\math\math.h"
 
 using namespace UI;
 
@@ -57,23 +58,7 @@ void Transform3D::identity()
 	m_matrixInverse.Identity();
 }
 
-bool  TestDegreeEmpty(float f)
-{
-	if (f < 0.0001)
-		return true;
 
-	if (abs(f - 360) < 0.0001)
-		return true;
-
-	if (abs(f - 720) < 0.0001)
-		return true;
-
-	float m = f - floor(f / 360.0f) * 360.f;
-	if (f < 0.0001)
-		return true;
-
-	return false;
-}
 
 bool  Transform3D::is_identity()
 {
@@ -83,9 +68,9 @@ bool  Transform3D::is_identity()
 		m_xScale == 1 &&
 		m_yScale == 1 &&
 		m_zScale == 1 && 
-		TestDegreeEmpty(m_xRotate) &&
-		TestDegreeEmpty(m_yRotate) &&
-		TestDegreeEmpty(m_zRotate))
+		IsEmptyDegree(m_xRotate) &&
+		IsEmptyDegree(m_yRotate) &&
+		IsEmptyDegree(m_zRotate))
 	{
 		return true;
 	}

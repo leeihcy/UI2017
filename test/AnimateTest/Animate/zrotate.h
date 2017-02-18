@@ -2,11 +2,11 @@
 #include "animate_base.h"
 
 
-class RotateYAnimate : public Animate
+class RotateZAnimate : public Animate
 {
 public:
 	virtual int  Type() override {
-		return AnimateType_RotateY;
+		return AnimateType_RotateZ;
 	}
 
 	virtual void Init() override
@@ -24,7 +24,7 @@ public:
 		[pPanel](const UI::LayerAnimateFinishParam& param) 
 		{
 		};
-		pPanel->RotateYBy(360, &param);
+		pPanel->RotateZBy(360, &param);
 	}
 
 	virtual void Release() override
