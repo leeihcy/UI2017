@@ -19,11 +19,12 @@ public:
 		UI::IPanel*  pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
 		UI::LayerAnimateParam param;
-		param.finishCallback =
+		param.SetEaseType(UIA::linear);
+		param.SetFinishCallback(
 		[pPanel](const UI::LayerAnimateFinishParam& param)
 		{
 			pPanel->SetOpacity(255);
-		};
+		});
 		pPanel->SetOpacity(0, &param);
 	}
 

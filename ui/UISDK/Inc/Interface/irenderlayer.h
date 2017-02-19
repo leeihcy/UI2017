@@ -52,6 +52,7 @@ struct LayerAnimateParam
 public:
 	LayerAnimateParam() {
 		m_bBlock = false;
+		m_eEaseType = UIA::ease_out;
 		m_fDuration = DEFAULT_ANIMATE_DURATION;
 	}
 
@@ -67,11 +68,30 @@ public:
 	float  GetDuration() {
 		return m_fDuration;
 	}
+	void  SetFinishCallback(
+		std::function<void(const LayerAnimateFinishParam&)> func)
+	{
+		m_finishCallback = func;
+	}
 
-	std::function<void(const LayerAnimateFinishParam&)>  finishCallback;
+	std::function<void(const LayerAnimateFinishParam&)>&  GetFinishCallback() {
+		return m_finishCallback;
+	}
+
+	void  SetEaseType(UIA::EaseType e) {
+		m_eEaseType = e;
+	}
+
+	UIA::EaseType  GetEaseType() {
+		return m_eEaseType;
+	}
+
 private:
 	bool  m_bBlock;
-	float  m_fDuration;  // 为0表示使用默认值 
+	float  m_fDuration;  
+	UIA::EaseType  m_eEaseType;
+	std::function<void(const LayerAnimateFinishParam&)>  m_finishCallback;
+
 };
 #define DefaultLayerAnimateParam (UI::LayerAnimateParam*)0xFFFFFFFF
 

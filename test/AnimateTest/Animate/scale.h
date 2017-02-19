@@ -21,11 +21,10 @@ public:
 
 		UI::LayerAnimateParam param;
 		param.SetDuration(500);
-		param.finishCallback = 
-		[pPanel](const UI::LayerAnimateFinishParam& param) 
+		param.SetFinishCallback( [pPanel](const UI::LayerAnimateFinishParam& param) 
 		{
 			pPanel->ScaleTo(1, 1, DefaultLayerAnimateParam);
-		};
+		});
 		pPanel->ScaleTo(3,3, &param);
 	}
 

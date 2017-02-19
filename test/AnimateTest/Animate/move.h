@@ -20,7 +20,7 @@ public:
 		UI::IPanel* pPanel = (UI::IPanel*)m_pWindow->FindObject(L"panel");
 
 		UI::LayerAnimateParam param;
-		param.finishCallback =
+		param.SetFinishCallback(
 			[pPanel](const UI::LayerAnimateFinishParam& param)
 		{
 			RECT rcParent;
@@ -29,7 +29,7 @@ public:
 				pPanel->TranslateToParent(dpi(200), rcParent.top, DefaultLayerAnimateParam);
 			else
 				pPanel->TranslateToParent(dpi(200), rcParent.top);
-		};
+		});
 		pPanel->TranslateTo(dpi(150), 0, 0, &param);
 	}
 

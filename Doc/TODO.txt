@@ -1,0 +1,9 @@
+1. 背景动画： 背景颜色、背景图片切换
+
+backgroundColor, borderColor
+
+2. 路径动画， Path 动画定义
+
+3. 利用一个新线程来等待present,然后通知到主线程进行绘制 
+
+4. 粒子动画

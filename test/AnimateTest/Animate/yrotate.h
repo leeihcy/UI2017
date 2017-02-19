@@ -20,10 +20,9 @@ public:
 
 		UI::LayerAnimateParam param;
 		param.SetDuration(600);
-		param.finishCallback = 
-		[pPanel](const UI::LayerAnimateFinishParam& param) 
+		param.SetFinishCallback([pPanel](const UI::LayerAnimateFinishParam& param) 
 		{
-		};
+		});
 		pPanel->RotateYBy(360, &param);
 	}
 

@@ -312,7 +312,8 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_nOpacity_Render, 
 			m_nOpacity, 
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -380,7 +381,8 @@ void  Layer::RotateYTo(float f, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_transfrom3d.get_rotateY(), 
 			m_fyRotate, 
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -450,7 +452,8 @@ void  Layer::RotateXTo(float f, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_transfrom3d.get_rotateX(),
 			m_fxRotate,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -520,7 +523,8 @@ void  Layer::RotateZTo(float f, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_transfrom3d.get_rotateZ(),
 			m_fzRotate,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -590,11 +594,13 @@ void  Layer::ScaleTo(float x, float y, LayerAnimateParam* pParam)
 		pStoryboard->CreateTimeline(0)->SetParam(
 			m_transfrom3d.get_scaleX(),
 			m_fxScale,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 		pStoryboard->CreateTimeline(1)->SetParam(
 			m_transfrom3d.get_scaleY(),
 			m_fyScale,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
 		*pSaveParam = *pParam;
@@ -674,17 +680,20 @@ void  Layer::TranslateTo(float x, float y, float z, LayerAnimateParam* pParam)
         pStoryboard->CreateTimeline(0)->SetParam(
             m_transfrom3d.get_translateX(),
             m_xTranslate,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
         pStoryboard->CreateTimeline(1)->SetParam(
             m_transfrom3d.get_translateY(),
             m_yTranslate,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
         pStoryboard->CreateTimeline(2)->SetParam(
             m_transfrom3d.get_translateZ(),
             m_zTranslate,
-			pParam->GetDuration());
+			pParam->GetDuration())
+			->SetEaseType(pParam->GetEaseType());
 
 
 		LayerAnimateParam* pSaveParam = new LayerAnimateParam;
@@ -845,11 +854,11 @@ void  Layer::OnAnimateEnd(UIA::IStoryboard* pStoryboard, UIA::E_ANIMATE_END_REAS
 		m_yTranslate = 0;
 		m_transfrom3d.translate3d(0, 0, m_zTranslate);
 	}
-	if (pParam->finishCallback)
+	if (pParam->GetFinishCallback())
 	{
 		LayerAnimateFinishParam info = { 0 };
 		info.endreason = e;
-		pParam->finishCallback(info);
+		pParam->GetFinishCallback()(info);
 	}
 
 	// !=normal时，可能是当前动画正在被新的动画取代，这个时候不去尝试销毁，由新的动画结束后触发
