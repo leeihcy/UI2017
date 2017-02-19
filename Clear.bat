@@ -11,6 +11,9 @@ set sln_dir=%current_dir%
 ::del %sln_dir%\Bin\Debug\*.dll
 ::del %sln_dir%\Bin\Debug\*.ilk
 
+::提交
+git commit -m "temp"
+
 ::打包
 cd %sln_dir%
 git archive -o %current_dir%\UI2017.zip HEAD
