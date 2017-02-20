@@ -93,6 +93,7 @@
     <ClInclude Include="Animate\alpha.h" />
     <ClInclude Include="Animate\animate_base.h" />
     <ClInclude Include="Animate\custom_timing_function.h" />
+    <ClInclude Include="Animate\list_animate.h" />
     <ClInclude Include="Animate\move.h" />
     <ClInclude Include="Animate\scale.h" />
     <ClInclude Include="Animate\xrotate.h" />

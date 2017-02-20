@@ -20,10 +20,14 @@ public:
 
 		UI::LayerAnimateParam param;
 		param.SetEaseType(UIA::linear);
+		param.SetDuration(800);
 		param.SetFinishCallback(
 		[pPanel](const UI::LayerAnimateFinishParam& param)
 		{
-			pPanel->SetOpacity(255);
+			UI::LayerAnimateParam param2;
+			param2.SetDuration(800);
+			param2.SetEaseType(UIA::ease_in);
+			pPanel->SetOpacity(255, &param2);
 		});
 		pPanel->SetOpacity(0, &param);
 	}

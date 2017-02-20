@@ -11,7 +11,16 @@
           <prop key="back.render" type="colorlist" color="#f00;#f0f;#0ff"/>
         </Button>
       </Panel>
+      <ListBox id="listbox" Xvisible="hidden" itemheight="64" itempadding="20,0,20,0" >
+        <prop key="layout" left="0" bottom="0" top="0" width="100"></prop>
+      </ListBox>
     </CustomWindow>
+    <ListItem id="ballitem">
+      <Picture id="image" >
+        <prop key="layout" width="64" height="64" align="center|vcenter"/>
+        <prop key="back.render" type="image" image.drawtype="stretch"/>
+      </Picture>
+    </ListItem>
 	</layout>
 	<font>
 		<font id="default" face="微软雅黑" size="10" />
@@ -19,6 +28,22 @@
 	<image>
     <image id="bkg" path="bkg.png"></image>
     <image id="red" path="red.png"></image>
+    <image id="ball00" path="balls\00.png"/>
+    <image id="ball01" path="balls\01.png"/>
+    <image id="ball02" path="balls\02.png"/>
+    <image id="ball03" path="balls\03.png"/>
+    <image id="ball04" path="balls\04.png"/>
+    <image id="ball05" path="balls\05.png"/>
+    <image id="ball06" path="balls\06.png"/>
+    <image id="ball07" path="balls\07.png"/>
+    <image id="ball08" path="balls\08.png"/>
+    <image id="ball09" path="balls\09.png"/>
+    <image id="ball10" path="balls\10.png"/>
+    <image id="ball11" path="balls\11.png"/>
+    <image id="ball12" path="balls\12.png"/>
+    <image id="ball13" path="balls\13.png"/>
+    <image id="ball14" path="balls\14.png"/>
+    <image id="ball15" path="balls\15.png"/>
   </image>
 	<i18n>
 	</i18n>

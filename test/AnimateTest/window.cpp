@@ -76,14 +76,16 @@ void LoginWindow::Destroy()
 
 void LoginWindow::ShowAnimate(long type)
 {
-	Animate::Create(type, m_pWindow)->Action();
+	Animate* p = Animate::Create(type, m_pWindow);
+	if (p)
+		p->Action();
 }
 
 void LoginWindow::OnKeydown(UINT key)
 {
-	if (key >= '1' && key <= '9')
+	if (key >= '0' && key <= '9')
 	{
-		int index = key - '1';
+		int index = key - '0';
 		ShowAnimate(index);
 	}
 // 	switch (key)

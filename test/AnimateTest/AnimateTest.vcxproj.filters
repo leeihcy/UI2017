@@ -27,6 +27,12 @@
     <Filter Include="Animate\旋转">
       <UniqueIdentifier>{8ae20dc9-74eb-42e0-b79d-b1b4f46ba560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animate\列表动画">
+      <UniqueIdentifier>{26717eb6-237d-4958-a789-74ab367fd09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animate\列表动画\添加">
+      <UniqueIdentifier>{d631ffe6-dab7-49be-9481-1f86008c288b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="small.ico">
@@ -78,6 +84,9 @@
     </ClInclude>
     <ClInclude Include="Animate\zrotate.h">
       <Filter>Animate\旋转</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate\list_animate.h">
+      <Filter>Animate\列表动画\添加</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

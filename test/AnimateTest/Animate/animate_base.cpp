@@ -7,6 +7,7 @@
 #include "scale.h"
 #include "xrotate.h"
 #include "zrotate.h"
+#include "list_animate.h"
 
 Animate*  Animate::s_pCurrentAnimate = nullptr;
 
@@ -51,7 +52,8 @@ MAPCREATOR(AnimateType_Alpha, AlphaAnimate);
 MAPCREATOR(AnimateType_RotateX, RotateXAnimate);
 MAPCREATOR(AnimateType_RotateY, RotateYAnimate);
 MAPCREATOR(AnimateType_RotateZ, RotateZAnimate);
-MAPCREATOR(AnimateType_Scale, ScaleAnimate)
+MAPCREATOR(AnimateType_Scale, ScaleAnimate);
+MAPCREATOR(AnimateType_List, ListAnimate);
 	}
 
 	if (p)
