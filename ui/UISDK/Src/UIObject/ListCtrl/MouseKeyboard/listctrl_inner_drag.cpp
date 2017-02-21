@@ -3,7 +3,6 @@
 #include <assert.h>
 #include "..\listctrlbase.h"
 #include "..\ListItemBase\listitembase.h"
-#include "..\animate_callback\listctrl_animate_callback.h"
 
 
 enum{

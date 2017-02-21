@@ -307,6 +307,9 @@
     <Filter Include="02. Src\02. UI对象\07. scrollpanel">
       <UniqueIdentifier>{0a9d3d44-a426-4ab3-a2bd-488da39c47d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Src\02. UI对象\05. listctrl\08. animate">
+      <UniqueIdentifier>{b62a6476-dd1b-4984-a6c7-93539aefb86b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Other/stdafx.h">
@@ -927,6 +930,18 @@
     <ClInclude Include="Inc\Interface\iscrollpanel.h">
       <Filter>02. Src\02. UI对象\07. scrollpanel</Filter>
     </ClInclude>
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listctrl_animate.h">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listitem_move.h">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listitem_animate.h">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.h">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Other/dllmain.cpp">
@@ -1480,6 +1495,18 @@
     </ClCompile>
     <ClCompile Include="Src\Base\Object\object_animate.cpp">
       <Filter>02. Src\01. UI对象基类\02. object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listctrl_animate.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listitem_move.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listitem_animate.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

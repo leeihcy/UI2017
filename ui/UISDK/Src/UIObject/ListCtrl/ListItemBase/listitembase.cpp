@@ -3,12 +3,11 @@
 #include "..\ListItemRootPanel\listitemrootpanel.h"
 #include "..\listctrlbase.h"
 #include "..\float\float_item_mgr.h"
-#include "..\animate_callback\listctrl_animate_callback.h"
-
 #include "Inc\Interface\ilayout.h"
 #include "Inc\Interface\iimagerender.h"
 #include "Src\Base\Object\object.h"
 #include "Inc\Interface\iuires.h"
+#include "..\animate_callback\listctrl_animate.h"
 
 using namespace UI;
 
@@ -996,8 +995,8 @@ void ListItemBase::SetParentRect(LPCRECT prc)
         return;
     }
 
-//     if (!ListCtrlAnimateCallback::HandleItemRectChanged(
-//             *this, &m_rcParent, prc))
+    if (!ListCtrlAnimate::HandleItemRectChanged(
+            *this, &m_rcParent, prc))
     {
         if (!m_rcParent.EqualRect(prc))
         {

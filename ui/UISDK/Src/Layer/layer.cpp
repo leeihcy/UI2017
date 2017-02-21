@@ -108,6 +108,30 @@ void  Layer::SetCompositorPtr(Compositor* p)
     m_pCompositor = p;
 }
 
+// bUpdateNow -- 场景：如果是阻塞型的动画，则要立即刷新
+void  Layer::InvalidateForLayerAnimate(bool bUpdateNow)
+{
+	if (GetType() == Layer_Software)
+	{
+		this->Invalidate(nullptr);
+		if (bUpdateNow)
+		{
+			m_pCompositor->DoInvalidate();
+		}
+	}
+	else
+	{
+		if (bUpdateNow)
+		{
+			m_pCompositor->DoInvalidate();
+		}
+		else
+		{
+			m_pCompositor->RequestInvalidate();
+		}
+	}
+}
+
 void  Layer::Invalidate(LPCRECT prcDirtyInLayer, uint nCount)
 {
 	for (uint i = 0; i < nCount; i++)
@@ -286,8 +310,9 @@ void  Layer::PostCompositorRequest()
 
 void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 {
-	if (m_nOpacity == b)
-		return;
+	// 相等也要往下去，以触发param中可能的end callback
+// 	if (m_nOpacity == b)
+// 		return;
 
 	m_nOpacity = b;
 
@@ -331,16 +356,7 @@ void Layer::SetOpacity(byte b, LayerAnimateParam* pParam)
 	else
 	{
 		m_nOpacity_Render = m_nOpacity;
-		if (GetType() == Layer_Software)
-		{
-			Object* obj = GetLayerContentObject();
-			if (obj)
-				obj->Invalidate();
-		}
-		else
-		{
-			m_pCompositor->RequestInvalidate();
-		}
+		InvalidateForLayerAnimate();
 	}
 }
 
@@ -356,8 +372,9 @@ void  Layer::RotateYBy(float f, LayerAnimateParam* param)
 
 void  Layer::RotateYTo(float f, LayerAnimateParam* pParam)
 {
-	if (m_fyRotate == f)
-		return;
+	// 相等也要往下去，以触发param中可能的end callback
+// 	if (m_fyRotate == f)
+// 		return;
 
 	m_fyRotate = f;
 
@@ -404,19 +421,7 @@ void  Layer::RotateYTo(float f, LayerAnimateParam* pParam)
 		m_transfrom3d.rotateY(f);
 	}
 
-	if (m_pLayerContent)
-	{
-		if (GetType() == Layer_Software)
-		{
-			Object* obj = GetLayerContentObject();
-			if (obj)
-				obj->Invalidate();
-		}
-		else
-		{
-			m_pCompositor->RequestInvalidate();
-		}
-	}
+	InvalidateForLayerAnimate();
 }
 
 
@@ -427,8 +432,9 @@ void  Layer::RotateXBy(float f, LayerAnimateParam* param)
 
 void  Layer::RotateXTo(float f, LayerAnimateParam* pParam)
 {
-	if (m_fxRotate == f)
-		return;
+	// 相等也要往下去，以触发param中可能的end callback
+// 	if (m_fxRotate == f)
+// 		return;
 
 	m_fxRotate = f;
 
@@ -475,19 +481,7 @@ void  Layer::RotateXTo(float f, LayerAnimateParam* pParam)
 		m_transfrom3d.rotateX(f);
 	}
 
-	if (m_pLayerContent)
-	{
-		if (GetType() == Layer_Software)
-		{
-			Object* obj = GetLayerContentObject();
-			if (obj)
-				obj->Invalidate();
-		}
-		else
-		{
-			m_pCompositor->RequestInvalidate();
-		}
-	}
+	InvalidateForLayerAnimate();
 }
 
 
@@ -498,8 +492,9 @@ void  Layer::RotateZBy(float f, LayerAnimateParam* param)
 
 void  Layer::RotateZTo(float f, LayerAnimateParam* pParam)
 {
-	if (m_fzRotate == f)
-		return;
+	// 相等也要往下去，以触发param中可能的end callback
+// 	if (m_fzRotate == f)
+// 		return;
 
 	m_fzRotate = f;
 
@@ -546,19 +541,7 @@ void  Layer::RotateZTo(float f, LayerAnimateParam* pParam)
 		m_transfrom3d.rotateZ(f);
 	}
 
-	if (m_pLayerContent)
-	{
-		if (GetType() == Layer_Software)
-		{
-			Object* obj = GetLayerContentObject();
-			if (obj)
-				obj->Invalidate();
-		}
-		else
-		{
-			m_pCompositor->RequestInvalidate();
-		}
-	}
+	InvalidateForLayerAnimate();
 }
 
 float  Layer::GetYRotate() 
@@ -568,8 +551,9 @@ float  Layer::GetYRotate()
 
 void  Layer::ScaleTo(float x, float y, LayerAnimateParam* pParam)
 {
-	if (fequ(x, m_fxScale) && fequ(y, m_fyScale))
-		return;
+	// 相等也要往下去，以触发param中可能的end callback
+// 	if (fequ(x, m_fxScale) && fequ(y, m_fyScale))
+// 		return;
 
 	m_fxScale = x;
 	m_fyScale = y;
@@ -620,19 +604,7 @@ void  Layer::ScaleTo(float x, float y, LayerAnimateParam* pParam)
 		m_transfrom3d.scale3d(m_fxScale, m_fyScale, 0);
 	}
 
-	if (m_pLayerContent)
-	{
-		if (GetType() == Layer_Software)
-		{
-			Object* obj = GetLayerContentObject();
-			if (obj)
-				obj->Invalidate();
-		}
-		else
-		{
-			m_pCompositor->RequestInvalidate();
-		}
-	}
+	InvalidateForLayerAnimate();
 }
 
 
@@ -651,10 +623,11 @@ void  Layer::TranslateBy(float x, float y, float z, LayerAnimateParam* param)
 }
 void  Layer::TranslateTo(float x, float y, float z, LayerAnimateParam* pParam)
 {
-    if (m_xTranslate == x && 
-        m_yTranslate == y &&
-        m_zTranslate == z)
-        return;
+	// 相等也要往下去，以触发param中可能的end callback
+//     if (m_xTranslate == x && 
+//         m_yTranslate == y &&
+//         m_zTranslate == z)
+//         return;
 
     m_xTranslate = x;
     m_yTranslate = y;

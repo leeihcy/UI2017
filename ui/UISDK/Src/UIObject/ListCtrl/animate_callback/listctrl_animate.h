@@ -14,18 +14,14 @@ typedef bool (__stdcall *pfnListItemRectChangedCallback)(
                                 IListItemBase& item,
                                 LPCRECT prcOld, 
                                 LPCRECT prcNew);
-#if 0
-class ListCtrlAnimateCallback
+class ListCtrlAnimate
 {
 protected:
-    ListCtrlAnimateCallback();
-    ~ListCtrlAnimateCallback();
+    ListCtrlAnimate();
+    ~ListCtrlAnimate();
 
 public:
-    static ListCtrlAnimateCallback&  Get();
-
-    static void  SetListItemRectChangedCallback(
-                    pfnListItemRectChangedCallback);
+    static ListCtrlAnimate&  Get();
 
     static bool  HandleItemRectChanged(
                     ListItemBase& item,
@@ -35,4 +31,5 @@ public:
 private:
     pfnListItemRectChangedCallback  m_pfnListItemRectChangedCallback;
 };
-#endif
+
+

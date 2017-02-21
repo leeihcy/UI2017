@@ -296,6 +296,10 @@
     <ClInclude Include="Src\UIObject\Control\control.h" />
     <ClInclude Include="Src\UIObject\HwndHost\HwndHost.h" />
     <ClInclude Include="Src\UIObject\HwndHost\hwndhost_desc.h" />
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.h" />
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listctrl_animate.h" />
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listitem_animate.h" />
+    <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\listitem_move.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\CustomItem\custom_listitem.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\float\float_item_mgr.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\listctrlbase.h" />
@@ -488,6 +492,10 @@
     <ClCompile Include="Src\UIObject\Control\icontrol.cpp" />
     <ClCompile Include="Src\UIObject\HwndHost\HwndHost.cpp" />
     <ClCompile Include="Src\UIObject\HwndHost\IHwndHost.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listctrl_animate.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listitem_animate.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\listitem_move.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\CustomItem\custom_listitem.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\float\float_item_mgr.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ilistctrlbase.cpp" />

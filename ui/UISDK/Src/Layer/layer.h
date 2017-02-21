@@ -96,6 +96,7 @@ public:
     void  RemoveMeInTheTree();
 
     void  PostCompositorRequest();
+	void  InvalidateForLayerAnimate(bool bUpdateNow = false);
 	void  Invalidate(LPCRECT prcDirtyInLayer);
 	void  Invalidate(LPCRECT prcArray, uint nCount);
     void  CopyDirtyRect(RectArray& arr);
