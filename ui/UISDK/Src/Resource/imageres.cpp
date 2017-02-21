@@ -742,11 +742,11 @@ HBITMAP  ImageRes::LoadBitmap(LPCTSTR szId)
 
 bool  ImageRes::GetBitmap(LPCTSTR szImageID, GRAPHICS_RENDER_LIBRARY_TYPE eRenderType, __out IRenderBitmap** pRenderBitmap)
 {
-	if (NULL == szImageID || NULL == pRenderBitmap)
+	if (!szImageID || !szImageID[0] || !pRenderBitmap)
 		return false;
 
 	ImageResItem* pItem = this->GetImageItem2(szImageID);
-	if (NULL == pItem)
+	if (!pItem)
 	{
 		// 获取失败，尝试向上一级资源获取
 		if (m_pSkinRes->GetParentSkinRes())
@@ -761,7 +761,7 @@ bool  ImageRes::GetBitmap(LPCTSTR szImageID, GRAPHICS_RENDER_LIBRARY_TYPE eRende
 
 	bool bFirstTimeCreate = false;
 	IRenderBitmap* pBitmap = pItem->GetImage(m_pSkinRes, eRenderType, &bFirstTimeCreate);
-	if (NULL == pBitmap)
+	if (!pBitmap)
 	{
 		UI_LOG_ERROR( _T("GetImage：%s failed .2"), szImageID);
 		return false;
