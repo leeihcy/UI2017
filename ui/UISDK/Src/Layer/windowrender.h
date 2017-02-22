@@ -18,6 +18,8 @@ interface IWindowRender;
 interface IWindowCommitListener;
 class Compositor;
 class Layer;
+interface IObjectLayerContent;
+interface IListItemLayerContent;
 
 class WindowRender
 {
@@ -46,7 +48,8 @@ public:
     void  InvalidateNow();
     void  OnPaint(HDC hDC, RECT* prcInvalid);
 
-	Layer*  CreateLayer(Object*);
+	Layer*  CreateLayer(IObjectLayerContent*);
+	Layer*  CreateLayer(IListItemLayerContent*);
 	void  RequestInvalidate();
 
 private:

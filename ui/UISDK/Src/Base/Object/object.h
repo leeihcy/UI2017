@@ -51,7 +51,6 @@ public:
 	Layer*  GetLayerForAnimate();
 	Layer*  GetSelfLayer() const;
 	ObjectLayer*  GetLayerEx();
-	Layer*  FindNextLayer(Layer* pParentLayer);
 	Object*  GetLayerCreator();
 	bool  HasLayer();
 	void  OnLayerDestory();

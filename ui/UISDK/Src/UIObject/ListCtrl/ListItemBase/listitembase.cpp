@@ -11,7 +11,7 @@
 
 using namespace UI;
 
-ListItemBase::ListItemBase(IListItemBase* p) : Message(p)
+ListItemBase::ListItemBase(IListItemBase* p) : Message(p), m_itemLayer(*this)
 {
     m_pIListItemBase = p;
     m_nConfigWidth = m_nConfigHeight = NDEF;
@@ -946,12 +946,14 @@ void  ListItemBase::DrawItemInnerControl(IRenderTarget* pRenderTarget)
     if (!m_pPanelRoot->GetChildObject())
         return;
 
-    pRenderTarget->PushRelativeClipRect(m_rcParent);
-    pRenderTarget->OffsetOrigin(m_rcParent.left, m_rcParent.top);
+	RECT rc = { 0 };
+	GetParentOrFloatRect(&rc);
+    pRenderTarget->PushRelativeClipRect(&rc);
+    pRenderTarget->OffsetOrigin(rc.left, rc.top);
 
     m_pPanelRoot->GetImpl()->DrawToLayer__(pRenderTarget);
 
-    pRenderTarget->OffsetOrigin(-m_rcParent.left, -m_rcParent.top);
+    pRenderTarget->OffsetOrigin(-rc.left, -rc.top);
     pRenderTarget->PopRelativeClipRect();
 }
 
@@ -1015,6 +1017,8 @@ void  ListItemBase::SetParentRectLightly(LPCRECT prc)
 
 void  ListItemBase::OnSize()
 {
+	m_itemLayer.OnSize(m_rcParent.Width(), m_rcParent.Height());
+
     BOOL bHandled = FALSE;
     UISendMessage(m_pIListItemBase, WM_SIZE, (WPARAM)0,
         MAKELPARAM(m_rcParent.Width(), m_rcParent.Height()), 0, 0, 0, &bHandled);

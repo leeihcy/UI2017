@@ -24,14 +24,18 @@ public:
     void  OnSize(uint nWidth, uint nHeight);
     void  OnObjPosInTreeChanged();
 
+	Layer*  FindNextLayer(Layer* pParentLayer);
+
 protected:
 	virtual Object&  GetObject() override { return m_obj;  }
-    virtual bool  IsChildOf(Object*) override;
-    virtual bool  IsSelfVisible() override;
+	virtual bool  IsChildOf(ILayerContent*) override;
+    virtual bool  IsVisible() override;
     virtual void  Draw(UI::IRenderTarget*) override;
     virtual void  GetWindowRect(RECT* prcOut) override;
     virtual void  GetParentWindowRect(RECT* prcOut) override;
 	virtual void  OnLayerDestory() override;
+	virtual Layer*  GetParentLayer() override;
+	virtual Layer*  GetNextLayer() override;
 
 private:
     Object&  m_obj;

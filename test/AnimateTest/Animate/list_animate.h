@@ -15,6 +15,8 @@ public:
 	virtual void Init() override
 	{
 		m_pListBox = (UI::IListBox*)m_pWindow->FindObject(L"listbox");
+		m_pListBox->EnableInnerDrag(true);
+
 		UI::LISTCTRLSTYLE s = { 0 };
 		s.dragwnd_if_clickblank = 1;
 		m_pListBox->ModifyListCtrlStyle(&s, 0);
@@ -31,7 +33,7 @@ public:
 			image->SetImageById(szImageId);
 		}
 		
-		m_pListBox->ClickEvent().connect0(this, &ListAnimate::onclick);
+		//m_pListBox->ClickEvent().connect0(this, &ListAnimate::onclick);
 	}
 
 	void onclick()

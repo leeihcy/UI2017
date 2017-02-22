@@ -263,39 +263,58 @@ bool  WindowRender::GetRequireAlphaChannel()
     return m_bNeedAlphaChannel;
 }
 
-Layer*  WindowRender::CreateLayer(Object* pObj)
+Layer*  WindowRender::CreateLayer(IObjectLayerContent* pContent)
 {
-	Layer* pLayer = get_create_compositor()->CreateLayer();
+	if (!pContent)
+		return nullptr;
 
-    // 获取父layer
-    Layer* pParentLayer = pObj->GetLayer();
-    if (!pParentLayer)
-    {
-        m_pCompositor->SetRootLayer(pLayer);
-        return pLayer;
-    }
-    
-    // 计算这个layer应该插入在layer tree的哪个位置，需要与object tree对应
-    UIASSERT (pObj->GetParentObject());
-    Layer* pNextLayer = pObj->FindNextLayer(pParentLayer);
-    
-    pParentLayer->AddSubLayer(pLayer, pNextLayer);
+	Object& obj = pContent->GetObject();
+	Layer* pNewLayer = get_create_compositor()->CreateLayer();
+	pNewLayer->SetContent(pContent);
 
-    // 整理子对象的layer
-    Layer* p = pParentLayer->GetFirstChild();
-    while (p)
-    {
-        ILayerContent* pLayerContent = p->GetContent();
-        
-        // 发现自己的子对象，替换它，并将它作为自己的子layer
-        if (pLayerContent && pLayerContent->IsChildOf(pObj))
-        {
-            p->MoveLayer2NewParentEnd(pParentLayer, pLayer);
-        }
-        p = p->GetNext();
-    }
+	
+	if (!m_pCompositor->GetRootLayer())
+	{
+		m_pCompositor->SetRootLayer(pNewLayer);
+		return pNewLayer;
+	}
 
-	return pLayer;
+	// 获取父layer
+	Layer* pParentLayer = obj.GetLayer();
+	if (!pParentLayer)
+	{
+		// 有根结点，但没父结点？
+		UIASSERT(0);
+		pParentLayer = m_pCompositor->GetRootLayer();
+	}
+
+	// 计算这个layer应该插入在layer tree的哪个位置，需要与object tree对应
+	Layer* pNextLayer = obj.FindNextLayer(pParentLayer);
+	pParentLayer->AddSubLayer(pNewLayer, pNextLayer);
+
+	// 整理子对象的layer
+	Layer* p = pParentLayer->GetFirstChild();
+	while (p)
+	{
+		if (p != pNewLayer)
+		{
+			ILayerContent* pLayerContent = p->GetContent();
+
+			// 发现自己的子对象，替换它，并将它作为自己的子layer
+			if (pLayerContent && pLayerContent->IsChildOf(pContent))
+			{
+				p->MoveLayer2NewParentEnd(pParentLayer, pNewLayer);
+			}
+		}
+		p = p->GetNext();
+	}
+
+	return pNewLayer;
+}
+
+Layer*  WindowRender::CreateLayer(IListItemLayerContent*)
+{
+	return nullptr;
 }
 
 Compositor* UI::WindowRender::get_create_compositor()

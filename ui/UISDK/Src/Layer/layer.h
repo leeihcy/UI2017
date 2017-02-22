@@ -44,28 +44,50 @@ namespace UI
 {
 
 class Object;
+class Layer;
 
 enum LayerContentType
 {
 	LayerContentTypeNormal,
 	LayerContentTypeObject,
+	LayerContentTypeListItem,
+
 };
 interface ILayerContent
 {
 	virtual LayerContentType Type() = 0;
+
+	// layer析构了
 	virtual void  OnLayerDestory() = 0;
+	
+	// 创建新layer时，将layer插入到layer树中时，需要将子layer挪到自己的下面来。
+	virtual bool  IsChildOf(ILayerContent*) = 0;
 
-    virtual bool  IsChildOf(Object*) = 0;
-    virtual bool  IsSelfVisible() = 0;
+	// 如果不可见，则不进行合成操作
+    virtual bool  IsVisible() = 0;
+
+	// 内容绘制
     virtual void  Draw(UI::IRenderTarget*) = 0;
-    virtual void  GetWindowRect(RECT* prcOut) = 0;
-    virtual void  GetParentWindowRect(RECT* prcOut) = 0;
 
+	// 获取自己的窗口坐标，用于合成
+	virtual void  GetWindowRect(RECT* prcOut) = 0;
+	// 获取layer对象的父控件（不是父layer）的窗口坐标。例如要将layer剪裁到父控件以内
+	virtual void  GetParentWindowRect(RECT* prcOut) = 0;
+
+	// 用于获取自己在Object tree中的位置，对应到Layer tree中的位置
+	virtual Layer*  GetParentLayer() = 0;
+	virtual Layer*  GetNextLayer() = 0;
 };
+
 interface IObjectLayerContent : public ILayerContent
 {
 	virtual LayerContentType Type() { return LayerContentTypeObject;  }
 	virtual Object&  GetObject() = 0;
+};
+
+interface IListItemLayerContent : public ILayerContent
+{
+	virtual LayerContentType Type() { return LayerContentTypeListItem; }
 };
 
 enum LayerType

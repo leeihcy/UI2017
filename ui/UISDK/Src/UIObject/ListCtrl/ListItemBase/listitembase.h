@@ -2,6 +2,7 @@
 #include "Inc\Interface\ilistitembase.h"
 #include "Src\Base\Message\message.h"
 #include "..\ListItemTooltip\listitemtooltip.h"
+#include "listitem_layer.h"
 
 namespace UI
 {
@@ -113,6 +114,8 @@ public:
     void  SetFloatRect(LPCRECT prc);
     void  GetFloatRect(RECT* prc);
     void  GetParentOrFloatRect(RECT* prc);
+
+	void  EnableLayer(bool b);
 
     void  SetToolTip(LPCTSTR szText);
     LPCTSTR  GetToolTip();
@@ -241,6 +244,8 @@ protected:
     IListItemBase*  m_pIListItemBase;
     ListCtrlBase*   m_pListCtrlBase;
     IPanel*         m_pPanelRoot;
+
+	ListItemLayer   m_itemLayer;
 };
 typedef ListItemBase* LPLISTITEMBASE;
 }

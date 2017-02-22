@@ -942,6 +942,9 @@
     <ClInclude Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.h">
       <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
     </ClInclude>
+    <ClInclude Include="Src\UIObject\ListCtrl\ListItemBase\listitem_layer.h">
+      <Filter>02. Src\02. UI对象\05. listctrl\01. listitem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Other/dllmain.cpp">
@@ -1507,6 +1510,12 @@
     </ClCompile>
     <ClCompile Include="Src\UIObject\ListCtrl\animate_callback\animate_wrap.cpp">
       <Filter>02. Src\02. UI对象\05. listctrl\08. animate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\listitembase_layer.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\01. listitem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\listitem_layer.cpp">
+      <Filter>02. Src\02. UI对象\05. listctrl\01. listitem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -304,6 +304,7 @@
     <ClInclude Include="Src\UIObject\ListCtrl\float\float_item_mgr.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\listctrlbase.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\ListItemBase\listitembase.h" />
+    <ClInclude Include="Src\UIObject\ListCtrl\ListItemBase\listitem_layer.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\ListItemLayout\listitemlayout.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\ListItemRootPanel\listitemrootpanel.h" />
     <ClInclude Include="Src\UIObject\ListCtrl\ListItemTooltip\listitemtooltip.h" />
@@ -505,6 +506,8 @@
     <ClCompile Include="Src\UIObject\ListCtrl\listctrlbase_util.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\ilistitembase.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\listitembase.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\listitembase_layer.cpp" />
+    <ClCompile Include="Src\UIObject\ListCtrl\ListItemBase\listitem_layer.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ListItemLayout\listitemlayout.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ListItemRootPanel\listitemrootpanel.cpp" />
     <ClCompile Include="Src\UIObject\ListCtrl\ListItemTooltip\listitemtooltip.cpp" />

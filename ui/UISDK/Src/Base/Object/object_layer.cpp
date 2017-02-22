@@ -29,8 +29,7 @@ void UI::ObjectLayer::CreateLayer()
 
 	if (pWndRender)
 	{
-		m_pLayer = pWndRender->CreateLayer(&m_obj);
-		m_pLayer->SetContent(this);
+		m_pLayer = pWndRender->CreateLayer(static_cast<IObjectLayerContent*>(this));
 
 		CRect rcParent;
 		m_obj.GetParentRect(&rcParent);
@@ -90,20 +89,33 @@ void  ObjectLayer::OnSize(uint nWidth, uint nHeight)
     }
 }
 
-bool  ObjectLayer::IsChildOf(Object* pParent)
+bool  ObjectLayer::IsChildOf(ILayerContent* pParentLayer)
 {
-    if (!pParent)
+    if (!pParentLayer)
         return false;
 
-    if (pParent->IsMyChild(&m_obj, true))
-        return true;
+	if (pParentLayer->Type() == LayerContentTypeObject)
+	{
+		Object& parentObject =
+			static_cast<ObjectLayer*>(pParentLayer)->GetObject();
+
+		return parentObject.IsMyChild(&m_obj, true);
+	}
+	else if (pParentLayer->Type() == LayerContentTypeListItem)
+	{
+		UIASSERT(0);
+	}
+	else
+	{
+		UIASSERT(0);
+	}
 
     return false;
 }
 
-bool  ObjectLayer::IsSelfVisible()
+bool  ObjectLayer::IsVisible()
 {
-    return m_obj.IsSelfVisible();
+    return m_obj.IsVisible();
 }
 
 // object在对象树中的位置改变了，同步到分层树上面
@@ -118,7 +130,7 @@ void  ObjectLayer::OnObjPosInTreeChanged()
     pParentLayer->AddSubLayer(m_pLayer, m_obj.FindNextLayer(pParentLayer));
 }
 
-void UI::ObjectLayer::OnLayerDestory()
+void  ObjectLayer::OnLayerDestory()
 {
 	if (m_pLayer)  // 由ObjectLayer::~ObjectLayer()触发的，不通知
 	{
@@ -127,3 +139,84 @@ void UI::ObjectLayer::OnLayerDestory()
 	}
 }
 
+Layer*  ObjectLayer::GetParentLayer()
+{
+	Object* parent = m_obj.GetParentObject();
+	if (!parent)
+		return nullptr;
+
+	return parent->GetLayer();
+}
+Layer*  ObjectLayer::GetNextLayer()
+{
+	return m_obj.FindNextLayer(GetParentLayer());
+}
+
+
+// Layer Tree 生成关键函数，参照webkit：
+// RenderLayer* RenderObject::findNextLayer(RenderLayer* parentLayer, RenderObject* startPoint, bool checkParent)
+// http://opensource.apple.com//source/WebCore/WebCore-658.28/rendering/RenderObject.cpp
+// 获取pStartObj的layer应该插入在pParentLayer的哪个位置
+// 注：这里并没有处理自己的子对象已经有layer在pParentLayer下面的情况，需要单独处理
+// Layer*  Object::FindNextLayer(
+//             Layer* pParentLayer, 
+//             Object* pStartObj,
+//             bool bCheckParent)
+// {
+//     if (!pParentLayer)
+//         return NULL;
+//     
+//     Layer* pThisLayer = m_pLayer ? m_pLayer->GetLayer() : NULL;
+// 
+//     // 找到一个同级的layer，这个对象是在pStartObj的后面，因此可以将pStartObj
+//     // 对应的layer插入到这个对象的layer前面。
+//     if (pThisLayer && pThisLayer->GetParent() == pParentLayer)
+//         return pThisLayer;
+// 
+//     // 如果这个对象没有layer，则向后递归遍历
+//     if (!pThisLayer || pThisLayer == pParentLayer)
+//     {
+//         Object* p = pStartObj ? pStartObj->GetNextObject() : GetChildObject();
+//         for (; p; p = p->GetNextObject())
+//         {
+//             Layer* pReturn = p->FindNextLayer(
+//                 pParentLayer, NULL, false);
+// 
+//             if (pReturn)
+//                 return pReturn;
+//         }
+//     }
+// 
+//     // 找到顶了，没有其它layer
+//     if (pThisLayer == pParentLayer)
+//         return NULL;
+// 
+//     // 向上找
+//     if (m_pParent && bCheckParent)
+//         return m_pParent->FindNextLayer(pParentLayer, this, true);
+// 
+//     return NULL;
+// }
+
+// 判断思路：这个对象的下一个层，只会在这个对象的下一个Object中出现。
+Layer*  ObjectLayer::FindNextLayer(Layer* pParentLayer)
+{
+	Object* pNextTreeObject = GetNextTreeItemObject();
+	while (pNextTreeObject)
+	{
+		Layer* pThisLayer = pNextTreeObject->GetSelfLayer();
+
+		// 找回到父layer了，说明自己就是最后一个，没有next
+		if (pThisLayer && pThisLayer == pParentLayer)
+			return NULL;
+
+		// 在后面的结点中，找到了一个同级层，插在它的前面 
+		if (pThisLayer && pThisLayer->GetParent() == pParentLayer)
+			return pThisLayer;
+
+		// 否则继续往下一个树结点遍历
+		pNextTreeObject = pNextTreeObject->GetNextTreeItemObject();
+	}
+
+	return NULL;
+}

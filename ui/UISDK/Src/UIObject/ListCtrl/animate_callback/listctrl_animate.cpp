@@ -3,6 +3,8 @@
 #include "listctrl_animate.h"
 #include "listitem_move.h"
 #include "Inc\Interface\ilistctrlbase.h"
+#include "..\..\Window\windowbase.h"
+#include "..\listctrlbase.h"
 
 ListCtrlAnimate::ListCtrlAnimate()
 {
@@ -25,6 +27,13 @@ bool  ListCtrlAnimate::HandleItemRectChanged(
            LPCRECT prcNew)
 {
 	UIASSERT(prcOld && prcNew);
+
+	ListCtrlBase* listctrl = item.GetListCtrlBase();
+	WindowBase* window = nullptr;
+	if (listctrl)
+		window = listctrl->GetWindowObject();
+	if (window && !window->IsGpuComposite())
+		return false;
 
 	if (::EqualRect(prcNew, prcOld))
 	{

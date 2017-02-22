@@ -106,7 +106,7 @@ void  HardwareCompositor::virtualCommit(const RectArray& arrDirtyInWindow)
 
 void  HardwareCompositor::commit_recursion(Layer* p, GpuLayerCommitContext* pContext)
 {
-    if (!p->GetContent()->IsSelfVisible())
+    if (!p->GetContent()->IsVisible())
         return;
 
 	GpuLayerCommitContext context(*pContext);

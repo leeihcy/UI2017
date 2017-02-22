@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "..\listctrlbase.h"
 #include "..\ListItemBase\listitembase.h"
+#include "..\animate_callback\listctrl_animate.h"
 
 
 enum{
@@ -135,7 +136,7 @@ BOOL UI::ListCtrlInnerDragMgr::OnDragLButtonUp(WPARAM wParam, LPARAM lParam)
 	{
 		AcceptDrag();
 
-        //bHandled = TRUE;  // <-- 还能设置为TRUE，还得交给mk去释放press item
+        //bHandled = TRUE;  // <-- 不能设置为TRUE，还得交给mk去释放press item
 	}
 	m_bLButtondown = false;
 
@@ -410,8 +411,8 @@ void  ListCtrlInnerDragMgr::AcceptDrag()
 
 	m_pListCtrlBase->ItemRect2ObjectRect(&rcTo, &rcTo);
 
-// 	if (!ListCtrlAnimateCallback::HandleItemRectChanged(
-// 			*m_pItemDrag, &rcFrom, &rcTo))
+	if (!ListCtrlAnimate::HandleItemRectChanged(
+			*m_pItemDrag, &rcFrom, &rcTo))
 	{
 		m_pItemDrag->SetFloat(false);
 	}
@@ -448,8 +449,8 @@ void UI::ListCtrlInnerDragMgr::CancelDrag()
 		CRect rcFrom;
 		m_pItemDrag->GetFloatRect(&rcFrom);
 
-// 		if (!ListCtrlAnimateCallback::HandleItemRectChanged(
-// 					*m_pItemDrag, &rcFrom, &m_rcOldPressItem))
+		if (!ListCtrlAnimate::HandleItemRectChanged(
+					*m_pItemDrag, &rcFrom, &m_rcOldPressItem))
 		{
 			m_pItemDrag->SetFloat(false);
 		}
